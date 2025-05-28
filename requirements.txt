@@ -1,1 +1,5 @@
+fastapi
+uvicorn
 pytest
+flake8
+httpx
