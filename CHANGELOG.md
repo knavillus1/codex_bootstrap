@@ -5,3 +5,4 @@
 2025-06-03 Added high score API integration on frontend
 2025-06-03 Implemented basic player movement and shooting mechanics
 2025-06-03 Implemented core game mechanics, styling polish, and ensured dev_init creates DB tables
+2025-06-03 Archived Space Man Pac Invaders PRD
