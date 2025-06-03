@@ -44,9 +44,10 @@ class SimulationEngine:
         """Advance the simulation by one step."""
         new_organisms: List[Organism] = []
 
-        # Move and grow all organisms first
+        # Move and grow all organisms first and enforce boundaries
         for organism in list(self.organisms):
             organism.move()
+            organism.position = self.environment.wrap_position(organism.position)
             organism.grow()
 
         # Handle collisions for eating interactions

@@ -24,3 +24,8 @@ class Environment:
         if consumed:
             self._nutrients[position] = available - consumed
         return consumed
+
+    def wrap_position(self, position: Tuple[int, int]) -> Tuple[int, int]:
+        """Return position wrapped within environment bounds."""
+        x, y = position
+        return (x % self.width, y % self.height)
