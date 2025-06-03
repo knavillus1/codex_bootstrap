@@ -41,10 +41,13 @@ backend
 - `backend/tests/test_auth.py` - Tests for registration and login endpoints.
 - `backend/decks.py` - CRUD endpoints for decks using in-memory store.
 - `backend/tests/test_decks.py` - Tests for deck API operations.
+- `backend/cards.py` - CRUD endpoints for cards using in-memory store.
+- `backend/tests/test_cards.py` - Tests for card API operations.
 - `frontend/index.html` - HTML entry point for Vite app.
 - `frontend/src/main.jsx` - React DOM rendering and router setup.
 - `frontend/src/App.jsx` - Application routes and navigation.
 - `frontend/src/pages/Login.jsx` - Login and registration form.
+- `frontend/src/pages/DeckList.jsx` - Deck management page.
 
 ### Existing Files Modified
 - `dev_init.sh` - Update to install dependencies and start backend/frontend for local dev.
@@ -66,11 +69,11 @@ backend
   - [x] 2.1 Build registration and login endpoints in `backend/auth.py`
   - [x] 2.2 Store password hashes and manage session cookies
   - [x] 2.3 Create frontend `Login.tsx` for user signup/login
-- [ ] 3.0 Deck management features
+- [x] 3.0 Deck management features
   - [x] 3.1 API endpoints for creating, reading, updating, and deleting decks
-  - [ ] 3.2 Frontend `DeckList.tsx` page for deck CRUD operations
+  - [x] 3.2 Frontend `DeckList.tsx` page for deck CRUD operations
 - [ ] 4.0 Card management features
-  - [ ] 4.1 API endpoints for adding, editing, and deleting cards in a deck
+  - [x] 4.1 API endpoints for adding, editing, and deleting cards in a deck
   - [ ] 4.2 UI components for card forms within `DeckList.tsx`
 - [ ] 5.0 Study mode implementation
   - [ ] 5.1 Frontend `Study.tsx` to display one card at a time

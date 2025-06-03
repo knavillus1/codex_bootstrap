@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login';
+import DeckList from './pages/DeckList';
 
 const App = () => (
   <div className="min-h-screen p-4">
@@ -10,6 +11,7 @@ const App = () => (
     </nav>
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/decks" element={<DeckList />} />
       <Route path="/" element={<Login />} />
     </Routes>
   </div>

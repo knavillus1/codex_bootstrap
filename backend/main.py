@@ -5,10 +5,12 @@ from .database import engine, get_db
 from .models import Base
 from .auth import router as auth_router
 from .decks import router as deck_router
+from .cards import router as card_router
 
 app = FastAPI()
 app.include_router(auth_router)
 app.include_router(deck_router)
+app.include_router(card_router)
 
 
 @app.on_event("startup")
