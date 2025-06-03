@@ -32,6 +32,7 @@ run_tests.sh
 - `frontend/src/index.css`
 - `frontend/src/App.tsx`
 - `frontend/src/main.tsx` - React/Vite bootstrap file.
+- `frontend/src/api.ts` - Helper for API requests.
 - `frontend/src/components/GameCanvas.tsx` - Canvas rendering component.
 - `frontend/src/components/GameHeader.tsx` - Displays title, score, lives.
 - `frontend/src/components/HighScoresPanel.tsx` - Shows leaderboard.
@@ -89,7 +90,7 @@ run_tests.sh
   - [x] 4.3 Add tests for the API endpoints.
   - [x] 4.4 Provide `.env.template` for required environment variables.
 - [ ] 5.0 High Score Integration & Polish
-  - [ ] 5.1 Connect frontend to the score API for submitting and viewing scores.
-  - [ ] 5.2 Add initials entry form and high score table in the UI.
+  - [x] 5.1 Connect frontend to the score API for submitting and viewing scores.
+  - [x] 5.2 Add initials entry form and high score table in the UI.
   - [ ] 5.3 Apply final styling and ensure components match mock design.
   - [ ] 5.4 Verify dev_init.sh runs migrations and starts both servers.
