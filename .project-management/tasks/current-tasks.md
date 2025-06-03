@@ -37,7 +37,7 @@
 
 - [ ] 1.0 Create Calculator UI
   - [x] 1.1 Set up a new `Calculator.js` file in the `frontend` directory.
-  - [ ] 1.2 Add two input fields for user numbers.
+  - [x] 1.2 Add two input fields for user numbers.
   - [ ] 1.3 Add operation selector (dropdown or buttons) for add, subtract, multiply, divide.
   - [ ] 1.4 Add a button to perform the calculation.
   - [ ] 1.5 Add a display area for the result and error messages.

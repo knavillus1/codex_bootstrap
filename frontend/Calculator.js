@@ -3,7 +3,8 @@ import React from 'react';
 function Calculator() {
   return (
     <div>
-      {/* TODO: Add calculator UI */}
+      <input type="number" placeholder="First number" />
+      <input type="number" placeholder="Second number" />
     </div>
   );
 }
