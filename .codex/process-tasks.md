@@ -12,11 +12,10 @@ Your work at this time is the next avaiable (uncompleted) task in the list.  For
 Follow the remaining guidelines below to manage this file.
 
 ## Task Implementation
-- **One sub-task at a time:** Do **NOT** start the next sub‑task until you ask the user for permission and they say “yes” or "y"
+- **One sub-task** process only one task.
 - **Completion protocol:**  
   1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`.  
-  2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed.  
-- Stop after each sub‑task and wait for the user’s go‑ahead.
+  2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed. 
 
 ## Task List Maintenance
 
@@ -39,4 +38,4 @@ When working with task lists, the AI must:
 3. Add newly discovered tasks.
 4. Keep “Relevant Files” accurate and up to date.
 5. Before starting work, check which sub‑task is next.
-6. After implementing a sub‑task, update the file and then pause for user approval.
+6. After implementing a sub‑task, update the file 

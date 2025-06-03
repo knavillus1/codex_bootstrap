@@ -1,6 +1,6 @@
 
 # Contributor Guide
-
+This is the only AGENTS.md file, do not look for others.
 ## Special Task Instructions
 If the user task consists of just the word 'TaskMaster' then open `/.codex/process-tasks.md` for instructions, otherwise ignore this file.
 ## Ignore 
