@@ -3,8 +3,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .database import engine, get_db
 from .models import Base
+from .auth import router as auth_router
 
 app = FastAPI()
+app.include_router(auth_router)
 
 
 @app.on_event("startup")
