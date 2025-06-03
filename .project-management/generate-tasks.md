@@ -28,6 +28,8 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 The generated task list _must_ follow this structure:
 
 ```markdown
+## Project Tree
+- Use command line tools to get current project tree view, ommitting any directory that starts with `.` or verbose nested directories like venv, etc...  
 ## Relevant Files
 
 - `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).

@@ -28,18 +28,27 @@ The AI should adapt its questions based on the prompt, but here are some common 
 
 ## PRD Structure
 
-The generated PRD should include the following sections:
-
-1.  **Introduction/Overview:** Briefly describe the feature and the problem it solves. State the goal.
-2.  **Goals:** List the specific, measurable objectives for this feature.
-3.  **User Stories:** Detail the user narratives describing feature usage and benefits.
-4.  **Functional Requirements:** List the specific functionalities the feature must have. Use clear, concise language (e.g., "The system must allow users to upload a profile picture."). Number these requirements.
-5.  **Non-Goals (Out of Scope):** Clearly state what this feature will *not* include to manage scope.
-6.  **Design Considerations (Optional):** Link to mockups, describe UI/UX requirements, or mention relevant components/styles if applicable.
-7.  **Technical Considerations (Optional):** Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
-8.  **Success Metrics:** How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
-9.  **Open Questions:** List any remaining questions or areas needing further clarification.
-
+The generated PRD should have this structure:
+```markdown
+## 1.  Introduction/Overview
+- Briefly describe the feature and the problem it solves. State the goal.
+## 2.  Goals
+- List the specific, measurable objectives for this feature.
+## 3.  User Stories
+- Detail the user narratives describing feature usage and benefits.
+## 4.  Functional Requirements
+- List the specific functionalities the feature must have. Use clear, concise language (e.g., "The system must allow users to upload a profile picture."). Number these requirements.
+## 5.  Non-Goals (Out of Scope)
+- Clearly state what this feature will *not* include to manage scope.
+## 6.  Design Considerations (Optional)
+- Link to mockups, describe UI/UX requirements, or mention relevant components/styles if applicable.
+## 7.  Technical Considerations (Optional)
+- Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
+## 8.  Success Metrics
+- How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
+## 9.  Open Questions
+- List any remaining questions or areas needing further clarification.
+```
 ## Target Audience
 
 Assume the primary reader of the PRD is a **junior developer**. Therefore, requirements should be explicit, unambiguous, and avoid jargon where possible. Provide enough detail for them to understand the feature's purpose and core logic.
