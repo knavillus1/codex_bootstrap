@@ -1,1 +1,7 @@
 .DS_Store
+venv/
+__pycache__/
+frontend/node_modules/
+frontend/dist/
+*.pyc
+npm-debug.log*
