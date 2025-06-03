@@ -5,3 +5,4 @@ flake8
 httpx
 SQLAlchemy
 asyncpg
+greenlet

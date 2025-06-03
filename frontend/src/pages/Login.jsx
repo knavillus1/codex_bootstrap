@@ -7,7 +7,7 @@ const Login = () => {
 
   const handleAction = async (endpoint) => {
     try {
-      const resp = await fetch(endpoint, {
+      const resp = await fetch(`/api${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

@@ -11,7 +11,7 @@ const DeckList = () => {
   const [editCards, setEditCards] = useState({});
 
   const fetchDecks = async () => {
-    const resp = await fetch('/decks/');
+    const resp = await fetch('/api/decks/');
     if (resp.ok) {
       setDecks(await resp.json());
     }
@@ -22,7 +22,7 @@ const DeckList = () => {
   }, []);
 
   const createDeck = async () => {
-    const resp = await fetch('/decks/', {
+    const resp = await fetch('/api/decks/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: newName }),
@@ -35,7 +35,7 @@ const DeckList = () => {
 
   const updateDeck = async (id) => {
     const name = editNames[id] || '';
-    const resp = await fetch(`/decks/${id}`, {
+    const resp = await fetch(`/api/decks/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
@@ -47,14 +47,14 @@ const DeckList = () => {
   };
 
   const deleteDeck = async (id) => {
-    const resp = await fetch(`/decks/${id}`, { method: 'DELETE' });
+    const resp = await fetch(`/api/decks/${id}`, { method: 'DELETE' });
     if (resp.ok) {
       fetchDecks();
     }
   };
 
   const fetchCards = async (deckId) => {
-    const resp = await fetch(`/decks/${deckId}/cards/`);
+    const resp = await fetch(`/api/decks/${deckId}/cards/`);
     if (resp.ok) {
       const list = await resp.json();
       setCards((c) => ({ ...c, [deckId]: list }));
@@ -63,7 +63,7 @@ const DeckList = () => {
 
   const createCard = async (deckId) => {
     const card = newCards[deckId] || { front: '', back: '' };
-    const resp = await fetch(`/decks/${deckId}/cards/`, {
+    const resp = await fetch(`/api/decks/${deckId}/cards/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(card),
@@ -79,7 +79,7 @@ const DeckList = () => {
       front: '',
       back: '',
     };
-    const resp = await fetch(`/decks/${deckId}/cards/${cardId}`, {
+    const resp = await fetch(`/api/decks/${deckId}/cards/${cardId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(card),
@@ -94,7 +94,7 @@ const DeckList = () => {
   };
 
   const deleteCard = async (deckId, cardId) => {
-    const resp = await fetch(`/decks/${deckId}/cards/${cardId}`, { method: 'DELETE' });
+    const resp = await fetch(`/api/decks/${deckId}/cards/${cardId}`, { method: 'DELETE' });
     if (resp.ok) {
       fetchCards(deckId);
     }

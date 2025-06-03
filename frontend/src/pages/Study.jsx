@@ -9,7 +9,7 @@ const Study = () => {
 
   useEffect(() => {
     const load = async () => {
-      const resp = await fetch(`/decks/${deckId}/cards/`);
+      const resp = await fetch(`/api/decks/${deckId}/cards/`);
       if (resp.ok) {
         setCards(await resp.json());
       }
