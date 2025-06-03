@@ -30,13 +30,18 @@ class StatsResponse(BaseModel):
     counts: dict[str, int]
 
 
-router = APIRouter()
+router = APIRouter(tags=["Simulation"])
 
 # Global engine instance used by API endpoints
 engine = SimulationEngine()
 
 
-@router.post("/reset", response_model=ResetResponse)
+@router.post(
+    "/reset",
+    response_model=ResetResponse,
+    summary="Reset simulation",
+    description="Initialize the ecosystem with a mix of organisms",
+)
 def reset_simulation(
     algae: int = Query(10),
     herbivores: int = Query(5),
@@ -52,14 +57,24 @@ def reset_simulation(
     return {"status": "reset", "organisms": len(engine.organisms)}
 
 
-@router.post("/step", response_model=StepResponse)
+@router.post(
+    "/step",
+    response_model=StepResponse,
+    summary="Advance simulation",
+    description="Advance the simulation by one discrete time step",
+)
 def step_simulation():
     """Advance the simulation by one step."""
     engine.step()
     return {"step": engine.step_count}
 
 
-@router.get("/state", response_model=StateResponse)
+@router.get(
+    "/state",
+    response_model=StateResponse,
+    summary="Get simulation state",
+    description="Return current step and organism details",
+)
 def state_simulation():
     """Return current simulation state."""
     organisms = [
@@ -74,7 +89,12 @@ def state_simulation():
     return {"step": engine.step_count, "organisms": organisms}
 
 
-@router.get("/stats", response_model=StatsResponse)
+@router.get(
+    "/stats",
+    response_model=StatsResponse,
+    summary="Get population stats",
+    description="Return counts for each organism type and current step",
+)
 def simulation_stats():
     """Return population counts and current step."""
     from collections import Counter

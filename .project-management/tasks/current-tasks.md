@@ -41,6 +41,9 @@
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
 - `frontend/src/index.tsx` - Placeholder React entry
+- `frontend/package.json` - Frontend dependencies and scripts
+- `frontend/tsconfig.json` - TypeScript configuration
+- `frontend/vite.config.ts` - Vite build configuration
 
 ### Notes
 
@@ -84,11 +87,11 @@
   - [x] 3.6 Implement proper error handling and HTTP status codes for all endpoints
   - [x] 3.7 Add request/response models using Pydantic for type safety
   - [x] 3.8 Write integration tests for all API endpoints
-  - [ ] 3.9 Add API documentation with proper OpenAPI/Swagger descriptions
+  - [x] 3.9 Add API documentation with proper OpenAPI/Swagger descriptions
 
 - [ ] 4.0 Build Frontend React Application
-  - [ ] 4.1 Initialize React project with Vite and TypeScript configuration
-  - [ ] 4.2 Update package.json with required dependencies (React, TypeScript, Canvas/SVG libraries)
+  - [x] 4.1 Initialize React project with Vite and TypeScript configuration
+  - [x] 4.2 Update package.json with required dependencies (React, TypeScript, Canvas/SVG libraries)
   - [ ] 4.3 Create main App component with layout matching PrototypeDesign.html structure
   - [ ] 4.4 Set up CSS variables and styling based on the provided design system
   - [ ] 4.5 Create TypeScript interfaces for simulation data (Organism, SimulationState, Stats)
