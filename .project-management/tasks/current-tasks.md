@@ -31,6 +31,8 @@
 - `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
 - `backend/tests/test_main.py` - Unit tests for FastAPI root endpoint
 - `backend/tests/test_collision_detection.py` - Unit tests for collision logic
+- `backend/api/simulation.py` - API endpoints for simulation control
+- `backend/tests/test_api.py` - Integration tests for simulation API
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
@@ -62,7 +64,7 @@
   - [x] 2.2 Implement nutrient distribution and tracking system within environment
   - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
   - [x] 2.4 Implement collision detection for organism interactions (eating, reproduction)
-  - [ ] 2.5 Add organism spawning logic with configurable initial populations
+  - [x] 2.5 Add organism spawning logic with configurable initial populations
   - [ ] 2.6 Implement energy costs for movement and growth calculations
   - [ ] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
   - [ ] 2.8 Implement death conditions and nutrient release back to environment
@@ -71,10 +73,10 @@
 
 - [ ] 3.0 Create API Endpoints for Simulation Control
   - [x] 3.1 Set up FastAPI main application with CORS middleware for frontend
-  - [ ] 3.2 Create /simulation/reset endpoint to initialize simulation with default parameters
-  - [ ] 3.3 Create /simulation/step endpoint to advance simulation by one time step
-  - [ ] 3.4 Create /simulation/state endpoint returning organism positions, sizes, and types
-  - [ ] 3.5 Create /stats endpoint returning population counts and simulation step number
+  - [x] 3.2 Create /simulation/reset endpoint to initialize simulation with default parameters
+  - [x] 3.3 Create /simulation/step endpoint to advance simulation by one time step
+  - [x] 3.4 Create /simulation/state endpoint returning organism positions, sizes, and types
+  - [x] 3.5 Create /stats endpoint returning population counts and simulation step number
   - [ ] 3.6 Implement proper error handling and HTTP status codes for all endpoints
   - [ ] 3.7 Add request/response models using Pydantic for type safety
   - [ ] 3.8 Write integration tests for all API endpoints
