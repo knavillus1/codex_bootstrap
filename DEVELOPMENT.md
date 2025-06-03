@@ -6,6 +6,17 @@ This section describes development environment setup and is maintained by the co
 
 ### Frontend
 
+1. Install dependencies (from project root):
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+   The app is served at http://localhost:5173 by default.
 
 ### Backend
 

@@ -32,9 +32,12 @@ pip install -r backend/requirements.txt
 uvicorn backend.main:app --reload &
 
 # Start frontend in background
+npm --prefix frontend install >/dev/null
+npm --prefix frontend run dev &
 
 # Wait briefly for servers to start
+sleep 2
 
 # Open in default browser (macOS or Linux)
 
-#  Wait for servers to shut down manually
+# Wait for servers to shut down manually
