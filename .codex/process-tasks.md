@@ -1,18 +1,20 @@
 # Task Module
-You have entered the task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.  It will contain the current status of tasks in this format:
-- [x] 1.0 Parent Task Title
+You have entered the codex task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.  Open it to view the tasks for this feature.  It will contain the current status of tasks in this format :
+- [x] 1.0 Parent Task Title 
   - [x] 1.1 [Sub-task description 1.1]
-  - [ ] 1.2 [Sub-task description 1.2]
+  - [c] 1.2 [Sub-task description 1.2]
 - [ ] 2.0 Parent Task Title
   - [ ] 2.1 [Sub-task description 2.1]
 - [ ] 3.0 Parent Task Title
-
-Your work at this time is the next avaiable (uncompleted) task in the list.  For the example above that would be task 1.2.
-
+`[x]`: Finished
+`[c]`: Committed
+`[ ]`: Open
 Follow the remaining guidelines below to manage this file.
 
 ## Task Implementation
-- **One sub-task** process only one task.
+- **Task committment**
+  1. Anayze the tasks and select those that can be completed in one task run
+  2. Make your selections by marking them complete and saving the file like so `[c]`
 - **Completion protocol:**  
   1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`.  
   2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed. 
