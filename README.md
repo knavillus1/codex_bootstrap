@@ -6,27 +6,36 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 
 - PRD and Task file creation within Codex via local IDE agent
 - Task orchestration and managment in Codex or local IDE agent
-- Automatic creation and maintenance of local dev setup and application start up script
+- Agent managed local dev setup and application start up script `dev-init.sh`
+- Agent maintenance of dependencies, Codex environment startup script.
+    - Changes to `.codex/install.sh` must be manually propogated to teh Codex environment setup configuration, but required environment changes are saved to this file by the Codex agent.
 - Backend: Python 3, FastAPI, Uvicorn
 - Frontend: React 18, Vite, Tailwind CSS, React Router
 - Pre-configured linting and testing scripts
+# TaskMaster
+Starting with any description of a feature, this project supplies tooling to automate creation of PRD and Task List files, and then Codex agent (or local IDE agent) will manage work from this list, updating it as needed. There are four phases:
 
 ## PRD file creation
 
-- Add a .md file describing the feature in as much or little detail to `.project-management/prd-background`
-- if relevant, add design mockup file
-- Start Codex task in Code mode with just the phrase *CreatePrd*
-- *Alternatively can be run with local cursor/github copilot agent mode etc.. with reasoning model for better results.  Give focus to `create-prd.md` file and send 'go' message*
-- There will be Q&A with the Agent, answer and click Code (Environment is spun up againP)
-- Result should be a PRD file in `.project-management/tasks/`
+- Add feature specs and background to `.project-management/current-prd/prd-background/`:
+    - `feature-specification.md` containing feature specs with as much or little detail as needed.  Mandatory for running PRD creation in Codex.  For local IDE agent feature specs can be delivered via copilot.
+    - `design-mock.html` Optional design mockup file.
+    - `api-documentation.md` Optional documentation for feature techinical assistance.
+- Create the PRD:
+    - Codex: Start task in *Code* mode with just the phrase **CreatePrd**
+    - *or*
+    - Local IDE agent: Give focus to `create-prd.md` file, enter specs (or just  'go' if background has full feature specs).
+- There will be Q&A with the Agent, On Codex answer questions and resume in *Code* mode (Environment is spun up again)
+- Result should be a PRD file in `.project-management/current-prd/`
 - Merge PR to target branch
 
 ## Task list file creation
-
-- Start Codex task in Code mode with just the phrase *CreateTasks*
-- *Alternatively can be run with local cursor/github copilot agent mode etc.. with reasoning model for better results.  Give focus to `generate-tasks.md` file and send 'go' message*
+- Create Task List File:
+    - Codex: Start task in *Code* mode with just the phrase **CreateTasks**
+    - *or*
+    - Local IDE agent: Give focus to `generate-tasks.md` file and send **go** message
 - Q&A, answer and click code
-- Result should be a task list file in `.project-management/tasks/`, with a copy named `current-tasks.md`
+- Result should be a task list file at `.project-management/current-prd/`
 - Merge PR to target branch
 
 ## TaskMaster
@@ -35,7 +44,17 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 - Start Codex in Code mode using the phrase *TaskMaster*.  This will corece the agent to reference `process-tasks-cloud.md' which picks one or more tasks to complete in the session.
 - *Alternatively, tasks can be executed by local agent with focus on `process-tasks-local.md' which will run one task at a time*
 
-## Project Structure
+## Feature Close
+- Perform final feature review
+    - Codex: Start task in *Code* mode with just the phrase **ClosePrd**
+    - *or*
+    - Local IDE agent: Give focus to `close-prd.md` file and send **go** message
+- Review will either:
+    - Result in flagged changes - review and resubmit the close out
+    - Pass review and close the PRD - feature files are moved from `current-prd` to `closed-prd`
+
+# Project Notes
+## Structure
 
 - `AGENTS.md`: Instructions for Codex agents
 *These files are under control and watch by the Codex agent and will be updated as project tasks demand.*
