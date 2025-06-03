@@ -8,8 +8,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/.project-management/`
-- **Filename:** `
+- **Location:** `/.project-management/` 
 - **Filename:** `tasks-[prd-file-name].md` (e.g., `tasks-prd-user-profile-editing.md`)` 
 
 ## Process
@@ -22,6 +21,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 6.  **Identify Relevant Files:** Based on the tasks and PRD, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
 7.  **Generate Final Output:** Combine the parent tasks, sub-tasks, relevant files, and notes into the final Markdown structure.
 8.  **Save Task List:** Save the generated document in the `/tasks/` directory with the filename `tasks-[prd-file-name].md`, where `[prd-file-name]` matches the base name of the input PRD file (e.g., if the input was `prd-user-profile-editing.md`, the output is `tasks-prd-user-profile-editing.md`).
+9.  **Optional 'tasks.md' copy** Ask the user if they would like the newly saved task file to `/.project-management/tasks/current-tasks.md`.  Check for existing file and if not present copy the file.
 
 ## Output Format
 

@@ -1,5 +1,5 @@
 # Task Module
-You have entered the task-based work module. The task list file for this project is `\.project-management\tasks.md`.  It will contain the current status of tasks in this format:
+You have entered the task-based work module. The task list file for this project is `\.project-management\tasks\current-tasks.md`.  It will contain the current status of tasks in this format:
 - [x] 1.0 Parent Task Title
   - [x] 1.1 [Sub-task description 1.1]
   - [ ] 1.2 [Sub-task description 1.2]

@@ -2,7 +2,7 @@
 # Contributor Guide
 
 ## Special Task Instructions
-If the user task consists of just a single file path name, like '.codex/process-tasks.md', then begin by opening that file which will contain the full task prompt for you to follow.
+If the user task consists of just a single file path name, like '/.codex/process-tasks.md', then begin by opening that file which will contain the full task prompt for you to follow.
 
 ## Ignore 
 Do not open items in this path, they will be irrelevant to your efforts:
