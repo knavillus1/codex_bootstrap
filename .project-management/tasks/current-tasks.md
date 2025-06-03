@@ -4,6 +4,8 @@
 - `frontend/src/components/Calculator.test.tsx` - Unit tests for the Calculator component.
 - `backend/calculator.py` - Backend logic for performing calculations (if backend calculation is required).
 - `backend/calculator.test.py` - Unit tests for backend calculation logic.
+- `.gitignore` - Git configuration to exclude local dependencies from version control.
+- `frontend/src/index.js` - Placeholder file to satisfy the lint configuration.
 
 ### Notes
 
@@ -13,7 +15,7 @@
 ## Tasks
 
 - [ ] 1.0 Set up project structure for the calculator demo
-  - [ ] 1.1 Create `frontend/src/components/Calculator.tsx` for the calculator UI
+  - [x] 1.1 Create `frontend/src/components/Calculator.tsx` for the calculator UI
   - [ ] 1.2 Create `backend/calculator.py` for backend calculation logic (if needed)
   - [ ] 1.3 Ensure frontend and backend are connected (if backend is used)
 - [ ] 2.0 Implement the Calculator UI component
