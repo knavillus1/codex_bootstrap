@@ -30,6 +30,7 @@
 - `backend/tests/test_environment.py` - Unit tests for environment
 - `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
 - `backend/tests/test_main.py` - Unit tests for FastAPI root endpoint
+- `backend/tests/test_collision_detection.py` - Unit tests for collision logic
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
@@ -60,7 +61,7 @@
   - [x] 2.1 Create Environment class to manage 2D coordinate space (500x500 default)
   - [x] 2.2 Implement nutrient distribution and tracking system within environment
   - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
-  - [ ] 2.4 Implement collision detection for organism interactions (eating, reproduction)
+  - [x] 2.4 Implement collision detection for organism interactions (eating, reproduction)
   - [ ] 2.5 Add organism spawning logic with configurable initial populations
   - [ ] 2.6 Implement energy costs for movement and growth calculations
   - [ ] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
