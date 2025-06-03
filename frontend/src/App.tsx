@@ -6,7 +6,7 @@ import HighScoresPanel from './components/HighScoresPanel'
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-black text-green-500 font-mono">
+    <div className="min-h-screen flex flex-col items-center bg-black text-green-500 font-pixel">
       <GameHeader />
       <div className="flex flex-row w-full max-w-screen-md">
         <GameCanvas />
