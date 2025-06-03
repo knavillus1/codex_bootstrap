@@ -37,6 +37,8 @@ backend
 - `backend/tests/test_app.py` - Basic health endpoint test.
 - `backend/__init__.py` - Marks backend as a package.
 - `backend/requirements.txt` - Added SQLAlchemy and asyncpg dependencies.
+- `backend/auth.py` - User registration and login logic with in-memory sessions.
+- `backend/tests/test_auth.py` - Tests for registration and login endpoints.
 
 ### Existing Files Modified
 - `dev_init.sh` - Update to install dependencies and start backend/frontend for local dev.
@@ -54,8 +56,8 @@ backend
   - [x] 1.3 Define `User`, `Deck`, and `Card` models in `backend/models.py`
   - [x] 1.4 Set up migration or table creation logic
 - [ ] 2.0 Implement user authentication
-  - [ ] 2.1 Build registration and login endpoints in `backend/auth.py`
-  - [ ] 2.2 Store password hashes and manage session cookies
+  - [x] 2.1 Build registration and login endpoints in `backend/auth.py`
+  - [x] 2.2 Store password hashes and manage session cookies
   - [ ] 2.3 Create frontend `Login.tsx` for user signup/login
 - [ ] 3.0 Deck management features
   - [ ] 3.1 API endpoints for creating, reading, updating, and deleting decks
