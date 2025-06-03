@@ -40,7 +40,7 @@
   - [x] 1.1 Initialize FastAPI project structure with proper directory layout
   - [x] 1.2 Update requirements.txt with FastAPI, uvicorn, pydantic, and testing dependencies
   - [x] 1.3 Create base Organism abstract class with core properties (position, size, energy, nutrients)
-  - [ ] 1.4 Implement Organism base methods (move, grow, reproduce, die, consume_nutrients)
+  - [x] 1.4 Implement Organism base methods (move, grow, reproduce, die, consume_nutrients)
   - [ ] 1.5 Create Algae class inheriting from Organism with stationary growth behavior
   - [ ] 1.6 Create Herbivore class inheriting from Organism with movement and algae consumption
   - [ ] 1.7 Create Carnivore class inheriting from Organism with movement and herbivore hunting
