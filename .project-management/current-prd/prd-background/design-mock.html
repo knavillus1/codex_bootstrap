@@ -1,1 +1,367 @@
-*PLACEHOLDER FILE*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Man Pac Invaders - Mockup</title>
+    <!-- Using a Google Font for a pixelated look -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /*
+            AESTHETIC GUIDELINES (Applied below):
+            - Overall: Retro pixel art, 8-bit inspired, clean and vibrant.
+            - Color Palette: Dark space backgrounds (deep blues, purples, black) with bright,
+                           neon-like colors for UI elements, text, and borders.
+            - Typography: Pixelated font ('Press Start 2P').
+            - Modularity: CSS classes follow a BEM-like structure (e.g., block__element--modifier)
+                          that would align well with React components.
+        */
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #0A001F; /* Deep space purple/black */
+            color: #E0E0E0; /* Light grey for general text */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer content */
+            min-height: 100vh;
+            box-sizing: border-box;
+            overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+        }
+
+        .game-wrapper {
+            /* This wrapper would be akin to your main React App component */
+            width: 100%;
+            max-width: 960px; /* Max width for the game interface */
+            border: 3px solid #39FF14; /* Neon Green border */
+            background-color: rgba(10, 5, 30, 0.85); /* Dark translucent purple */
+            padding: 20px;
+            box-shadow: 0 0 20px #39FF14, 0 0 30px #39FF14 inset; /* Neon glow */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between major sections */
+        }
+
+        /* Header Section (Title, Score, Lives) */
+        .game-header {
+            /* Component: GameHeader.tsx */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #FF00FF; /* Neon Pink dashed separator */
+        }
+
+        .game-header__title {
+            font-size: 24px; /* Adjust as needed */
+            color: #FFFF00; /* Bright Yellow */
+            text-shadow: 2px 2px #FF00FF; /* Pink shadow for retro feel */
+        }
+
+        .game-header__stats {
+            font-size: 16px;
+            color: #00FFFF; /* Cyan */
+            text-align: right;
+        }
+
+        .game-header__stat-item {
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+        .game-header__stat-item .label {
+            color: #CCCCCC; /* Lighter grey for labels */
+        }
+        .game-header__stat-item .value {
+            color: #FFFFFF; /* Bright white for values */
+        }
+
+
+        /* Main Content Area (Game Canvas + High Scores Side Panel) */
+        .game-main-content {
+            /* Component: MainContent.tsx or similar grouping */
+            display: flex;
+            gap: 20px; /* Space between game area and high scores */
+            flex-wrap: wrap; /* Allow high scores to wrap below on small screens */
+        }
+
+        /* Game Canvas Placeholder Area */
+        .game-canvas-area {
+            /* Component: GameCanvas.tsx (this would render the actual canvas) */
+            flex-grow: 1; /* Takes available space */
+            min-width: 320px; /* Minimum width for the game area */
+            height: 480px; /* Example fixed height, adjust as per game design */
+            background-color: #000000; /* Black background for canvas */
+            border: 2px solid #00FFFF; /* Cyan border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555555; /* Dim text for placeholder */
+            font-size: 20px;
+            box-shadow: 0 0 15px #00FFFF inset; /* Inner cyan glow */
+            position: relative; /* For potential overlays like "GET READY" */
+        }
+        .game-canvas-area__overlay-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFF00; /* Yellow */
+            font-size: 28px;
+            text-shadow: 2px 2px #FF00FF; /* Pink shadow */
+            z-index: 10;
+            text-align: center;
+        }
+
+
+        /* High Scores Panel */
+        .high-scores-panel {
+            /* Component: HighScoresPanel.tsx */
+            width: 280px; /* Fixed width for the side panel */
+            flex-shrink: 0; /* Prevent shrinking */
+            padding: 15px;
+            background-color: rgba(30, 0, 20, 0.7); /* Dark magenta tint */
+            border: 2px solid #FF00FF; /* Neon Pink border */
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .game-main-content {
+                flex-direction: column; /* Stack game and high scores */
+            }
+            .high-scores-panel {
+                width: 100%; /* Full width when stacked */
+                margin-top: 20px;
+            }
+            .game-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .game-header__stats {
+                width: 100%;
+                text-align: left;
+            }
+            .game-header__stat-item {
+                margin-left: 0;
+                margin-right: 20px; /* Space between stats if they wrap */
+                display: inline-block;
+            }
+        }
+
+        .high-scores-panel__title {
+            font-size: 20px;
+            color: #39FF14; /* Neon Green */
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #39FF14;
+        }
+
+        .high-scores-panel__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto; /* Scroll if many scores */
+            flex-grow: 1;
+        }
+
+        .high-scores-panel__item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 2px;
+            font-size: 14px;
+            border-bottom: 1px dotted rgba(224, 224, 224, 0.3);
+        }
+        .high-scores-panel__item:last-child {
+            border-bottom: none;
+        }
+
+        .high-scores-panel__item-rank {
+            color: #00FFFF; /* Cyan */
+            width: 30px; /* Fixed width for rank */
+        }
+        .high-scores-panel__item-initials {
+            color: #FFFF00; /* Yellow */
+            width: 60px; /* Fixed width for initials */
+            text-align: center;
+        }
+        .high-scores-panel__item-score {
+            color: #FFFFFF; /* White */
+            text-align: right;
+            flex-grow: 1;
+        }
+
+        /* Footer Section (e.g. for Initials Entry) */
+        .game-footer {
+            /* Component: GameFooter.tsx or part of a GameState dependent UI */
+            padding-top: 15px;
+            border-top: 2px dashed #00FFFF; /* Cyan dashed separator */
+            text-align: center;
+        }
+
+        .game-footer__message {
+            font-size: 18px;
+            color: #FF69B4; /* Hot Pink for messages like "GAME OVER" */
+            margin-bottom: 10px;
+            min-height: 25px; /* Reserve space for message */
+        }
+
+        .game-footer__initials-form label {
+            margin-right: 10px;
+            color: #CCCCCC;
+        }
+
+        .game-footer__initials-input {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #222222;
+            color: #FFFFFF;
+            border: 2px solid #FFFF00; /* Yellow border */
+            padding: 8px;
+            font-size: 18px;
+            width: 80px; /* For 3 characters */
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .game-footer__initials-input:focus {
+            outline: 2px solid #FF00FF; /* Pink outline on focus */
+        }
+
+        /* Helper for lives icons */
+        .life-icon {
+            color: #FFFF00; /* Yellow Pac-Man like color */
+            margin-right: 4px;
+            /* In real game, this would be a sprite/image */
+            display: inline-block; /* For spacing */
+            /* Using a simple character for mockup */
+            content: "●";
+            font-size: 1.2em; /* Make icon slightly larger */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="game-wrapper" id="spaceManPacInvadersApp">
+
+        <!-- Header Section -->
+        <header class="game-header">
+            <h1 class="game-header__title">Space Man Pac Invaders</h1>
+            <div class="game-header__stats">
+                <span class="game-header__stat-item"><span class="label">SCORE:</span> <span class="value" id="currentScore">000000</span></span>
+                <span class="game-header__stat-item"><span class="label">LIVES:</span>
+                    <span class="value" id="livesDisplay">
+                        <span class="life-icon"></span><span class="life-icon"></span><span class="life-icon"></span>
+                    </span>
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="game-main-content">
+            <!-- Game Canvas Placeholder -->
+            <section class="game-canvas-area" id="gameCanvasContainer">
+                <!-- This div is where the actual game canvas would be rendered by React/JS -->
+                <div class="game-canvas-area__placeholder-text">(Game Canvas Area)</div>
+                <!-- Example of an overlay message -->
+                <div class="game-canvas-area__overlay-message" id="gameOverlayMessage">GET READY!</div>
+            </section>
+
+            <!-- High Scores Panel -->
+            <aside class="high-scores-panel" id="highScoresPanel">
+                <h2 class="high-scores-panel__title">HIGH SCORES</h2>
+                <ul class="high-scores-panel__list" id="highScoreList">
+                    <!-- High score items would be dynamically populated by React from API data -->
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">1.</span>
+                        <span class="high-scores-panel__item-initials">ACE</span>
+                        <span class="high-scores-panel__item-score">150320</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">2.</span>
+                        <span class="high-scores-panel__item-initials">ROB</span>
+                        <span class="high-scores-panel__item-score">125100</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">3.</span>
+                        <span class="high-scores-panel__item-initials">ZAP</span>
+                        <span class="high-scores-panel__item-score">110050</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">4.</span>
+                        <span class="high-scores-panel__item-initials">MAX</span>
+                        <span class="high-scores-panel__item-score">98750</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">5.</span>
+                        <span class="high-scores-panel__item-initials">LEIA</span>
+                        <span class="high-scores-panel__item-score">85300</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">6.</span>
+                        <span class="high-scores-panel__item-initials">SOL</span>
+                        <span class="high-scores-panel__item-score">75000</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">7.</span>
+                        <span class="high-scores-panel__item-initials">ART</span>
+                        <span class="high-scores-panel__item-score">68200</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">8.</span>
+                        <span class="high-scores-panel__item-initials">KIM</span>
+                        <span class="high-scores-panel__item-score">61500</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">9.</span>
+                        <span class="high-scores-panel__item-initials">NEO</span>
+                        <span class="high-scores-panel__item-score">55430</span>
+                    </li>
+                    <li class="high-scores-panel__item">
+                        <span class="high-scores-panel__item-rank">10.</span>
+                        <span class="high-scores-panel__item-initials">XYZ</span>
+                        <span class="high-scores-panel__item-score">50100</span>
+                    </li>
+                </ul>
+            </aside>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="game-footer" id="gameFooter">
+            <div class="game-footer__message" id="footerMessage">PRESS START</div> <!-- Or "GAME OVER", etc. -->
+            <form class="game-footer__initials-form" id="initialsForm" style="display: none;"> <!-- Hidden by default -->
+                <label for="playerInitials">ENTER INITIALS:</label>
+                <input type="text" id="playerInitials" name="playerInitials" class="game-footer__initials-input" maxlength="3" required>
+                <!-- Submit button could be added or handled by Enter key -->
+            </form>
+        </footer>
+
+    </div>
+
+    <script>
+        // Example JavaScript to toggle initials form (mimicking game state change)
+        // In a React app, this would be handled by state.
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameOverlayMessage = document.getElementById('gameOverlayMessage');
+            const footerMessage = document.getElementById('footerMessage');
+            const initialsForm = document.getElementById('initialsForm');
+
+            // Simulate game flow for demonstration
+            setTimeout(() => {
+                if(gameOverlayMessage) gameOverlayMessage.style.display = 'none'; // Hide "GET READY"
+                if(footerMessage) footerMessage.textContent = 'LEVEL 1';
+            }, 3000); // After 3 seconds
+
+            // Simulate Game Over and show initials form
+            // setTimeout(() => {
+            //     if(footerMessage) footerMessage.textContent = 'GAME OVER!';
+            //     if(initialsForm) initialsForm.style.display = 'block';
+            //     if(document.getElementById('playerInitials')) document.getElementById('playerInitials').focus();
+            // }, 8000); // After 8 seconds (example)
+        });
+    </script>
+
+</body>
+</html>
