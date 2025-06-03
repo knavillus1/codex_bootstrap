@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
+from .auth import get_current_user
 
 router = APIRouter(prefix="/decks")
 
@@ -17,30 +18,39 @@ class DeckOut(DeckIn):
 
 
 @router.post("/", response_model=DeckOut)
-async def create_deck(deck: DeckIn):
+async def create_deck(deck: DeckIn, user: str = Depends(get_current_user)):
     global _next_id
     deck_id = _next_id
     _next_id += 1
-    _decks[deck_id] = deck.dict()
+    _decks[deck_id] = {"owner": user, **deck.dict()}
     return {"id": deck_id, **deck.dict()}
 
 
 @router.get("/", response_model=list[DeckOut])
-async def list_decks():
-    return [{"id": i, **d} for i, d in _decks.items()]
+async def list_decks(user: str = Depends(get_current_user)):
+    return [{"id": i, **data}
+            for i, data in _decks.items()
+            if data.get("owner") == user]
 
 
 @router.put("/{deck_id}", response_model=DeckOut)
-async def update_deck(deck_id: int, deck: DeckIn):
-    if deck_id not in _decks:
+async def update_deck(
+    deck_id: int,
+    deck: DeckIn,
+    user: str = Depends(get_current_user),
+):
+    if deck_id not in _decks or _decks[deck_id]["owner"] != user:
         raise HTTPException(status_code=404, detail="Deck not found")
-    _decks[deck_id] = deck.dict()
+    _decks[deck_id].update(deck.dict())
     return {"id": deck_id, **deck.dict()}
 
 
 @router.delete("/{deck_id}")
-async def delete_deck(deck_id: int):
-    if deck_id not in _decks:
+async def delete_deck(
+    deck_id: int,
+    user: str = Depends(get_current_user),
+):
+    if deck_id not in _decks or _decks[deck_id]["owner"] != user:
         raise HTTPException(status_code=404, detail="Deck not found")
     del _decks[deck_id]
     return {"status": "deleted"}

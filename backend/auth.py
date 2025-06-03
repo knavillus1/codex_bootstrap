@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Response
+from fastapi import APIRouter, HTTPException, Response, Request
 from pydantic import BaseModel
 import hashlib
 import secrets
@@ -36,3 +36,11 @@ async def login(creds: UserCredentials, response: Response):
     sessions[token] = creds.username
     response.set_cookie("session_token", token, httponly=True)
     return {"status": "logged_in"}
+
+
+def get_current_user(request: Request) -> str:
+    token = request.cookies.get("session_token")
+    user = sessions.get(token)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return user

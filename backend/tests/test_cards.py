@@ -5,6 +5,8 @@ client = TestClient(app)
 
 
 def test_card_crud():
+    client.post("/register", json={"username": "carol", "password": "pw"})
+    client.post("/login", json={"username": "carol", "password": "pw"})
     # create deck first
     resp = client.post('/decks/', json={'name': 'Deck1'})
     deck_id = resp.json()['id']

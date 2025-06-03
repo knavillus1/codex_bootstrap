@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const DeckList = () => {
   const [decks, setDecks] = useState([]);
@@ -136,6 +137,9 @@ const DeckList = () => {
               >
                 Delete
               </button>
+              <Link to={`/study/${d.id}`} className="bg-purple-500 text-white px-2">
+                Study
+              </Link>
               <button
                 className="bg-gray-500 text-white px-2"
                 onClick={() => {
