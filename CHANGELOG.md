@@ -3,3 +3,4 @@
 2025-06-03 Added pixel font styling and completed layout tasks
 2025-06-03 Implemented basic requestAnimationFrame game loop
 2025-06-03 Added high score API integration on frontend
+2025-06-03 Implemented basic player movement and shooting mechanics

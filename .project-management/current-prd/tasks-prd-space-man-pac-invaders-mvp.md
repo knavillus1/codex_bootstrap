@@ -16,6 +16,7 @@ run_tests.sh
 ```
 
 ## Relevant Files
+- `CHANGELOG.md`
 - `backend/requirements.txt`
 - `frontend/package.json`
 - `.codex/install.sh`
@@ -80,7 +81,7 @@ run_tests.sh
   - [x] 2.4 Ensure layout matches the mockup styling.
 - [ ] 3.0 Core Gameplay Mechanics
   - [x] 3.1 Implement main game loop in `logic.ts` with `requestAnimationFrame`.
-  - [ ] 3.2 Implement player movement, shooting, and collision detection.
+  - [x] 3.2 Implement player movement, shooting, and collision detection.
   - [ ] 3.3 Implement invader movement, projectiles, and pellet collection.
   - [ ] 3.4 Track levels, lives, and scoring.
   - [ ] 3.5 Manage game states (title, playing, game over).
