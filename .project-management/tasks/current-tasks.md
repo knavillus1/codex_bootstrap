@@ -6,17 +6,24 @@
 ├── DEVELOPMENT.md
 ├── README.md
 ├── backend
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── tests
+│       └── __init__.py
 ├── dev_init.sh
 ├── frontend
 │   ├── eslint.config.js
-│   └── package.json
+│   ├── package.json
+│   └── Calculator.js
 └── run_tests.sh
 ```
 
 ## Relevant Files
 
 - `frontend/Calculator.js` - Main React component for the calculator UI and logic.
+- `frontend/package.json` - NPM configuration and scripts including linting.
+- `backend/tests/__init__.py` - Placeholder directory enabling pytest to run.
+- `.gitignore` - Ignore frontend dependencies and other artifacts.
+- `CHANGELOG.md` - Record of project changes.
 - `frontend/Calculator.test.js` - Unit tests for the calculator component.
 - `frontend/App.js` - Entry point for the frontend app, may need to integrate the calculator.
 - `frontend/App.test.js` - Unit tests for the app entry point.
@@ -29,7 +36,7 @@
 ## Tasks
 
 - [ ] 1.0 Create Calculator UI
-  - [ ] 1.1 Set up a new `Calculator.js` file in the `frontend` directory.
+  - [x] 1.1 Set up a new `Calculator.js` file in the `frontend` directory.
   - [ ] 1.2 Add two input fields for user numbers.
   - [ ] 1.3 Add operation selector (dropdown or buttons) for add, subtract, multiply, divide.
   - [ ] 1.4 Add a button to perform the calculation.
