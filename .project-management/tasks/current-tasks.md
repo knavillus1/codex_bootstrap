@@ -20,6 +20,7 @@
 
 - `backend/main.py` - FastAPI application entry point
 - `CHANGELOG.md` - Summary of changes
+- `.project-management/tasks/current-tasks.md` - Task tracking file
 - `backend/models/organism.py` - Base organism definition
 - `backend/tests/test_organism.py` - Unit tests for Organism
 - `backend/models/algae.py` - Algae organism implementation
@@ -62,7 +63,7 @@
   - [x] 1.8 Write unit tests for all organism classes and their behaviors
   - [x] 1.9 Set up pytest configuration and test directory structure
 
-- [ ] 2.0 Implement Simulation Engine and Environment
+- [x] 2.0 Implement Simulation Engine and Environment
   - [x] 2.1 Create Environment class to manage 2D coordinate space (500x500 default)
   - [x] 2.2 Implement nutrient distribution and tracking system within environment
   - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
@@ -71,8 +72,8 @@
   - [x] 2.6 Implement energy costs for movement and growth calculations
   - [x] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
   - [x] 2.8 Implement death conditions and nutrient release back to environment
-  - [c] 2.9 Add boundary handling (wrap-around or collision with walls)
-  - [c] 2.10 Write comprehensive unit tests for simulation engine and environment
+  - [x] 2.9 Add boundary handling (wrap-around or collision with walls)
+  - [x] 2.10 Write comprehensive unit tests for simulation engine and environment
 
 - [ ] 3.0 Create API Endpoints for Simulation Control
   - [x] 3.1 Set up FastAPI main application with CORS middleware for frontend
@@ -80,9 +81,9 @@
   - [x] 3.3 Create /simulation/step endpoint to advance simulation by one time step
   - [x] 3.4 Create /simulation/state endpoint returning organism positions, sizes, and types
   - [x] 3.5 Create /stats endpoint returning population counts and simulation step number
-  - [ ] 3.6 Implement proper error handling and HTTP status codes for all endpoints
-  - [ ] 3.7 Add request/response models using Pydantic for type safety
-  - [ ] 3.8 Write integration tests for all API endpoints
+  - [x] 3.6 Implement proper error handling and HTTP status codes for all endpoints
+  - [x] 3.7 Add request/response models using Pydantic for type safety
+  - [x] 3.8 Write integration tests for all API endpoints
   - [ ] 3.9 Add API documentation with proper OpenAPI/Swagger descriptions
 
 - [ ] 4.0 Build Frontend React Application
