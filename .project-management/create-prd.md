@@ -41,7 +41,7 @@ The generated PRD should have this structure:
 ## 5.  Non-Goals (Out of Scope)
 - Clearly state what this feature will *not* include to manage scope.
 ## 6.  Design Considerations (Optional)
-- Describe UI/UX requirements, or mention relevant components/styles if applicable. If a design mockup (html) was found in `.project-management/prd-background`, then make explcit reference to this file with the full path.
+- Describe UI/UX requirements, or mention relevant components/styles if applicable. 
 ## 7.  Technical Considerations (Optional)
 - Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
 ## 8.  Success Metrics
@@ -49,7 +49,9 @@ The generated PRD should have this structure:
 ## 9.  Open Questions
 - List any remaining questions or areas needing further clarification.
 ## 10. Referenced PRD-background files
-- if files included in  `.project-management/prd-background` contain focused and specific guidance, reference the file here for the task creation phase.
+- if files included in  `.project-management/prd-background` contain focused and specific guidance, reference the file (full file path) here with a description of what it describes
+- If a design mockup (html) was found in `.project-management/prd-background`, then make explcit reference to this file with the full path.
+- Do not include the primary project description file here.
 ```
 ## Target Audience
 
