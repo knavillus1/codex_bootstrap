@@ -4,9 +4,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from .database import engine, get_db
 from .models import Base
 from .auth import router as auth_router
+from .decks import router as deck_router
 
 app = FastAPI()
 app.include_router(auth_router)
+app.include_router(deck_router)
 
 
 @app.on_event("startup")

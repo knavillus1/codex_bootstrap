@@ -25,10 +25,10 @@ backend
 - `backend/models.py` - SQLAlchemy models for users, decks, and cards.
 - `backend/auth.py` - User registration and login logic with session cookies.
 - `backend/database.py` - Database connection utilities.
-- `frontend/src/App.tsx` - React entry with routing configuration.
-- `frontend/src/pages/Login.tsx` - Login and registration page.
-- `frontend/src/pages/DeckList.tsx` - Deck management interface.
-- `frontend/src/pages/Study.tsx` - Study mode interface.
+- `frontend/src/App.jsx` - React entry with routing configuration.
+- `frontend/src/pages/Login.jsx` - Login and registration page.
+- `frontend/src/pages/DeckList.jsx` - Deck management interface.
+- `frontend/src/pages/Study.jsx` - Study mode interface.
 
 ### New and Updated Files
 - `backend/main.py` - FastAPI app with startup table creation and health endpoint.
@@ -39,11 +39,18 @@ backend
 - `backend/requirements.txt` - Added SQLAlchemy and asyncpg dependencies.
 - `backend/auth.py` - User registration and login logic with in-memory sessions.
 - `backend/tests/test_auth.py` - Tests for registration and login endpoints.
+- `backend/decks.py` - CRUD endpoints for decks using in-memory store.
+- `backend/tests/test_decks.py` - Tests for deck API operations.
+- `frontend/index.html` - HTML entry point for Vite app.
+- `frontend/src/main.jsx` - React DOM rendering and router setup.
+- `frontend/src/App.jsx` - Application routes and navigation.
+- `frontend/src/pages/Login.jsx` - Login and registration form.
 
 ### Existing Files Modified
 - `dev_init.sh` - Update to install dependencies and start backend/frontend for local dev.
 - `frontend/package.json` - Add scripts and dependencies for React project.
 - `backend/requirements.txt` - Include FastAPI, SQLAlchemy, and async PG driver.
+- `frontend/eslint.config.js` - Enable linting for JS and JSX files.
 
 ### Notes
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `Login.tsx` and `Login.test.tsx`).
@@ -55,12 +62,12 @@ backend
   - [x] 1.2 Add `backend/database.py` for SQLAlchemy connection to Postgres
   - [x] 1.3 Define `User`, `Deck`, and `Card` models in `backend/models.py`
   - [x] 1.4 Set up migration or table creation logic
-- [ ] 2.0 Implement user authentication
+- [x] 2.0 Implement user authentication
   - [x] 2.1 Build registration and login endpoints in `backend/auth.py`
   - [x] 2.2 Store password hashes and manage session cookies
-  - [ ] 2.3 Create frontend `Login.tsx` for user signup/login
+  - [x] 2.3 Create frontend `Login.tsx` for user signup/login
 - [ ] 3.0 Deck management features
-  - [ ] 3.1 API endpoints for creating, reading, updating, and deleting decks
+  - [x] 3.1 API endpoints for creating, reading, updating, and deleting decks
   - [ ] 3.2 Frontend `DeckList.tsx` page for deck CRUD operations
 - [ ] 4.0 Card management features
   - [ ] 4.1 API endpoints for adding, editing, and deleting cards in a deck
