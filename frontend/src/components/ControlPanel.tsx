@@ -1,19 +1,16 @@
 import React from 'react';
-import { resetSimulation, stepSimulation } from '../api';
 
-const ControlPanel: React.FC = () => {
-  const handleReset = async () => {
-    await resetSimulation();
-  };
+interface Props {
+  onReset: () => Promise<void>;
+  onStep: () => Promise<void>;
+}
 
-  const handleStep = async () => {
-    await stepSimulation();
-  };
+const ControlPanel: React.FC<Props> = ({ onReset, onStep }) => {
 
   return (
     <div className="control-panel">
-      <button onClick={handleReset}>Reset</button>
-      <button onClick={handleStep}>Step</button>
+      <button onClick={onReset}>Reset</button>
+      <button onClick={onStep}>Step</button>
     </div>
   );
 };

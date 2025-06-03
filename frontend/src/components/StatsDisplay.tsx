@@ -4,11 +4,21 @@ import { Stats } from '../types';
 
 const StatsDisplay: React.FC = () => {
   const [stats, setStats] = useState<Stats | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchStats().then(setStats).catch(() => setStats(null));
+    fetchStats()
+      .then((s) => {
+        setStats(s);
+        setError(null);
+      })
+      .catch(() => {
+        setStats(null);
+        setError('Failed to load stats');
+      });
   }, []);
 
+  if (error) return <div>{error}</div>;
   if (!stats) return <div>Loading stats...</div>;
 
   return (

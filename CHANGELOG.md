@@ -11,3 +11,4 @@
 2025-06-03 Added Pydantic models and error handling for API endpoints
 2025-06-03 Added OpenAPI summaries and TypeScript frontend setup
 2025-06-03 Added basic React app structure and API utilities
+2025-06-03 Added React state management, routing and canvas rendering
