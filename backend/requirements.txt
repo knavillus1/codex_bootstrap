@@ -3,3 +3,5 @@ uvicorn
 pytest
 flake8
 httpx
+pydantic
+pytest-asyncio
