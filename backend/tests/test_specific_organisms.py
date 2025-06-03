@@ -1,4 +1,5 @@
 from backend.models import Algae, Herbivore, Carnivore
+import pytest
 
 
 def test_algae_growth():
@@ -6,6 +7,7 @@ def test_algae_growth():
     algae.grow()
     assert algae.size > 1.0
     assert algae.nutrients < 2.0
+    assert pytest.approx(algae.energy, rel=1e-3) == 0.9
 
 
 def test_herbivore_move_and_eat():

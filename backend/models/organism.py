@@ -31,6 +31,8 @@ class Organism(ABC):
         if self.nutrients > 0:
             consumed = min(self.nutrients, 1.0)
             self.consume_nutrients(consumed)
+            # Apply an energy cost for growth
+            self.energy -= consumed * 0.1
             self.size += consumed
 
     def reproduce(self) -> Optional["Organism"]:
