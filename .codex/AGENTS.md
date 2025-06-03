@@ -1,11 +1,22 @@
 
 # Contributor Guide
+## Special Task Instructions
+If the user task consists of just a single file path name, like '.codex/process-tasks.md'.  Then begin by opening that file, which will contain the full task prompt.
+
+## Ignore 
+Do not open items in this path, they will be irrelevant to your efforts:
+/project/**
+/.github/**
 
 ## CODEX Dev Environment Tips
 
-Do NOT Run `install.sh` this script, which references `backend/requirements.txt` and `frontend/package.json`. This script will be executed during environement setup for you. You can reference these files to review causes of dependency issues and update these files as needed to address, but the effects will not take place until the next task session.  If you detect any missing dependencies in any part of your coding workflow, it is your responsability to update depedencies in `requirements.txt` and `package.json`
+Do NOT attempt to run any command which requires open network communication.  Your Dev environment has no network access and is sandboxed. No harm will come from trying but you will waste your effort.
 
-Do NOT attempt to run any command which requires open network communication.  Your Dev environment is isolated for safety.
+Do NOT Run `.codex/install.sh` this script. This script will be executed during environement setup for you during your environment setup prior to you arriving.  If you make changes that require new dependencies or services (like postgres etc...) to be installed, you must edit this file to include the dependencies and/or service installation and startup.
+
+The 'install.sh' references dependencies gathered here: `backend/requirements.txt` and `frontend/package.json`. 
+
+Note that the effects will not take place until the next task session.  
 
 ## Style Instructions
 Lint javascript using:
