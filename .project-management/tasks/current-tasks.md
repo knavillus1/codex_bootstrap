@@ -40,10 +40,17 @@
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
-- `frontend/src/index.tsx` - Placeholder React entry
+- `frontend/src/index.tsx` - React application entry
 - `frontend/package.json` - Frontend dependencies and scripts
 - `frontend/tsconfig.json` - TypeScript configuration
 - `frontend/vite.config.ts` - Vite build configuration
+- `frontend/index.html` - HTML page mounting the React app
+- `frontend/src/App.tsx` - Main React component layout
+- `frontend/src/components/SimulationCanvas.tsx` - Canvas component
+- `frontend/src/components/ControlPanel.tsx` - Simulation control buttons
+- `frontend/src/components/StatsDisplay.tsx` - Displays population stats
+- `frontend/src/types.ts` - TypeScript interfaces for simulation data
+- `frontend/src/api.ts` - API service helper functions
 
 ### Notes
 
@@ -78,7 +85,7 @@
   - [x] 2.9 Add boundary handling (wrap-around or collision with walls)
   - [x] 2.10 Write comprehensive unit tests for simulation engine and environment
 
-- [ ] 3.0 Create API Endpoints for Simulation Control
+- [x] 3.0 Create API Endpoints for Simulation Control
   - [x] 3.1 Set up FastAPI main application with CORS middleware for frontend
   - [x] 3.2 Create /simulation/reset endpoint to initialize simulation with default parameters
   - [x] 3.3 Create /simulation/step endpoint to advance simulation by one time step
@@ -92,21 +99,21 @@
 - [ ] 4.0 Build Frontend React Application
   - [x] 4.1 Initialize React project with Vite and TypeScript configuration
   - [x] 4.2 Update package.json with required dependencies (React, TypeScript, Canvas/SVG libraries)
-  - [ ] 4.3 Create main App component with layout matching PrototypeDesign.html structure
+  - [x] 4.3 Create main App component with layout matching PrototypeDesign.html structure
   - [ ] 4.4 Set up CSS variables and styling based on the provided design system
-  - [ ] 4.5 Create TypeScript interfaces for simulation data (Organism, SimulationState, Stats)
-  - [ ] 4.6 Implement API service module for backend communication with proper error handling
-  - [ ] 4.7 Create basic component structure (SimulationCanvas, ControlPanel, StatsDisplay)
+  - [x] 4.5 Create TypeScript interfaces for simulation data (Organism, SimulationState, Stats)
+  - [x] 4.6 Implement API service module for backend communication with proper error handling
+  - [x] 4.7 Create basic component structure (SimulationCanvas, ControlPanel, StatsDisplay)
   - [ ] 4.8 Set up React state management for simulation data and UI state
   - [ ] 4.9 Add basic routing and error boundary components if needed
 
 - [ ] 5.0 Implement Organism Visualization and User Controls
-  - [ ] 5.1 Create SimulationCanvas component using HTML5 Canvas or React SVG
+  - [x] 5.1 Create SimulationCanvas component using HTML5 Canvas or React SVG
   - [ ] 5.2 Implement organism rendering with color coding (green=algae, brown=herbivores, red=carnivores)
   - [ ] 5.3 Add size-based visual representation for organisms (larger circles for bigger organisms)
-  - [ ] 5.4 Create ControlPanel component with Reset and Step buttons
-  - [ ] 5.5 Implement button click handlers that call appropriate API endpoints
-  - [ ] 5.6 Create StatsDisplay component showing population counts and simulation step
+  - [x] 5.4 Create ControlPanel component with Reset and Step buttons
+  - [x] 5.5 Implement button click handlers that call appropriate API endpoints
+  - [x] 5.6 Create StatsDisplay component showing population counts and simulation step
   - [ ] 5.7 Add real-time canvas updates when simulation state changes
   - [ ] 5.8 Implement proper coordinate scaling between backend (500x500) and canvas display
   - [ ] 5.9 Add basic error handling and loading states for user feedback

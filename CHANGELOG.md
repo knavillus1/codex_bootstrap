@@ -10,3 +10,4 @@
 2025-06-03 Added boundary handling with wrap-around and tests
 2025-06-03 Added Pydantic models and error handling for API endpoints
 2025-06-03 Added OpenAPI summaries and TypeScript frontend setup
+2025-06-03 Added basic React app structure and API utilities
