@@ -30,6 +30,14 @@ backend
 - `frontend/src/pages/DeckList.tsx` - Deck management interface.
 - `frontend/src/pages/Study.tsx` - Study mode interface.
 
+### New and Updated Files
+- `backend/main.py` - FastAPI app with startup table creation and health endpoint.
+- `backend/database.py` - Async engine and session provider.
+- `backend/models.py` - SQLAlchemy models for users, decks, and cards.
+- `backend/tests/test_app.py` - Basic health endpoint test.
+- `backend/__init__.py` - Marks backend as a package.
+- `backend/requirements.txt` - Added SQLAlchemy and asyncpg dependencies.
+
 ### Existing Files Modified
 - `dev_init.sh` - Update to install dependencies and start backend/frontend for local dev.
 - `frontend/package.json` - Add scripts and dependencies for React project.
@@ -40,11 +48,11 @@ backend
 - Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
 
 ## Tasks
-- [ ] 1.0 Initialize FastAPI backend with PostgreSQL
-  - [ ] 1.1 Create `backend/main.py` and configure FastAPI instance
-  - [ ] 1.2 Add `backend/database.py` for SQLAlchemy connection to Postgres
-  - [ ] 1.3 Define `User`, `Deck`, and `Card` models in `backend/models.py`
-  - [ ] 1.4 Set up migration or table creation logic
+- [x] 1.0 Initialize FastAPI backend with PostgreSQL
+  - [x] 1.1 Create `backend/main.py` and configure FastAPI instance
+  - [x] 1.2 Add `backend/database.py` for SQLAlchemy connection to Postgres
+  - [x] 1.3 Define `User`, `Deck`, and `Card` models in `backend/models.py`
+  - [x] 1.4 Set up migration or table creation logic
 - [ ] 2.0 Implement user authentication
   - [ ] 2.1 Build registration and login endpoints in `backend/auth.py`
   - [ ] 2.2 Store password hashes and manage session cookies

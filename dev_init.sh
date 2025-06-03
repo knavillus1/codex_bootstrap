@@ -11,18 +11,25 @@ set -euo pipefail
 # Export optional debug environment variables if provided
 
 # Example CORS allowed origins for the backend (comma-separated)
-#: "${ALLOW_ORIGINS:=http://localhost:5173}"
-#export ALLOW_ORIGINS
+: "${ALLOW_ORIGINS:=http://localhost:5173}"
+export ALLOW_ORIGINS
 
 # Kill existing processes
+pkill -f uvicorn 2>/dev/null || true
 
 # Create virtual environment if it doesn't exist
+if [ ! -d venv ]; then
+  python3 -m venv venv
+fi
 
 # Activate virtual environment
+source venv/bin/activate
 
 # Install  dependencies
+pip install -r backend/requirements.txt
 
 # Start backend in background
+uvicorn backend.main:app --reload &
 
 # Start frontend in background
 
