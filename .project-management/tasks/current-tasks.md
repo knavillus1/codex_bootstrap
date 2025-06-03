@@ -21,6 +21,10 @@
 - `backend/main.py` - FastAPI application entry point
 - `backend/models/organism.py` - Base organism definition
 - `backend/tests/test_organism.py` - Unit tests for Organism
+- `backend/models/algae.py` - Algae organism implementation
+- `backend/models/herbivore.py` - Herbivore organism implementation
+- `backend/models/carnivore.py` - Carnivore organism implementation
+- `backend/tests/test_specific_organisms.py` - Unit tests for concrete organisms
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
@@ -36,15 +40,15 @@
 
 ## Tasks
 
-- [ ] 1.0 Setup Backend Infrastructure and Core Models
+- [x] 1.0 Setup Backend Infrastructure and Core Models
   - [x] 1.1 Initialize FastAPI project structure with proper directory layout
   - [x] 1.2 Update requirements.txt with FastAPI, uvicorn, pydantic, and testing dependencies
   - [x] 1.3 Create base Organism abstract class with core properties (position, size, energy, nutrients)
   - [x] 1.4 Implement Organism base methods (move, grow, reproduce, die, consume_nutrients)
-  - [ ] 1.5 Create Algae class inheriting from Organism with stationary growth behavior
-  - [ ] 1.6 Create Herbivore class inheriting from Organism with movement and algae consumption
-  - [ ] 1.7 Create Carnivore class inheriting from Organism with movement and herbivore hunting
-  - [ ] 1.8 Write unit tests for all organism classes and their behaviors
+  - [x] 1.5 Create Algae class inheriting from Organism with stationary growth behavior
+  - [x] 1.6 Create Herbivore class inheriting from Organism with movement and algae consumption
+  - [x] 1.7 Create Carnivore class inheriting from Organism with movement and herbivore hunting
+  - [x] 1.8 Write unit tests for all organism classes and their behaviors
   - [x] 1.9 Set up pytest configuration and test directory structure
 
 - [ ] 2.0 Implement Simulation Engine and Environment
