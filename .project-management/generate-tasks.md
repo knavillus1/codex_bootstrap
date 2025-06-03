@@ -44,7 +44,10 @@ The generated task list _must_ follow this structure:
 ### Notes
 
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
-- Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
+- `dev_init.sh` - This file is used by the user install dependencies and start backend/frontend for local dev. For tasks that add systems like databases, or third party components that need more nuanced installation above and beyond npm and pip, update this script such that it leads to a full deployment in the local environment.
+- `.codex/install.sh` - This file stores the environment initialization script that sets up the sandbox environment for the Codex agent.  Generally, if the codex coding agent needs environment with systems like databases (as set up in `dev_install.sh`) that setup can be added here.
+- `frontend/package.json`,`backend/requirements.txt` - For any task that adds new depenencies, update these files.
+- Summarize Design and Technology considerations from the PRD not specifically referenced in tasks.
 
 ## Tasks
 
