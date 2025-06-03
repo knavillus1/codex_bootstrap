@@ -31,6 +31,12 @@ run_tests.sh
 - `frontend/vite.config.ts`
 - `frontend/src/index.css`
 - `frontend/src/App.tsx`
+- `frontend/src/main.tsx` - React/Vite bootstrap file.
+- `frontend/src/components/GameCanvas.tsx` - Canvas rendering component.
+- `frontend/src/components/GameHeader.tsx` - Displays title, score, lives.
+- `frontend/src/components/HighScoresPanel.tsx` - Shows leaderboard.
+- `frontend/src/components/GameFooter.tsx` - Handles messages and initials form.
+- `frontend/src/game/logic.ts` - Core gameplay loop and mechanics.
 
 ### Proposed New Files
 - `backend/app/main.py` - FastAPI application entrypoint.
@@ -72,7 +78,7 @@ run_tests.sh
   - [x] 2.3 Add `<canvas>` element wrapped by `GameCanvas` component.
   - [x] 2.4 Ensure layout matches the mockup styling.
 - [ ] 3.0 Core Gameplay Mechanics
-  - [ ] 3.1 Implement main game loop in `logic.ts` with `requestAnimationFrame`.
+  - [x] 3.1 Implement main game loop in `logic.ts` with `requestAnimationFrame`.
   - [ ] 3.2 Implement player movement, shooting, and collision detection.
   - [ ] 3.3 Implement invader movement, projectiles, and pellet collection.
   - [ ] 3.4 Track levels, lives, and scoring.
