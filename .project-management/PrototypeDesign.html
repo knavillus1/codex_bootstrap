@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSim Mockup - Generic</title>
+    <style>
+        :root {
+            --color-bg-main: #F5EEDC;         /* rgb(245, 238, 220) Light Beige/Cream */
+            --color-panel-bg: #183B4E;      /* rgb(24, 59, 78) Dark Blue/Teal */
+            --color-panel-text: #F5EEDC;    /* Light text for dark panels */
+            --color-accent-primary: #27548A;  /* rgb(39, 84, 138) Medium Blue */
+            --color-accent-secondary: #DDA853;/* rgb(221, 168, 83) Gold/Mustard */
+            --color-text-main: #183B4E;     /* Dark text for light backgrounds */
+
+            --border-radius-soft: 8px;
+            --border-radius-medium: 12px;
+            --border-radius-large: 16px;
+
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--color-bg-main);
+            color: var(--color-text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent scrollbars from minor overflows */
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--color-accent-primary);
+            flex-shrink: 0;
+        }
+
+        .app-header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-areas:
+                "status status"
+                "canvas controls";
+            grid-template-columns: 3fr 1fr; /* Canvas takes more space */
+            grid-template-rows: auto 1fr;   /* Status auto, rest fills height */
+            gap: 15px;
+            flex-grow: 1;
+            height: calc(100% - 60px); /* Adjust based on header height and padding */
+        }
+
+        .status-dashboard {
+            grid-area: status;
+            background-color: var(--color-panel-bg);
+            color: var(--color-panel-text);
+            padding: 15px 20px;
+            border-radius: var(--border-radius-medium);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .status-dashboard .stat-item {
+            margin: 5px 10px;
+            text-align: center;
+        }
+        .status-dashboard .stat-item .label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .status-dashboard .stat-item .value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--color-accent-secondary);
+        }
+
+
+        .simulation-canvas-area {
+            grid-area: canvas;
+            background-color: var(--color-bg-main); /* Canvas background color */
+            border-radius: var(--border-radius-large);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05), 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+        .canvas-placeholder-text {
+            color: var(--color-text-main);
+            opacity: 0.7;
+        }
+
+
+        .control-panel {
+            grid-area: controls;
+            background-color: var(--color-panel-bg);
+            color: var(--color-panel-text);
+            padding: 20px;
+            border-radius: var(--border-radius-large);
+            overflow-y: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .control-panel h2 {
+            margin-top: 0;
+            text-align: center;
+            color: var(--color-accent-secondary);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            margin-bottom: 25px; /* Increased margin for group separation */
+        }
+        .control-group h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px; /* Increased margin under group title */
+            color: var(--color-accent-primary);
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(245, 238, 220, 0.2);
+        }
+        .control-item {
+            margin-bottom: 15px; /* Increased margin for item separation */
+        }
+        .control-item > label { /* Style for the main descriptive label of a control item */
+            display: block;
+            margin-bottom: 8px; /* Space between label and control element */
+            font-size: 0.9em;
+        }
+
+        /* Slider with Value Display */
+        .slider-with-value {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slider-with-value input[type="range"] {
+            flex-grow: 1;
+            box-sizing: border-box;
+            border-radius: var(--border-radius-soft);
+            /* The following background/border are for the track, might be overridden by browser/accent-color */
+            background-color: rgba(245, 238, 220, 0.1);
+            border: 1px solid rgba(245, 238, 220, 0.3);
+            padding: 0; /* Range inputs usually don't need L/R padding */
+            accent-color: var(--color-accent-secondary);
+            height: 8px; /* Making track slimmer */
+            -webkit-appearance: none; /* Necessary for custom styling in WebKit */
+            appearance: none;
+        }
+        /* Webkit-specific track styling */
+        .slider-with-value input[type="range"]::-webkit-slider-runnable-track {
+            height: 8px;
+            background: rgba(245, 238, 220, 0.2);
+            border: 1px solid rgba(245, 238, 220, 0.3);
+            border-radius: var(--border-radius-soft);
+        }
+        .slider-with-value input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -6px; /* (track-height - thumb-height) / 2 ... e.g., (8 - 20)/2 = -6 */
+            background: var(--color-accent-secondary);
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--color-panel-bg); /* Border to make thumb pop from track */
+        }
+        /* Mozilla-specific track styling */
+        .slider-with-value input[type="range"]::-moz-range-track {
+            height: 8px;
+            background: rgba(245, 238, 220, 0.2);
+            border: 1px solid rgba(245, 238, 220, 0.3);
+            border-radius: var(--border-radius-soft);
+        }
+        .slider-with-value input[type="range"]::-moz-range-thumb {
+            background: var(--color-accent-secondary);
+            height: 16px; /* Slightly smaller for moz to feel right without complex border */
+            width: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value-display {
+            min-width: 35px;
+            text-align: right;
+            font-size: 0.95em; /* Slightly larger for readability */
+            font-weight: bold;
+            color: var(--color-panel-text);
+        }
+
+        /* Textbox Styling */
+        .control-item input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: var(--border-radius-soft);
+            padding: 8px 10px; /* Standard padding */
+            background-color: rgba(245, 238, 220, 0.1);
+            border: 1px solid rgba(245, 238, 220, 0.3);
+            color: var(--color-panel-text);
+            font-size: 0.9em;
+        }
+        .control-item input[type="text"]:focus {
+            outline: none;
+            border-color: var(--color-accent-secondary);
+            box-shadow: 0 0 0 2px rgba(221, 168, 83, 0.3);
+        }
+
+
+        /* Toggle Switch Styling */
+        .toggle-switch-container { /* Wrapper for the visual switch if needed for alignment */
+             /* display: inline-block; /* Or adjust as needed */
+        }
+        .toggle-switch { /* This is the label acting as the switch */
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            vertical-align: middle; /* Helps align if next to text on same line */
+        }
+        .toggle-switch input[type="checkbox"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider-visual {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(245, 238, 220, 0.3); /* Off state track */
+            transition: .3s;
+            border-radius: 13px; /* height / 2 */
+        }
+        .toggle-slider-visual:before { /* The sliding knob */
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--color-panel-text); /* Knob color */
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .toggle-switch input[type="checkbox"]:checked + .toggle-slider-visual {
+            background-color: var(--color-accent-secondary); /* On state track */
+        }
+        .toggle-switch input[type="checkbox"]:checked + .toggle-slider-visual:before {
+            transform: translateX(24px); /* 50 (width) - 20 (knob) - 3 (left) - 3 (gap) = 24 */
+        }
+        .toggle-switch input[type="checkbox"]:focus + .toggle-slider-visual {
+            box-shadow: 0 0 0 2px var(--color-panel-bg), 0 0 0 4px var(--color-accent-secondary); /* Focus ring */
+        }
+
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px; /* Increased margin */
+        }
+        .action-buttons button {
+            padding: 10px 12px;
+            border: none;
+            border-radius: var(--border-radius-soft);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95em;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .action-buttons button:hover {
+            transform: translateY(-1px);
+        }
+        .action-buttons button:active {
+            transform: translateY(0);
+        }
+        .btn-start {
+            background-color: var(--color-accent-primary);
+            color: var(--color-panel-text);
+        }
+        .btn-start:hover { background-color: #3a6aa8; }
+        .btn-stop {
+            background-color: #c0392b; /* A suitable red */
+            color: white;
+        }
+        .btn-stop:hover { background-color: #a52f22; }
+        .btn-step, .btn-reset {
+            background-color: var(--color-accent-secondary);
+            color: var(--color-text-main);
+        }
+        .btn-step:hover, .btn-reset:hover { background-color: #c8974a; }
+
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>EcoSim Circle of Life</h1>
+    </header>
+
+    <div class="main-content">
+        <section class="status-dashboard">
+            <div class="stat-item">
+                <div class="label">StatusItem1</div>
+                <div class="value">1024</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">StatusItem2</div>
+                <div class="value">150</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">StatusItem3</div>
+                <div class="value">35</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">StatusItem4</div>
+                <div class="value">8</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">StatusItem5</div>
+                <div class="value">5000</div>
+            </div>
+        </section>
+
+        <section class="simulation-canvas-area">
+            <p class="canvas-placeholder-text">(Simulation Canvas Area)</p>
+        </section>
+
+        <aside class="control-panel">
+            <h2>Controls & Settings</h2>
+
+            <div class="action-buttons">
+                <button class="btn-start">Start</button>
+                <button class="btn-stop">Stop</button>
+                <button class="btn-step">Step</button>
+                <button class="btn-reset">Reset</button>
+            </div>
+
+            <div class="control-group">
+                <h3>ControlGroup1</h3>
+                <div class="control-item">
+                    <label for="cg1-item1-slider">ControlItem1 Slider:</label>
+                    <div class="slider-with-value">
+                        <input type="range" id="cg1-item1-slider" name="cg1-item1-slider" min="0" max="100" value="25">
+                        <span class="slider-value-display">25</span>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <label for="cg1-item2-toggle">ControlItem2 Toggle:</label>
+                    <div class="toggle-switch-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="cg1-item2-toggle" name="cg1-item2-toggle" checked>
+                            <span class="toggle-slider-visual"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <label for="cg1-item3-textbox">ControlItem3 Textbox:</label>
+                    <input type="text" id="cg1-item3-textbox" name="cg1-item3-textbox" value="Sample Text Alpha">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>ControlGroup2</h3>
+                <div class="control-item">
+                    <label for="cg2-item1-slider">ControlItem1 Slider:</label>
+                    <div class="slider-with-value">
+                        <input type="range" id="cg2-item1-slider" name="cg2-item1-slider" min="10" max="500" value="150" step="10">
+                        <span class="slider-value-display">150</span>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <label for="cg2-item2-toggle">ControlItem2 Toggle:</label>
+                    <div class="toggle-switch-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="cg2-item2-toggle" name="cg2-item2-toggle">
+                            <span class="toggle-slider-visual"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <label for="cg2-item3-textbox">ControlItem3 Textbox:</label>
+                    <input type="text" id="cg2-item3-textbox" name="cg2-item3-textbox" placeholder="Enter value here...">
+                </div>
+            </div>
+            <!-- Add more generic control groups as needed following the pattern above -->
+
+        </aside>
+    </div>
+    <script>
+        // Basic script to update slider value display for demo purposes
+        // This is optional for a static prototype but makes it more interactive.
+        document.querySelectorAll('.slider-with-value input[type="range"]').forEach(slider => {
+            const display = slider.parentElement.querySelector('.slider-value-display');
+            if (display) {
+                // Set initial value
+                display.textContent = slider.value;
+                // Update value on input
+                slider.addEventListener('input', (event) => {
+                    display.textContent = event.target.value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
