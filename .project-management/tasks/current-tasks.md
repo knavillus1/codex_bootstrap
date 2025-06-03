@@ -53,6 +53,11 @@
 - `frontend/src/api.ts` - API service helper functions
 - `frontend/src/components/ErrorBoundary.tsx` - React error boundary component
 - `frontend/src/index.css` - Global styles and CSS variables
+- `frontend/vitest.config.ts` - Vitest test configuration
+- `frontend/src/__tests__/App.test.tsx` - Unit test for main App component
+- `frontend/src/__tests__/ControlPanel.test.tsx` - Unit test for ControlPanel
+- `frontend/src/__tests__/StatsDisplay.test.tsx` - Unit test for StatsDisplay
+- `frontend/src/__tests__/SimulationCanvas.test.tsx` - Unit test for SimulationCanvas
 
 ### Notes
 
@@ -109,7 +114,7 @@
   - [x] 4.8 Set up React state management for simulation data and UI state
   - [x] 4.9 Add basic routing and error boundary components if needed
 
-- [ ] 5.0 Implement Organism Visualization and User Controls
+- [x] 5.0 Implement Organism Visualization and User Controls
   - [x] 5.1 Create SimulationCanvas component using HTML5 Canvas or React SVG
   - [x] 5.2 Implement organism rendering with color coding (green=algae, brown=herbivores, red=carnivores)
   - [x] 5.3 Add size-based visual representation for organisms (larger circles for bigger organisms)
@@ -119,4 +124,4 @@
   - [x] 5.7 Add real-time canvas updates when simulation state changes
   - [x] 5.8 Implement proper coordinate scaling between backend (500x500) and canvas display
   - [x] 5.9 Add basic error handling and loading states for user feedback
-  - [ ] 5.10 Write unit tests for all React components and user interactions
+  - [x] 5.10 Write unit tests for all React components and user interactions
