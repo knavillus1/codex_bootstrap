@@ -2,7 +2,7 @@
 # Contributor Guide
 This is the only AGENTS.md file, do not look for others.
 ## Special Task Instructions
-If the user task consists of just the word 'TaskMaster' then open `/.codex/process-tasks.md` for instructions, otherwise ignore this file.
+If the user task consists of just the word 'TaskMaster' then open `.codex/process-tasks.md` for instructions, otherwise ignore this file.
 ## Ignore 
 Do not open items in this path, they will be irrelevant to your efforts:
 /project/**
@@ -48,3 +48,5 @@ README.md just describes the project.  Do not look here for guidance on how to p
 
 ## dev_init.sh startup script
 When there are code changes that need targeted environment setup, review dev_init.sh and modify as needed such that this script will completely setup the application and start it running.
+
+*End of document*

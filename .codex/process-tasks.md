@@ -39,3 +39,4 @@ When working with task lists, the AI must:
 4. Keep “Relevant Files” accurate and up to date.
 5. Before starting work, check which sub‑task is next.
 6. After implementing a sub‑task, update the file 
+*End of document*

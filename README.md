@@ -36,4 +36,4 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 
 ## Codex Environment Setup
 Go to https://chatgpt.com/codex/settings/environments, select or create your github-connected environment then Edit -> Advanced and copy-paste install.sh into the startup script textbox. Save
-
+*End of document*
