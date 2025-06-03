@@ -22,6 +22,14 @@ run_tests.sh
 - `dev_init.sh`
 - `DEVELOPMENT.md`
 - `run_tests.sh`
+- `.env.template`
+- `frontend/index.html`
+- `frontend/tailwind.config.js`
+- `frontend/postcss.config.js`
+- `frontend/tsconfig.json`
+- `frontend/tsconfig.node.json`
+- `frontend/vite.config.ts`
+- `frontend/src/index.css`
 
 ### Proposed New Files
 - `backend/app/main.py` - FastAPI application entrypoint.
@@ -51,12 +59,12 @@ run_tests.sh
 - Future enhancements like varied enemy types or multiple maze layouts are out of scope for the MVP.
 
 ## Tasks
-- [ ] 1.0 Project Setup
-  - [ ] 1.1 Create FastAPI and React scaffolding.
-  - [ ] 1.2 Configure PostgreSQL connection details.
-  - [ ] 1.3 Update `backend/requirements.txt` and `frontend/package.json`.
-  - [ ] 1.4 Implement environment start script in `dev_init.sh`.
-  - [ ] 1.5 Document setup steps in `DEVELOPMENT.md` and update `.codex/install.sh`.
+- [x] 1.0 Project Setup
+  - [x] 1.1 Create FastAPI and React scaffolding.
+  - [x] 1.2 Configure PostgreSQL connection details.
+  - [x] 1.3 Update `backend/requirements.txt` and `frontend/package.json`.
+  - [x] 1.4 Implement environment start script in `dev_init.sh`.
+  - [x] 1.5 Document setup steps in `DEVELOPMENT.md` and update `.codex/install.sh`.
 - [ ] 2.0 Canvas Game Layout
   - [ ] 2.1 Configure Tailwind CSS in the Vite project.
   - [ ] 2.2 Create React components per `design-mock.html` (header, canvas, scores, footer).

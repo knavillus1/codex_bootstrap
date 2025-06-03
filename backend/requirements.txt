@@ -3,3 +3,6 @@ uvicorn
 pytest
 flake8
 httpx
+SQLAlchemy
+psycopg2-binary
+python-dotenv
