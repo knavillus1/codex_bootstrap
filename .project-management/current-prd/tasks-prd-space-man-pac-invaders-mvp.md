@@ -30,6 +30,7 @@ run_tests.sh
 - `frontend/tsconfig.node.json`
 - `frontend/vite.config.ts`
 - `frontend/src/index.css`
+- `frontend/src/App.tsx`
 
 ### Proposed New Files
 - `backend/app/main.py` - FastAPI application entrypoint.
@@ -65,22 +66,22 @@ run_tests.sh
   - [x] 1.3 Update `backend/requirements.txt` and `frontend/package.json`.
   - [x] 1.4 Implement environment start script in `dev_init.sh`.
   - [x] 1.5 Document setup steps in `DEVELOPMENT.md` and update `.codex/install.sh`.
-- [ ] 2.0 Canvas Game Layout
-  - [ ] 2.1 Configure Tailwind CSS in the Vite project.
-  - [ ] 2.2 Create React components per `design-mock.html` (header, canvas, scores, footer).
-  - [ ] 2.3 Add `<canvas>` element wrapped by `GameCanvas` component.
-  - [ ] 2.4 Ensure layout matches the mockup styling.
+- [x] 2.0 Canvas Game Layout
+  - [x] 2.1 Configure Tailwind CSS in the Vite project.
+  - [x] 2.2 Create React components per `design-mock.html` (header, canvas, scores, footer).
+  - [x] 2.3 Add `<canvas>` element wrapped by `GameCanvas` component.
+  - [x] 2.4 Ensure layout matches the mockup styling.
 - [ ] 3.0 Core Gameplay Mechanics
   - [ ] 3.1 Implement main game loop in `logic.ts` with `requestAnimationFrame`.
   - [ ] 3.2 Implement player movement, shooting, and collision detection.
   - [ ] 3.3 Implement invader movement, projectiles, and pellet collection.
   - [ ] 3.4 Track levels, lives, and scoring.
   - [ ] 3.5 Manage game states (title, playing, game over).
-- [ ] 4.0 High Score API
-  - [ ] 4.1 Define SQLAlchemy models and migrations for high scores.
-  - [ ] 4.2 Create FastAPI routes to submit and fetch scores.
-  - [ ] 4.3 Add tests for the API endpoints.
-  - [ ] 4.4 Provide `.env.template` for required environment variables.
+- [x] 4.0 High Score API
+  - [x] 4.1 Define SQLAlchemy models and migrations for high scores.
+  - [x] 4.2 Create FastAPI routes to submit and fetch scores.
+  - [x] 4.3 Add tests for the API endpoints.
+  - [x] 4.4 Provide `.env.template` for required environment variables.
 - [ ] 5.0 High Score Integration & Polish
   - [ ] 5.1 Connect frontend to the score API for submitting and viewing scores.
   - [ ] 5.2 Add initials entry form and high score table in the UI.
