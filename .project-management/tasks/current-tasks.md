@@ -32,6 +32,7 @@
 - `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
 - `backend/tests/test_main.py` - Unit tests for FastAPI root endpoint
 - `backend/tests/test_collision_detection.py` - Unit tests for collision logic
+- `backend/tests/test_reproduction_and_death.py` - Unit tests for reproduction and nutrient release
 - `backend/api/simulation.py` - API endpoints for simulation control
 - `backend/tests/test_api.py` - Integration tests for simulation API
 - `dev_init.sh` - Development startup script
@@ -66,9 +67,9 @@
   - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
   - [x] 2.4 Implement collision detection for organism interactions (eating, reproduction)
   - [x] 2.5 Add organism spawning logic with configurable initial populations
-  - [c] 2.6 Implement energy costs for movement and growth calculations
-  - [ ] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
-  - [ ] 2.8 Implement death conditions and nutrient release back to environment
+  - [x] 2.6 Implement energy costs for movement and growth calculations
+  - [x] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
+  - [x] 2.8 Implement death conditions and nutrient release back to environment
   - [ ] 2.9 Add boundary handling (wrap-around or collision with walls)
   - [ ] 2.10 Write comprehensive unit tests for simulation engine and environment
 

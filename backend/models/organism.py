@@ -36,14 +36,14 @@ class Organism(ABC):
             self.size += consumed
 
     def reproduce(self) -> Optional["Organism"]:
-        """Create a new organism if energy allows.
+        """Create a new organism if energy and size allow.
 
-        Returns a new organism instance with half the parent's energy
-        and nutrients, or ``None`` if reproduction conditions are not
-        met.
+        Offspring inherits half the parent's size, energy, and nutrients.
+        Returns ``None`` if thresholds are not met.
         """
-        if self.energy > 1.0:
+        if self.energy >= 2.0 and self.size >= 2.0:
             self.energy /= 2
+            self.size /= 2
             offspring = self.__class__(
                 position=self.position,
                 size=self.size,
