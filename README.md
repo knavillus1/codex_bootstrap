@@ -33,20 +33,20 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 
 ## Project Structure
 
-- AGENTS.md: Instructions for Codex agents
+- `AGENTS.md`: Instructions for Codex agents
 # These files are under control and watch by the Codex agent and will be updated as project tasks demand.
-- CHANGELOG.md: Project change history
-- DEVELOPMENT.md: Developer setup and local testing instructions
-- README.md: Project overview and file descriptions
-- dev_init.sh: Script to initialize development environment and start services
-- .codex/install.sh: Codex Environment Setup script for dependencies and environment
-- run_tests.sh: Initial script to run tests across backend and frontend
-- backend/requirements.txt: Python dependencies with initial common pacakges
-- frontend/
-    - package.json: npm dependencies and scripts for frontend
-    - eslint.config.js: ESLint configuration(e.g., .NET)
-- .flake8 python flake8 configuration for linting
-## Technologies Used
+- `CHANGELOG.md`: Project change history
+- `DEVELOPMENT.md`: Developer setup and local testing instructions
+- `README.md`: Project overview and file descriptions
+- `dev_init.sh`: Script to initialize development environment and start services
+- `.codex/install.sh`: Codex Environment Setup script for dependencies and environment
+- `run_tests.sh`: Initial script to run tests across backend and frontend
+- `backend/requirements.txt`: Python dependencies with initial common pacakges
+- `frontend/`
+    - `package.json`: npm dependencies and scripts for frontend
+    - `eslint.config.js`: ESLint configuration(e.g., .NET)
+- `.flake8` python flake8 configuration for linting
+## Target Technologies
 
 - Python 3.x
 - FastAPI
