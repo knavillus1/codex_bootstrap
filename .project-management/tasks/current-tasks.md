@@ -72,9 +72,9 @@ backend
 - [x] 3.0 Deck management features
   - [x] 3.1 API endpoints for creating, reading, updating, and deleting decks
   - [x] 3.2 Frontend `DeckList.tsx` page for deck CRUD operations
-- [ ] 4.0 Card management features
+- [x] 4.0 Card management features
   - [x] 4.1 API endpoints for adding, editing, and deleting cards in a deck
-  - [ ] 4.2 UI components for card forms within `DeckList.tsx`
+  - [x] 4.2 UI components for card forms within `DeckList.tsx`
 - [ ] 5.0 Study mode implementation
   - [ ] 5.1 Frontend `Study.tsx` to display one card at a time
   - [ ] 5.2 Include card flip navigation and progress indicator
