@@ -19,6 +19,13 @@ fi
 source .venv/bin/activate
 pip install -r backend/requirements.txt
 
+# Ensure database schema is up to date
+python - <<'EOF'
+from backend.app.db import engine
+from backend.app.models import Base
+Base.metadata.create_all(bind=engine)
+EOF
+
 # Start backend
 uvicorn backend.app.main:app --reload --port 8000 &
 BACKEND_PID=$!

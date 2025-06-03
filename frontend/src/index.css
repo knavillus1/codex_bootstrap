@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-black text-green-500 font-pixel;
+}
+
+canvas {
+  image-rendering: pixelated;
+}

@@ -79,19 +79,19 @@ run_tests.sh
   - [x] 2.2 Create React components per `design-mock.html` (header, canvas, scores, footer).
   - [x] 2.3 Add `<canvas>` element wrapped by `GameCanvas` component.
   - [x] 2.4 Ensure layout matches the mockup styling.
-- [ ] 3.0 Core Gameplay Mechanics
+- [x] 3.0 Core Gameplay Mechanics
   - [x] 3.1 Implement main game loop in `logic.ts` with `requestAnimationFrame`.
   - [x] 3.2 Implement player movement, shooting, and collision detection.
-  - [ ] 3.3 Implement invader movement, projectiles, and pellet collection.
-  - [ ] 3.4 Track levels, lives, and scoring.
-  - [ ] 3.5 Manage game states (title, playing, game over).
+  - [x] 3.3 Implement invader movement, projectiles, and pellet collection.
+  - [x] 3.4 Track levels, lives, and scoring.
+  - [x] 3.5 Manage game states (title, playing, game over).
 - [x] 4.0 High Score API
   - [x] 4.1 Define SQLAlchemy models and migrations for high scores.
   - [x] 4.2 Create FastAPI routes to submit and fetch scores.
   - [x] 4.3 Add tests for the API endpoints.
   - [x] 4.4 Provide `.env.template` for required environment variables.
-- [ ] 5.0 High Score Integration & Polish
+- [x] 5.0 High Score Integration & Polish
   - [x] 5.1 Connect frontend to the score API for submitting and viewing scores.
   - [x] 5.2 Add initials entry form and high score table in the UI.
-  - [ ] 5.3 Apply final styling and ensure components match mock design.
-  - [ ] 5.4 Verify dev_init.sh runs migrations and starts both servers.
+  - [x] 5.3 Apply final styling and ensure components match mock design.
+  - [x] 5.4 Verify dev_init.sh runs migrations and starts both servers.
