@@ -31,7 +31,7 @@ The generated task list _must_ follow this structure:
 ## Project Tree
 - Use command line tools to get current project tree view, ommitting any directory that starts with `.` or verbose nested directories like venv, etc...  
 ## Relevant Files
-
+- Reference *existing* project files here
 - `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).
 - `path/to/file1.test.ts` - Unit tests for `file1.ts`.
 - `path/to/another/file.tsx` - Brief description (e.g., API route handler for data submission).
