@@ -4,8 +4,9 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 
 ## Features
 
-- PRD and Task creation
-- Task orchestration
+- PRD and Task file creation within Codex via local IDE agent
+- Task orchestration and managment in Codex or local IDE agent
+- Automatic creation and maintenance of local dev setup and application start up script
 - Backend: Python 3, FastAPI, Uvicorn
 - Frontend: React 18, Vite, Tailwind CSS, React Router
 - Pre-configured linting and testing scripts
