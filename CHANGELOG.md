@@ -7,3 +7,4 @@
 2025-06-05 Added simulation spawn logic and basic API endpoints
 2025-06-05 Added energy cost to organism growth
 2025-06-05 Added reproduction thresholds and nutrient release on death
+2025-06-03 Added boundary handling with wrap-around and tests

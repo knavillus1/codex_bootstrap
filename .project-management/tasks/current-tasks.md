@@ -30,6 +30,7 @@
 - `backend/simulation/engine.py` - Simulation engine orchestrating organisms
 - `backend/tests/test_environment.py` - Unit tests for environment
 - `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
+- `backend/tests/test_boundary_handling.py` - Unit tests for environment boundary handling
 - `backend/tests/test_main.py` - Unit tests for FastAPI root endpoint
 - `backend/tests/test_collision_detection.py` - Unit tests for collision logic
 - `backend/tests/test_reproduction_and_death.py` - Unit tests for reproduction and nutrient release
@@ -70,8 +71,8 @@
   - [x] 2.6 Implement energy costs for movement and growth calculations
   - [x] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
   - [x] 2.8 Implement death conditions and nutrient release back to environment
-  - [ ] 2.9 Add boundary handling (wrap-around or collision with walls)
-  - [ ] 2.10 Write comprehensive unit tests for simulation engine and environment
+  - [c] 2.9 Add boundary handling (wrap-around or collision with walls)
+  - [c] 2.10 Write comprehensive unit tests for simulation engine and environment
 
 - [ ] 3.0 Create API Endpoints for Simulation Control
   - [x] 3.1 Set up FastAPI main application with CORS middleware for frontend
