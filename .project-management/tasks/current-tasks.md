@@ -18,27 +18,13 @@
 
 ## Relevant Files
 
-- `backend/main.py` - FastAPI application entry point and main simulation endpoints
-- `backend/models/organism.py` - Base organism class and behavior implementations
-- `backend/models/algae.py` - Algae organism implementation (stationary, grows)
-- `backend/models/herbivore.py` - Herbivore organism implementation (mobile, eats algae)
-- `backend/models/carnivore.py` - Carnivore organism implementation (mobile, eats herbivores)
-- `backend/simulation/engine.py` - Core simulation engine managing time steps and organism interactions
-- `backend/simulation/environment.py` - 2D environment management and nutrient tracking
-- `backend/api/simulation.py` - API endpoints for simulation control (/reset, /step, /state)
-- `backend/api/stats.py` - API endpoint for population statistics
-- `backend/tests/test_organisms.py` - Unit tests for organism behaviors
-- `backend/tests/test_simulation.py` - Unit tests for simulation engine
-- `backend/tests/test_api.py` - Integration tests for API endpoints
-- `frontend/src/App.tsx` - Main React application component
-- `frontend/src/components/SimulationCanvas.tsx` - Canvas component for rendering organisms
-- `frontend/src/components/ControlPanel.tsx` - Control buttons (Reset, Step)
-- `frontend/src/components/StatsDisplay.tsx` - Statistics display component
-- `frontend/src/services/api.ts` - API service for communicating with backend
-- `frontend/src/types/simulation.ts` - TypeScript interfaces for simulation data
-- `frontend/src/utils/canvas.ts` - Canvas rendering utilities
-- `frontend/src/App.test.tsx` - Unit tests for main App component
-- `frontend/src/components/SimulationCanvas.test.tsx` - Unit tests for canvas component
+- `backend/main.py` - FastAPI application entry point
+- `backend/models/organism.py` - Base organism definition
+- `backend/tests/test_organism.py` - Unit tests for Organism
+- `dev_init.sh` - Development startup script
+- `pytest.ini` - Pytest configuration
+- `frontend/src/dummy.js` - Placeholder script for linting
+- `frontend/src/index.tsx` - Placeholder React entry
 
 ### Notes
 
@@ -51,15 +37,15 @@
 ## Tasks
 
 - [ ] 1.0 Setup Backend Infrastructure and Core Models
-  - [ ] 1.1 Initialize FastAPI project structure with proper directory layout
-  - [ ] 1.2 Update requirements.txt with FastAPI, uvicorn, pydantic, and testing dependencies
-  - [ ] 1.3 Create base Organism abstract class with core properties (position, size, energy, nutrients)
+  - [x] 1.1 Initialize FastAPI project structure with proper directory layout
+  - [x] 1.2 Update requirements.txt with FastAPI, uvicorn, pydantic, and testing dependencies
+  - [x] 1.3 Create base Organism abstract class with core properties (position, size, energy, nutrients)
   - [ ] 1.4 Implement Organism base methods (move, grow, reproduce, die, consume_nutrients)
   - [ ] 1.5 Create Algae class inheriting from Organism with stationary growth behavior
   - [ ] 1.6 Create Herbivore class inheriting from Organism with movement and algae consumption
   - [ ] 1.7 Create Carnivore class inheriting from Organism with movement and herbivore hunting
   - [ ] 1.8 Write unit tests for all organism classes and their behaviors
-  - [ ] 1.9 Set up pytest configuration and test directory structure
+  - [x] 1.9 Set up pytest configuration and test directory structure
 
 - [ ] 2.0 Implement Simulation Engine and Environment
   - [ ] 2.1 Create Environment class to manage 2D coordinate space (500x500 default)
