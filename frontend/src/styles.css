@@ -1,0 +1,130 @@
+:root {
+  --bg-color: #EFE4D2;
+  --primary-color: #131D4F;
+  --secondary-color: #254D70;
+  --accent-color: #954C2E;
+  --text-color-light: #EFE4D2;
+  --text-color-dark: #131D4F;
+  --border-color: #ccc;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color-dark);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+nav {
+  background-color: var(--secondary-color);
+  padding: 0.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin: 0 10px;
+  color: var(--text-color-light);
+  text-decoration: none;
+}
+
+button {
+  background-color: var(--secondary-color);
+  color: var(--text-color-light);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+}
+
+button.danger {
+  background-color: var(--accent-color);
+}
+
+button.danger:hover {
+  background-color: #7a3c23;
+}
+
+ul.deck-list, ul.card-list {
+  list-style: none;
+  padding: 0;
+}
+
+.deck-list li, .card-list li {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deck-actions button,
+.card-actions button {
+  margin-left: 5px;
+}
+
+.study-card {
+  background-color: #fff;
+  border: 2px solid var(--secondary-color);
+  padding: 30px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.study-card .card-side-label {
+  font-size: 0.7em;
+  color: var(--accent-color);
+  margin-bottom: 5px;
+}
+
+.study-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.study-progress {
+  font-style: italic;
+  color: var(--secondary-color);
+}

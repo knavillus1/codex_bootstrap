@@ -9,3 +9,4 @@
 2025-06-03T11:12:03Z - Added deck list UI and card API with tests
 2025-06-03T11:15:54Z - Added card management UI in DeckList
 2025-06-03T11:20:25Z - Added study mode UI and auth restrictions
+2025-06-03T16:40:28Z - Applied design mockup styling and layout
