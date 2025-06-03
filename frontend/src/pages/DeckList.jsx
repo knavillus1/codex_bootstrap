@@ -101,47 +101,34 @@ const DeckList = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
-      <h1 className="text-xl font-bold mb-2">Decks</h1>
-      <div className="flex mb-4 gap-2">
+    <div>
+      <h2>My Decks</h2>
+      <div className="form-group">
         <input
-          className="border p-1 flex-1"
           placeholder="New deck name"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
+          type="text"
         />
-        <button className="bg-blue-500 text-white px-2" onClick={createDeck}>
-          Add
-        </button>
+        <button onClick={createDeck}>Add</button>
       </div>
-      <ul>
+      <ul className="deck-list">
         {decks.map((d) => (
-          <li key={d.id} className="mb-4 border p-2">
-            <div className="flex items-center gap-2 mb-2">
+          <li key={d.id}>
+            <div>
               <input
-                className="border p-1 flex-1"
                 value={editNames[d.id] ?? d.name}
                 onChange={(e) =>
                   setEditNames((cur) => ({ ...cur, [d.id]: e.target.value }))
                 }
+                type="text"
               />
+            </div>
+            <div className="deck-actions">
+              <button onClick={() => updateDeck(d.id)}>Save</button>
+              <button className="danger" onClick={() => deleteDeck(d.id)}>Delete</button>
+              <Link to={`/study/${d.id}`}>Study</Link>
               <button
-                className="bg-green-500 text-white px-2"
-                onClick={() => updateDeck(d.id)}
-              >
-                Save
-              </button>
-              <button
-                className="bg-red-500 text-white px-2"
-                onClick={() => deleteDeck(d.id)}
-              >
-                Delete
-              </button>
-              <Link to={`/study/${d.id}`} className="bg-purple-500 text-white px-2">
-                Study
-              </Link>
-              <button
-                className="bg-gray-500 text-white px-2"
                 onClick={() => {
                   setShowCards((s) => ({ ...s, [d.id]: !s[d.id] }));
                   if (!showCards[d.id]) fetchCards(d.id);
@@ -152,9 +139,8 @@ const DeckList = () => {
             </div>
             {showCards[d.id] && (
               <div className="ml-4">
-                <div className="flex gap-2 mb-2">
+                <div className="form-group">
                   <input
-                    className="border p-1 flex-1"
                     placeholder="Front"
                     value={newCards[d.id]?.front || ''}
                     onChange={(e) =>
@@ -163,9 +149,9 @@ const DeckList = () => {
                         [d.id]: { ...(n[d.id] || {}), front: e.target.value },
                       }))
                     }
+                    type="text"
                   />
                   <input
-                    className="border p-1 flex-1"
                     placeholder="Back"
                     value={newCards[d.id]?.back || ''}
                     onChange={(e) =>
@@ -174,19 +160,14 @@ const DeckList = () => {
                         [d.id]: { ...(n[d.id] || {}), back: e.target.value },
                       }))
                     }
+                    type="text"
                   />
-                  <button
-                    className="bg-blue-500 text-white px-2"
-                    onClick={() => createCard(d.id)}
-                  >
-                    Add Card
-                  </button>
+                  <button onClick={() => createCard(d.id)}>Add Card</button>
                 </div>
-                <ul>
+                <ul className="card-list">
                   {(cards[d.id] || []).map((c) => (
-                    <li key={c.id} className="mb-2 flex gap-2 items-center">
+                    <li key={c.id}>
                       <input
-                        className="border p-1 flex-1"
                         value={
                           (editCards[d.id] && editCards[d.id][c.id]?.front) ||
                           c.front
@@ -203,9 +184,9 @@ const DeckList = () => {
                             },
                           }))
                         }
+                        type="text"
                       />
                       <input
-                        className="border p-1 flex-1"
                         value={
                           (editCards[d.id] && editCards[d.id][c.id]?.back) ||
                           c.back
@@ -222,17 +203,10 @@ const DeckList = () => {
                             },
                           }))
                         }
+                        type="text"
                       />
-                      <button
-                        className="bg-green-500 text-white px-2"
-                        onClick={() => updateCard(d.id, c.id)}
-                      >
-                        Save
-                      </button>
-                      <button
-                        className="bg-red-500 text-white px-2"
-                        onClick={() => deleteCard(d.id, c.id)}
-                      >
+                      <button onClick={() => updateCard(d.id, c.id)}>Save</button>
+                      <button className="danger" onClick={() => deleteCard(d.id, c.id)}>
                         Delete
                       </button>
                     </li>
