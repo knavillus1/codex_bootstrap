@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Study App Mockup</title>
+    <style>
+        :root {
+            --bg-color: #EFE4D2; /* rgb(239, 228, 210) */
+            --primary-color: #131D4F; /* rgb(19, 29, 79) */
+            --secondary-color: #254D70; /* rgb(37, 77, 112) */
+            --accent-color: #954C2E; /* rgb(149, 76, 46) */
+            --text-color-light: #EFE4D2;
+            --text-color-dark: #131D4F;
+            --border-color: #ccc;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 0.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            margin: 0 10px;
+        }
+
+        .view {
+            display: none; /* Hidden by default */
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        button.danger {
+            background-color: var(--accent-color);
+        }
+        button.danger:hover {
+            background-color: #7a3c23; /* Darker accent */
+        }
+
+        .deck-list, .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .deck-list li, .card-list li {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .deck-actions button, .card-actions button {
+            margin-left: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .study-card {
+            background-color: #fff;
+            border: 2px solid var(--secondary-color);
+            padding: 30px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .study-card .card-content {
+            margin-bottom: 15px;
+        }
+        .study-card .card-side-label {
+            font-size: 0.7em;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .study-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .study-progress {
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flashcard Study App</h1>
+    </header>
+
+    <div class="container">
+        <nav>
+            <button id="navDecks">My Decks</button>
+            <!-- Navigation will primarily be contextual within views -->
+        </nav>
+
+        <!-- Decks List View -->
+        <div id="decksView" class="view">
+            <h2>My Decks</h2>
+            <button id="showCreateDeckFormBtn">Create New Deck</button>
+            <ul class="deck-list" id="deckListContainer">
+                <!-- Sample Deck Item -->
+                <li>
+                    <div>
+                        <strong>JavaScript Basics</strong> (15 cards)<br>
+                        <small>Fundamental concepts of JavaScript.</small>
+                    </div>
+                    <div class="deck-actions">
+                        <button class="study-deck-btn" data-deck-id="1">Study</button>
+                        <button class="manage-deck-btn" data-deck-id="1">Manage</button>
+                        <button class="danger delete-deck-btn" data-deck-id="1">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Spanish Vocabulary</strong> (50 cards)<br>
+                        <small>Common Spanish words and phrases.</small>
+                    </div>
+                    <div class="deck-actions">
+                        <button class="study-deck-btn" data-deck-id="2">Study</button>
+                        <button class="manage-deck-btn" data-deck-id="2">Manage</button>
+                        <button class="danger delete-deck-btn" data-deck-id="2">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Create/Edit Deck View -->
+        <div id="deckFormView" class="view">
+            <h2 id="deckFormTitle">Create New Deck</h2>
+            <div class="form-group">
+                <label for="deckName">Deck Name:</label>
+                <input type="text" id="deckName" placeholder="e.g., JavaScript Basics">
+            </div>
+            <div class="form-group">
+                <label for="deckDescription">Description (optional):</label>
+                <textarea id="deckDescription" placeholder="A brief description of the deck"></textarea>
+            </div>
+            <button id="saveDeckBtn">Save Deck</button>
+            <button id="cancelDeckFormBtn" class="danger">Cancel</button>
+        </div>
+
+        <!-- Manage Cards View (for a specific deck) -->
+        <div id="manageCardsView" class="view">
+            <h2 id="manageCardsTitle">Manage Cards for: [Deck Name]</h2>
+            <button id="showCreateCardFormBtn">Add New Card</button>
+            <button id="backToDecksFromCardsBtn">Back to Decks</button>
+            <ul class="card-list" id="cardListContainer">
+                <!-- Sample Card Item -->
+                <li>
+                    <div>
+                        <strong>Front:</strong> What is a closure?<br>
+                        <strong>Back:</strong> A function that remembers its lexical scope...
+                    </div>
+                    <div class="card-actions">
+                        <button class="edit-card-btn" data-card-id="101">Edit</button>
+                        <button class="danger delete-card-btn" data-card-id="101">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Front:</strong> `typeof null`<br>
+                        <strong>Back:</strong> "object"
+                    </div>
+                    <div class="card-actions">
+                        <button class="edit-card-btn" data-card-id="102">Edit</button>
+                        <button class="danger delete-card-btn" data-card-id="102">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Create/Edit Card View -->
+        <div id="cardFormView" class="view">
+            <h2 id="cardFormTitle">Add New Card to [Deck Name]</h2>
+            <div class="form-group">
+                <label for="cardFront">Card Front (Question/Term):</label>
+                <textarea id="cardFront" placeholder="e.g., What is hoisting?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cardBack">Card Back (Answer/Definition):</label>
+                <textarea id="cardBack" placeholder="e.g., JavaScript's default behavior..."></textarea>
+            </div>
+            <button id="saveCardBtn">Save Card</button>
+            <button id="cancelCardFormBtn" class="danger">Cancel</button>
+        </div>
+
+        <!-- Study View -->
+        <div id="studyView" class="view">
+            <h2 id="studyDeckTitle">Studying: [Deck Name]</h2>
+             <div class="study-card" id="studyCardDisplay">
+                <div class="card-side-label" id="studyCardSideLabel">FRONT</div>
+                <div class="card-content" id="studyCardContent">What is the capital of France?</div>
+            </div>
+            <button id="flipCardBtn" style="width:100%; margin-bottom: 10px;">Flip Card</button>
+            <div class="study-navigation">
+                <button id="prevCardBtn">Previous</button>
+                <span id="studyProgress" class="study-progress">Card 1 of 10</span>
+                <button id="nextCardBtn">Next</button>
+            </div>
+            <button id="backToDecksFromStudyBtn" style="margin-top: 20px;">Back to Decks</button>
+        </div>
+    </div>
+
+    <script>
+        // Mock data (in a real app, this comes from the backend)
+        const mockDecks = [
+            { id: 1, name: "JavaScript Basics", description: "Fundamental concepts of JavaScript.", cards: [
+                { id: 101, front: "What is a closure?", back: "A function that remembers its lexical scope even when executed outside that scope." },
+                { id: 102, front: "typeof null", back: "\"object\" (a historical bug)" },
+                { id: 103, front: "What does 'this' refer to?", back: "Depends on how a function is called (execution context)." }
+            ]},
+            { id: 2, name: "Spanish Vocabulary", description: "Common Spanish words and phrases.", cards: [
+                { id: 201, front: "Hola", back: "Hello" },
+                { id: 202, front: "Adiós", back: "Goodbye" },
+                { id: 203, front: "Por favor", back: "Please" },
+                { id: 204, front: "Gracias", back: "Thank you" }
+            ]}
+        ];
+
+        let currentDeckEditing = null;
+        let currentCardEditing = null;
+        let currentStudyDeck = null;
+        let currentStudyCardIndex = 0;
+        let isCardFlipped = false;
+
+        // --- "TypeScript Style" Class for App Logic ---
+        class FlashcardApp {
+            constructor() {
+                this.views = {
+                    decks: document.getElementById('decksView'),
+                    deckForm: document.getElementById('deckFormView'),
+                    manageCards: document.getElementById('manageCardsView'),
+                    cardForm: document.getElementById('cardFormView'),
+                    study: document.getElementById('studyView')
+                };
+
+                this.deckFormTitleEl = document.getElementById('deckFormTitle');
+                this.deckNameInput = document.getElementById('deckName');
+                this.deckDescriptionInput = document.getElementById('deckDescription');
+                this.deckListContainer = document.getElementById('deckListContainer');
+
+                this.manageCardsTitleEl = document.getElementById('manageCardsTitle');
+                this.cardListContainer = document.getElementById('cardListContainer');
+                this.cardFormTitleEl = document.getElementById('cardFormTitle');
+                this.cardFrontInput = document.getElementById('cardFront');
+                this.cardBackInput = document.getElementById('cardBack');
+
+                this.studyDeckTitleEl = document.getElementById('studyDeckTitle');
+                this.studyCardDisplayEl = document.getElementById('studyCardDisplay');
+                this.studyCardContentEl = document.getElementById('studyCardContent');
+                this.studyCardSideLabelEl = document.getElementById('studyCardSideLabel');
+                this.studyProgressEl = document.getElementById('studyProgress');
+
+                this.bindEventListeners();
+                this.showView('decks'); // Initial view
+            }
+
+            showView(viewName, context = {}) {
+                Object.values(this.views).forEach(view => view.classList.remove('active'));
+                if (this.views[viewName]) {
+                    this.views[viewName].classList.add('active');
+                    this.updateViewContext(viewName, context);
+                } else {
+                    console.error("View not found:", viewName);
+                }
+            }
+            
+            updateViewContext(viewName, context) {
+                if (viewName === 'decks') {
+                    this.renderDeckList();
+                } else if (viewName === 'deckForm') {
+                    this.deckFormTitleEl.textContent = context.isEditing ? 'Edit Deck' : 'Create New Deck';
+                    this.deckNameInput.value = context.deck ? context.deck.name : '';
+                    this.deckDescriptionInput.value = context.deck ? context.deck.description : '';
+                    currentDeckEditing = context.deck ? context.deck.id : null;
+                } else if (viewName === 'manageCards') {
+                    const deck = mockDecks.find(d => d.id === context.deckId);
+                    if (deck) {
+                        currentDeckEditing = deck.id; // Store current deck for adding cards
+                        this.manageCardsTitleEl.textContent = `Manage Cards for: ${deck.name}`;
+                        this.renderCardList(deck.id);
+                    }
+                } else if (viewName === 'cardForm') {
+                    const deck = mockDecks.find(d => d.id === currentDeckEditing);
+                    this.cardFormTitleEl.textContent = context.isEditing ? `Edit Card in ${deck.name}` : `Add New Card to ${deck.name}`;
+                    this.cardFrontInput.value = context.card ? context.card.front : '';
+                    this.cardBackInput.value = context.card ? context.card.back : '';
+                    currentCardEditing = context.card ? context.card.id : null;
+                } else if (viewName === 'study') {
+                    const deck = mockDecks.find(d => d.id === context.deckId);
+                    if (deck && deck.cards.length > 0) {
+                        currentStudyDeck = deck;
+                        currentStudyCardIndex = 0;
+                        isCardFlipped = false;
+                        this.studyDeckTitleEl.textContent = `Studying: ${deck.name}`;
+                        this.renderStudyCard();
+                    } else {
+                        alert("This deck has no cards to study or does not exist!");
+                        this.showView('decks');
+                    }
+                }
+            }
+
+            renderDeckList() {
+                this.deckListContainer.innerHTML = ''; // Clear existing
+                mockDecks.forEach(deck => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div>
+                            <strong>${deck.name}</strong> (${deck.cards.length} cards)<br>
+                            <small>${deck.description || 'No description'}</small>
+                        </div>
+                        <div class="deck-actions">
+                            <button class="study-deck-btn" data-deck-id="${deck.id}">Study</button>
+                            <button class="manage-deck-btn" data-deck-id="${deck.id}">Manage</button>
+                            <button class="edit-deck-btn" data-deck-id="${deck.id}">Edit</button>
+                            <button class="danger delete-deck-btn" data-deck-id="${deck.id}">Delete</button>
+                        </div>
+                    `;
+                    this.deckListContainer.appendChild(li);
+                });
+                // Re-attach event listeners for dynamically created buttons
+                this.deckListContainer.querySelectorAll('.study-deck-btn').forEach(btn => 
+                    btn.addEventListener('click', (e) => this.handleStudyDeck(e.target.dataset.deckId))
+                );
+                this.deckListContainer.querySelectorAll('.manage-deck-btn').forEach(btn => 
+                    btn.addEventListener('click', (e) => this.handleManageDeck(e.target.dataset.deckId))
+                );
+                 this.deckListContainer.querySelectorAll('.edit-deck-btn').forEach(btn => 
+                    btn.addEventListener('click', (e) => this.handleEditDeck(e.target.dataset.deckId))
+                );
+                this.deckListContainer.querySelectorAll('.delete-deck-btn').forEach(btn => 
+                    btn.addEventListener('click', (e) => this.handleDeleteDeck(e.target.dataset.deckId))
+                );
+            }
+
+            renderCardList(deckId) {
+                const deck = mockDecks.find(d => d.id === deckId);
+                this.cardListContainer.innerHTML = '';
+                if (deck) {
+                    deck.cards.forEach(card => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <div>
+                                <strong>Front:</strong> ${card.front}<br>
+                                <strong>Back:</strong> ${card.back}
+                            </div>
+                            <div class="card-actions">
+                                <button class="edit-card-btn" data-card-id="${card.id}" data-deck-id="${deckId}">Edit</button>
+                                <button class="danger delete-card-btn" data-card-id="${card.id}" data-deck-id="${deckId}">Delete</button>
+                            </div>
+                        `;
+                        this.cardListContainer.appendChild(li);
+                    });
+                     this.cardListContainer.querySelectorAll('.edit-card-btn').forEach(btn => 
+                        btn.addEventListener('click', (e) => this.handleEditCard(e.target.dataset.deckId, e.target.dataset.cardId))
+                    );
+                    this.cardListContainer.querySelectorAll('.delete-card-btn').forEach(btn => 
+                        btn.addEventListener('click', (e) => this.handleDeleteCard(e.target.dataset.deckId, e.target.dataset.cardId))
+                    );
+                }
+            }
+            
+            renderStudyCard() {
+                if (!currentStudyDeck || currentStudyDeck.cards.length === 0) return;
+                const card = currentStudyDeck.cards[currentStudyCardIndex];
+                this.studyCardSideLabelEl.textContent = isCardFlipped ? 'BACK' : 'FRONT';
+                this.studyCardContentEl.textContent = isCardFlipped ? card.back : card.front;
+                this.studyProgressEl.textContent = `Card ${currentStudyCardIndex + 1} of ${currentStudyDeck.cards.length}`;
+                document.getElementById('prevCardBtn').disabled = currentStudyCardIndex === 0;
+                document.getElementById('nextCardBtn').disabled = currentStudyCardIndex === currentStudyDeck.cards.length - 1;
+            }
+
+            // --- Event Handlers ---
+            bindEventListeners() {
+                document.getElementById('navDecks').addEventListener('click', () => this.showView('decks'));
+                
+                // Deck Form
+                document.getElementById('showCreateDeckFormBtn').addEventListener('click', () => this.showView('deckForm', { isEditing: false }));
+                document.getElementById('saveDeckBtn').addEventListener('click', () => this.handleSaveDeck());
+                document.getElementById('cancelDeckFormBtn').addEventListener('click', () => this.showView('decks'));
+
+                // Card Management
+                document.getElementById('backToDecksFromCardsBtn').addEventListener('click', () => this.showView('decks'));
+                document.getElementById('showCreateCardFormBtn').addEventListener('click', () => this.showView('cardForm', { isEditing: false, deckId: currentDeckEditing }));
+                
+                // Card Form
+                document.getElementById('saveCardBtn').addEventListener('click', () => this.handleSaveCard());
+                document.getElementById('cancelCardFormBtn').addEventListener('click', () => this.showView('manageCards', { deckId: currentDeckEditing }));
+
+                // Study View
+                document.getElementById('flipCardBtn').addEventListener('click', () => this.handleFlipCard());
+                document.getElementById('prevCardBtn').addEventListener('click', () => this.handlePrevCard());
+                document.getElementById('nextCardBtn').addEventListener('click', () => this.handleNextCard());
+                document.getElementById('backToDecksFromStudyBtn').addEventListener('click', ().showView('decks'));
+                this.studyCardDisplayEl.addEventListener('click', () => this.handleFlipCard()); // Click card to flip
+            }
+
+            handleSaveDeck() {
+                const name = this.deckNameInput.value.trim();
+                const description = this.deckDescriptionInput.value.trim();
+                if (!name) { alert("Deck name is required."); return; }
+
+                if (currentDeckEditing !== null) { // Editing existing
+                    const deck = mockDecks.find(d => d.id === currentDeckEditing);
+                    deck.name = name;
+                    deck.description = description;
+                } else { // Creating new
+                    const newId = mockDecks.length > 0 ? Math.max(...mockDecks.map(d => d.id)) + 1 : 1;
+                    mockDecks.push({ id: newId, name, description, cards: [] });
+                }
+                currentDeckEditing = null;
+                this.showView('decks');
+            }
+            
+            handleEditDeck(deckId) {
+                const deck = mockDecks.find(d => d.id === parseInt(deckId));
+                if(deck) {
+                    this.showView('deckForm', { isEditing: true, deck: deck });
+                }
+            }
+            
+            handleDeleteDeck(deckId) {
+                if (confirm("Are you sure you want to delete this deck and all its cards?")) {
+                    const index = mockDecks.findIndex(d => d.id === parseInt(deckId));
+                    if (index > -1) {
+                        mockDecks.splice(index, 1);
+                        this.renderDeckList(); // Re-render the list
+                    }
+                }
+            }
+
+            handleManageDeck(deckId) {
+                this.showView('manageCards', { deckId: parseInt(deckId) });
+            }
+
+            handleStudyDeck(deckId) {
+                this.showView('study', { deckId: parseInt(deckId) });
+            }
+
+            handleSaveCard() {
+                const front = this.cardFrontInput.value.trim();
+                const back = this.cardBackInput.value.trim();
+                if (!front || !back) { alert("Both front and back of the card are required."); return; }
+
+                const deck = mockDecks.find(d => d.id === currentDeckEditing);
+                if (!deck) { alert("Error: Deck not found."); return; }
+
+                if (currentCardEditing !== null) { // Editing existing card
+                    const card = deck.cards.find(c => c.id === currentCardEditing);
+                    card.front = front;
+                    card.back = back;
+                } else { // Creating new card
+                    const newCardId = deck.cards.length > 0 ? Math.max(...deck.cards.map(c => c.id)) + 1 : (deck.id * 100) + 1; // Simple ID generation
+                    deck.cards.push({ id: newCardId, front, back });
+                }
+                currentCardEditing = null;
+                this.showView('manageCards', { deckId: deck.id });
+            }
+
+            handleEditCard(deckId, cardId) {
+                const deck = mockDecks.find(d => d.id === parseInt(deckId));
+                if (deck) {
+                    const card = deck.cards.find(c => c.id === parseInt(cardId));
+                    if (card) {
+                        currentDeckEditing = deck.id; // Set context for saving
+                        this.showView('cardForm', { isEditing: true, card: card });
+                    }
+                }
+            }
+
+            handleDeleteCard(deckId, cardId) {
+                if (confirm("Are you sure you want to delete this card?")) {
+                    const deck = mockDecks.find(d => d.id === parseInt(deckId));
+                    if (deck) {
+                        const cardIndex = deck.cards.findIndex(c => c.id === parseInt(cardId));
+                        if (cardIndex > -1) {
+                            deck.cards.splice(cardIndex, 1);
+                            this.renderCardList(deck.id); // Re-render
+                        }
+                    }
+                }
+            }
+            
+            handleFlipCard() {
+                isCardFlipped = !isCardFlipped;
+                this.renderStudyCard();
+            }
+
+            handlePrevCard() {
+                if (currentStudyCardIndex > 0) {
+                    currentStudyCardIndex--;
+                    isCardFlipped = false; // Show front of new card
+                    this.renderStudyCard();
+                }
+            }
+            
+            handleNextCard() {
+                if (currentStudyDeck && currentStudyCardIndex < currentStudyDeck.cards.length - 1) {
+                    currentStudyCardIndex++;
+                    isCardFlipped = false; // Show front of new card
+                    this.renderStudyCard();
+                }
+            }
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            new FlashcardApp();
+        });
+
+    </script>
+</body>
+</html>

@@ -48,6 +48,8 @@ The generated PRD should have this structure:
 - How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
 ## 9.  Open Questions
 - List any remaining questions or areas needing further clarification.
+## 10. Referenced PRD-background files
+- if files included in  `.project-management/prd-background` contain focused and specific guidance, reference the file here for the task creation phase.
 ```
 ## Target Audience
 
