@@ -6,6 +6,12 @@ This section describes development environment setup and is maintained by the co
 
 ### Frontend
 
+Run the Vite development server:
+
+```bash
+cd frontend
+npm run dev
+```
 
 ### Backend
 
