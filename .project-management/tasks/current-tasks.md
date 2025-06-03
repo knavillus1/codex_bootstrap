@@ -19,6 +19,7 @@
 ## Relevant Files
 
 - `backend/main.py` - FastAPI application entry point
+- `CHANGELOG.md` - Summary of changes
 - `backend/models/organism.py` - Base organism definition
 - `backend/tests/test_organism.py` - Unit tests for Organism
 - `backend/models/algae.py` - Algae organism implementation
@@ -65,7 +66,7 @@
   - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
   - [x] 2.4 Implement collision detection for organism interactions (eating, reproduction)
   - [x] 2.5 Add organism spawning logic with configurable initial populations
-  - [ ] 2.6 Implement energy costs for movement and growth calculations
+  - [c] 2.6 Implement energy costs for movement and growth calculations
   - [ ] 2.7 Add reproduction mechanics when organisms reach size/energy thresholds
   - [ ] 2.8 Implement death conditions and nutrient release back to environment
   - [ ] 2.9 Add boundary handling (wrap-around or collision with walls)
