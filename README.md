@@ -15,6 +15,7 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 - Add a .md file describing the feature in as much or little detail to `.project-management/prd-background`
 - if relevant, add design mockup file
 - Start Codex task in Code mode with just the phrase *CreatePrd*
+- *Alternatively can be run with local cursor/github copilot agent mode etc.. with reasoning model for better results.  Give focus to `create-prd.md` file and send 'go' message*
 - There will be Q&A with the Agent, answer and click Code (Environment is spun up againP)
 - Result should be a PRD file in `.project-management/tasks/`
 - Merge PR to target branch
@@ -22,6 +23,7 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 ## Task list file creation
 
 - Start Codex task in Code mode with just the phrase *CreateTasks*
+- *Alternatively can be run with local cursor/github copilot agent mode etc.. with reasoning model for better results.  Give focus to `generate-tasks.md` file and send 'go' message*
 - Q&A, answer and click code
 - Result should be a task list file in `.project-management/tasks/`, with a copy named `current-tasks.md`
 - Merge PR to target branch
@@ -29,7 +31,8 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 ## TaskMaster
 
 - Once `.project-management/tasks/current-tasks.md` is created, the TaskMaster message can be used.  This will allow the agent to commit to one or more tasks in a session.  The task list file will be updated as part of the PR, with completed tasks checked off and relevant files updated as needed.
-- Start Codex in Code mode using the phrase *TaskMaster*
+- Start Codex in Code mode using the phrase *TaskMaster*.  This will corece the agent to reference `process-tasks-cloud.md' which picks one or more tasks to complete in the session.
+- *Alternatively, tasks can be executed by local agent with focus on `process-tasks-local.md' which will run one task at a time*
 
 ## Project Structure
 
