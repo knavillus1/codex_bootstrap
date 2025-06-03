@@ -10,7 +10,7 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 - Frontend: React 18, Vite, Tailwind CSS, React Router
 - Pre-configured linting and testing scripts
 
-## PRD and Task list file creation
+## PRD file creation
 
 - Add a .md file describing the feature in as much or little detail to `.project-management/prd-background`
 - if relevant, add design mockup file
@@ -19,7 +19,7 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 - Result should be a PRD file in `.project-management/tasks/`
 - Merge PR to target branch
 
-## PRD and Task list file creation
+## Task list file creation
 
 - Start Codex task in Code mode with just the phrase *CreateTasks*
 - Q&A, answer and click code
@@ -34,7 +34,7 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 ## Project Structure
 
 - `AGENTS.md`: Instructions for Codex agents
-# These files are under control and watch by the Codex agent and will be updated as project tasks demand.
+*These files are under control and watch by the Codex agent and will be updated as project tasks demand.*
 - `CHANGELOG.md`: Project change history
 - `DEVELOPMENT.md`: Developer setup and local testing instructions
 - `README.md`: Project overview and file descriptions
@@ -46,6 +46,16 @@ codex-bootstrap is a starter template for a full-stack web application integrati
     - `package.json`: npm dependencies and scripts for frontend
     - `eslint.config.js`: ESLint configuration(e.g., .NET)
 - `.flake8` python flake8 configuration for linting
+
+*Project managment instruction prompts heavily derived from [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks), with gratitude*
+- `.project-management/` 
+    - `create-prd.md`: Instructions and rules for generating a Product Requirements Document (PRD) via AI, including clarifying questions and output location.
+    - `generate-tasks.md`: Instructions for generating a step-by-step task list from a PRD, including process and file naming conventions.
+    - `process-tasks-cloud.md`: TaskMaster module rules for managing and marking tasks as committed or completed in a cloud workflow.
+    - `process-tasks-local.md`: TaskMaster module rules for local task management, including sub-task completion protocol and user confirmation steps.
+    - `prd-background/`: Feature background and html design mockups for current feature
+    - `tasks/`: Current Task list and Historical PRD, task list output files
+
 ## Target Technologies
 
 - Python 3.x
