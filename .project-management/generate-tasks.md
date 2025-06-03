@@ -8,14 +8,14 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/.project-management/` 
+- **Location:** `/.project-management/tasks/` 
 - **Filename:** `tasks-[prd-file-name].md` (e.g., `tasks-prd-user-profile-editing.md`)` 
 
 ## Process
 
 1.  **Receive PRD Reference:** The user points the AI to a specific PRD file
 2.  **Analyze PRD:** The AI reads and analyzes the functional requirements, user stories, and other sections of the specified PRD.
-3.  **Phase 1: Generate Parent Tasks:** Based on the PRD analysis, create the file and generate the main, high-level tasks required to implement the feature. Use your judgement on how many high-level tasks to use. It's likely to be about 5. Present these tasks to the user in the specified format (without sub-tasks yet). Inform the user: "I have generated the high-level tasks based on the PRD. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
+3.  **Phase 1: Generate Parent Tasks:** Based on the PRD analysis, create the file and generate the main, high-level tasks required to implement the feature. Use your judgement on how many high-level tasks to use. It's likely to be about 5. If the parent task is informed by a referenced file in the PRD (like a html design mockup), make note of the full file path in the task description. Present these tasks to the user in the specified format (without sub-tasks yet). Inform the user: "I have generated the high-level tasks based on the PRD. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
 4.  **Wait for Confirmation:** Pause and wait for the user to respond with "Go".
 5.  **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task and cover the implementation details implied by the PRD.
 6.  **Identify Relevant Files:** Based on the tasks and PRD, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
@@ -32,10 +32,12 @@ The generated task list _must_ follow this structure:
 - Use command line tools to get current project tree view, ommitting any directory that starts with `.` or verbose nested directories like venv, etc...  
 ## Relevant Files
 - Reference *existing* project files here
+### Proposed New Files
 - `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).
 - `path/to/file1.test.ts` - Unit tests for `file1.ts`.
 - `path/to/another/file.tsx` - Brief description (e.g., API route handler for data submission).
 - `path/to/another/file.test.tsx` - Unit tests for `another/file.tsx`.
+### Existing Files Modified
 - `lib/utils/helpers.ts` - Brief description (e.g., Utility functions needed for calculations).
 - `lib/utils/helpers.test.ts` - Unit tests for `helpers.ts`.
 
@@ -52,6 +54,7 @@ The generated task list _must_ follow this structure:
 - [ ] 2.0 Parent Task Title
   - [ ] 2.1 [Sub-task description 2.1]
 - [ ] 3.0 Parent Task Title (may not require sub-tasks if purely structural or configuration)
+*End of document*
 ```
 
 ## Interaction Model

@@ -6,7 +6,7 @@ To guide an AI assistant in creating a detailed Product Requirements Document (P
 
 ## Process
 
-1.  **Receive Initial Prompt:** The user provides a brief description or request for a new feature or functionality.
+1.  **Receive Initial Prompt:** The user provides a description or request for a new feature or functionality. If files exist in `.project-management/prd-background` then read them and treat the content as additional user input of the request.
 2.  **Generate initial tree view of current project** generate a tree view of the project, ommitting verbose directories.  Output the tree then continue to the next step.
 3.  **Ask Clarifying Questions:** Before writing the PRD, the AI *must* ask clarifying questions to gather sufficient detail. The goal is to understand the "what" and "why" of the feature, not necessarily the "how" (which the developer will figure out).
 4.  **Generate PRD:** Based on the initial prompt and the user's answers to the clarifying questions, generate a PRD using the structure outlined below.
@@ -41,7 +41,7 @@ The generated PRD should have this structure:
 ## 5.  Non-Goals (Out of Scope)
 - Clearly state what this feature will *not* include to manage scope.
 ## 6.  Design Considerations (Optional)
-- Link to mockups, describe UI/UX requirements, or mention relevant components/styles if applicable.
+- Describe UI/UX requirements, or mention relevant components/styles if applicable. If a design mockup (html) was found in `.project-management/prd-background`, then make explcit reference to this file with the full path.
 ## 7.  Technical Considerations (Optional)
 - Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
 ## 8.  Success Metrics
