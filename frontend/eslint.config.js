@@ -1,6 +1,6 @@
 export default [
   {
-    files: ['**/*.js', '**/*.jsx'],
+    files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: 'module',
