@@ -85,7 +85,7 @@ Starting with any description of a feature, this project supplies tooling to aut
 
 ## Target Technologies
 
-- Python 3.x
+- Python 3.13
 - FastAPI
 - Uvicorn
 - React 18
