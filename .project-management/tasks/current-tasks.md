@@ -29,6 +29,7 @@
 - `backend/simulation/engine.py` - Simulation engine orchestrating organisms
 - `backend/tests/test_environment.py` - Unit tests for environment
 - `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
+- `backend/tests/test_main.py` - Unit tests for FastAPI root endpoint
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
@@ -68,7 +69,7 @@
   - [ ] 2.10 Write comprehensive unit tests for simulation engine and environment
 
 - [ ] 3.0 Create API Endpoints for Simulation Control
-  - [ ] 3.1 Set up FastAPI main application with CORS middleware for frontend
+  - [x] 3.1 Set up FastAPI main application with CORS middleware for frontend
   - [ ] 3.2 Create /simulation/reset endpoint to initialize simulation with default parameters
   - [ ] 3.3 Create /simulation/step endpoint to advance simulation by one time step
   - [ ] 3.4 Create /simulation/state endpoint returning organism positions, sizes, and types
