@@ -66,6 +66,11 @@ class SimulationEngine:
             if offspring is not None:
                 new_organisms.append(offspring)
             if organism.die():
+                # return remaining energy and nutrients to the environment
+                self.environment.add_nutrients(
+                    organism.position,
+                    organism.energy + organism.nutrients,
+                )
                 self.organisms.remove(organism)
 
         self.organisms.extend(new_organisms)
