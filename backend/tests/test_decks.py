@@ -5,6 +5,8 @@ client = TestClient(app)
 
 
 def test_deck_crud():
+    client.post("/register", json={"username": "bob", "password": "pw"})
+    client.post("/login", json={"username": "bob", "password": "pw"})
     # create deck
     resp = client.post('/decks/', json={'name': 'My Deck'})
     assert resp.status_code == 200

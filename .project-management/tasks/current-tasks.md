@@ -75,7 +75,7 @@ backend
 - [x] 4.0 Card management features
   - [x] 4.1 API endpoints for adding, editing, and deleting cards in a deck
   - [x] 4.2 UI components for card forms within `DeckList.tsx`
-- [ ] 5.0 Study mode implementation
-  - [ ] 5.1 Frontend `Study.tsx` to display one card at a time
-  - [ ] 5.2 Include card flip navigation and progress indicator
-  - [ ] 5.3 Ensure only the logged-in user's decks are accessible
+- [x] 5.0 Study mode implementation
+  - [x] 5.1 Frontend `Study.tsx` to display one card at a time
+  - [x] 5.2 Include card flip navigation and progress indicator
+  - [x] 5.3 Ensure only the logged-in user's decks are accessible
