@@ -4,22 +4,44 @@ codex-bootstrap is a starter template for a full-stack web application integrati
 
 ## Features
 
+- PRD and Task creation
+- Task orchestration
 - Backend: Python 3, FastAPI, Uvicorn
 - Frontend: React 18, Vite, Tailwind CSS, React Router
-- Codex agent task orchestrations
 - Pre-configured linting and testing scripts
+
+## PRD and Task list file creation
+
+- Add a .md file describing the feature in as much or little detail to `.project-management/prd-background`
+- if relevant, add design mockup file
+- Start Codex task in Code mode with just the phrase *CreatePrd*
+- There will be Q&A with the Agent, answer and click Code (Environment is spun up againP)
+- Result should be a PRD file in `.project-management/tasks/`
+- Merge PR to target branch
+
+## PRD and Task list file creation
+
+- Start Codex task in Code mode with just the phrase *CreateTasks*
+- Q&A, answer and click code
+- Result should be a task list file in `.project-management/tasks/`, with a copy named `current-tasks.md`
+- Merge PR to target branch
+
+## TaskMaster
+
+- Once `.project-management/tasks/current-tasks.md` is created, the TaskMaster message can be used.  This will allow the agent to commit to one or more tasks in a session.  The task list file will be updated as part of the PR, with completed tasks checked off and relevant files updated as needed.
+- Start Codex in Code mode using the phrase *TaskMaster*
 
 ## Project Structure
 
-- AGENTS.md: Instructions for Codex agents and contributor guide
+- AGENTS.md: Instructions for Codex agents
 # These files are under control and watch by the Codex agent and will be updated as project tasks demand.
 - CHANGELOG.md: Project change history
 - DEVELOPMENT.md: Developer setup and local testing instructions
 - README.md: Project overview and file descriptions
 - dev_init.sh: Script to initialize development environment and start services
-- install.sh: Codex Environment Setup script for dependencies and environment
+- .codex/install.sh: Codex Environment Setup script for dependencies and environment
 - run_tests.sh: Initial script to run tests across backend and frontend
-- requirements.txt: Python dependencies with initial common pacakges
+- backend/requirements.txt: Python dependencies with initial common pacakges
 - frontend/
     - package.json: npm dependencies and scripts for frontend
     - eslint.config.js: ESLint configuration(e.g., .NET)
