@@ -7,3 +7,4 @@
   - npm lint failed: No files matching the pattern 'src'
 2025-06-03T11:06:30Z - Added login page, deck API router, and tests
 2025-06-03T11:12:03Z - Added deck list UI and card API with tests
+2025-06-03T11:15:54Z - Added card management UI in DeckList
