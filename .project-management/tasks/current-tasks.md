@@ -25,6 +25,10 @@
 - `backend/models/herbivore.py` - Herbivore organism implementation
 - `backend/models/carnivore.py` - Carnivore organism implementation
 - `backend/tests/test_specific_organisms.py` - Unit tests for concrete organisms
+- `backend/simulation/environment.py` - Environment model for managing nutrients
+- `backend/simulation/engine.py` - Simulation engine orchestrating organisms
+- `backend/tests/test_environment.py` - Unit tests for environment
+- `backend/tests/test_simulation_engine.py` - Unit tests for simulation engine
 - `dev_init.sh` - Development startup script
 - `pytest.ini` - Pytest configuration
 - `frontend/src/dummy.js` - Placeholder script for linting
@@ -52,9 +56,9 @@
   - [x] 1.9 Set up pytest configuration and test directory structure
 
 - [ ] 2.0 Implement Simulation Engine and Environment
-  - [ ] 2.1 Create Environment class to manage 2D coordinate space (500x500 default)
-  - [ ] 2.2 Implement nutrient distribution and tracking system within environment
-  - [ ] 2.3 Create SimulationEngine class to manage organism collections and time steps
+  - [x] 2.1 Create Environment class to manage 2D coordinate space (500x500 default)
+  - [x] 2.2 Implement nutrient distribution and tracking system within environment
+  - [x] 2.3 Create SimulationEngine class to manage organism collections and time steps
   - [ ] 2.4 Implement collision detection for organism interactions (eating, reproduction)
   - [ ] 2.5 Add organism spawning logic with configurable initial populations
   - [ ] 2.6 Implement energy costs for movement and growth calculations
