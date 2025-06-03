@@ -1,21 +1,14 @@
-# Task Module
-You have entered the task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.  It will contain the current status of tasks in this format:
-- [x] 1.0 Parent Task Title
-  - [x] 1.1 [Sub-task description 1.1]
-  - [ ] 1.2 [Sub-task description 1.2]
-- [ ] 2.0 Parent Task Title
-  - [ ] 2.1 [Sub-task description 2.1]
-- [ ] 3.0 Parent Task Title
+# Task List Management
 
-Your work at this time is the next avaiable (uncompleted) task in the list.  For the example above that would be task 1.2.
 
-Follow the remaining guidelines below to manage this file.
+You have entered the task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.
 
 ## Task Implementation
-- **One sub-task** process only one task.
+- **One sub-task at a time:** Do **NOT** start the next sub‑task until you ask the user for permission and they say “yes” or "y"
 - **Completion protocol:**  
   1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`.  
-  2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed. 
+  2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed.  
+- Stop after each sub‑task and wait for the user’s go‑ahead.
 
 ## Task List Maintenance
 
@@ -38,5 +31,4 @@ When working with task lists, the AI must:
 3. Add newly discovered tasks.
 4. Keep “Relevant Files” accurate and up to date.
 5. Before starting work, check which sub‑task is next.
-6. After implementing a sub‑task, update the file 
-*End of document*
+6. After implementing a sub‑task, update the file and then pause for user approval.
