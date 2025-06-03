@@ -17,6 +17,29 @@ class SimulationEngine:
     def add_organism(self, organism: Organism) -> None:
         self.organisms.append(organism)
 
+    def spawn(self, algae: int = 0, herbivores: int = 0, carnivores: int = 0) -> None:
+        """Spawn a mix of organisms with default attributes."""
+        from random import randint
+
+        def random_position() -> tuple[int, int]:
+            return (
+                randint(0, self.environment.width - 1),
+                randint(0, self.environment.height - 1),
+            )
+
+        for _ in range(algae):
+            self.add_organism(Algae(random_position(), 1.0, 1.0, 1.0))
+        for _ in range(herbivores):
+            self.add_organism(Herbivore(random_position(), 1.0, 1.0, 1.0))
+        for _ in range(carnivores):
+            self.add_organism(Carnivore(random_position(), 1.0, 1.0, 1.0))
+
+    def reset(self, algae: int = 10, herbivores: int = 5, carnivores: int = 2) -> None:
+        """Reset the simulation and spawn new organisms."""
+        self.organisms = []
+        self.step_count = 0
+        self.spawn(algae, herbivores, carnivores)
+
     def step(self) -> None:
         """Advance the simulation by one step."""
         new_organisms: List[Organism] = []

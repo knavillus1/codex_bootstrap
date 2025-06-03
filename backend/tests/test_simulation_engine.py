@@ -23,3 +23,13 @@ def test_engine_step_increments_counter():
     engine.step()
     assert engine.step_count == 1
     assert len(engine.organisms) == 1
+
+
+def test_spawn_and_reset():
+    engine = SimulationEngine()
+    engine.spawn(algae=2, herbivores=1, carnivores=1)
+    assert len(engine.organisms) == 4
+
+    engine.reset(algae=1, herbivores=0, carnivores=0)
+    assert len(engine.organisms) == 1
+    assert engine.step_count == 0

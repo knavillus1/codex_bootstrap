@@ -2,6 +2,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from backend.api.simulation import router as simulation_router
 
 app = FastAPI(title="Ecosystem Simulation API")
 
@@ -14,6 +15,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(simulation_router, prefix="/simulation")
 
 
 @app.get("/")
