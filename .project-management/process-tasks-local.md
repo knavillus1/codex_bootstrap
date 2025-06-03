@@ -1,7 +1,6 @@
 # Task List Management
 
-
-You have entered the task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.
+You have entered the codex task-based work module. The task list file for this project is `.project-management\current-prd\tasks.*.md`.  Open it to view the tasks for this feature.
 
 ## Task Implementation
 - **One sub-task at a time:** Do **NOT** start the next sub‑task until you ask the user for permission and they say “yes” or "y"

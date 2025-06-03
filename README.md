@@ -51,14 +51,18 @@ codex-bootstrap is a starter template for a full-stack web application integrati
     - `eslint.config.js`: ESLint configuration(e.g., .NET)
 - `.flake8` python flake8 configuration for linting
 
-*Project managment instruction prompts heavily derived from [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks), with gratitude*
+*Project managment instruction prompts derived from [snarktank/ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) under Apache License 2.0*
 - `.project-management/` 
     - `create-prd.md`: Instructions and rules for generating a Product Requirements Document (PRD) via AI, including clarifying questions and output location.
     - `generate-tasks.md`: Instructions for generating a step-by-step task list from a PRD, including process and file naming conventions.
     - `process-tasks-cloud.md`: TaskMaster module rules for managing and marking tasks as committed or completed in a cloud workflow.
     - `process-tasks-local.md`: TaskMaster module rules for local task management, including sub-task completion protocol and user confirmation steps.
+    - `close-prd.md`: Instructions and rules for generating a final PRD feature review, to either provide final cleanup or closeout.
     - `prd-background/`: Feature background and html design mockups for current feature
-    - `tasks/`: Current Task list and Historical PRD, task list output files
+        - `archive-prd/`: Archived PRDs and Task lists
+        - `close-prd/`: Closed PRDs and Task lists, but reviewed during subsequent PRD creation to provide previously completed dev context
+        - `current-prd/`: Current PRD and Task list for the feature under active development
+            - `prd-background/`: feature background `design-mock.html`, `api-document.md` etc... If using Codex-cloud PRD creation, feature specification should be found at `feature-specification.md`
 
 ## Target Technologies
 

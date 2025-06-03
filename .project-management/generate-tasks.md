@@ -8,7 +8,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/.project-management/tasks/` 
+- **Location:** `/.project-management/current-prd/` 
 - **Filename:** `tasks-[prd-file-name].md` (e.g., `tasks-prd-user-profile-editing.md`)` 
 
 ## Process
@@ -20,8 +20,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 5.  **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task and cover the implementation details implied by the PRD.
 6.  **Identify Relevant Files:** Based on the tasks and PRD, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
 7.  **Generate Final Output:** Combine the parent tasks, sub-tasks, relevant files, and notes into the final Markdown structure.
-8.  **Save Task List:** Save the generated document in the `/tasks/` directory with the filename `tasks-[prd-file-name].md`, where `[prd-file-name]` matches the base name of the input PRD file (e.g., if the input was `prd-user-profile-editing.md`, the output is `tasks-prd-user-profile-editing.md`).
-9.  **Copy new Tasks File** Copy the new tasks file to `/.project-management/tasks/current-tasks.md`.  Overwrite existing file if present.
+8.  **Save Task List:** Save the generated document to `/.project-management/current-prd/tasks-[prd-file-name].md`, where `[prd-file-name]` matches the base name of the input PRD file (e.g., if the input was `prd-user-profile-editing.md`, the output is `tasks-prd-user-profile-editing.md`).
 
 ## Output Format
 
@@ -45,7 +44,7 @@ The generated task list _must_ follow this structure:
 
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
 - `dev_init.sh` - This file is used by the user install dependencies and start backend/frontend for local dev. For tasks that add systems like databases, or third party components that need more nuanced installation above and beyond npm and pip, update this script such that it leads to a full deployment in the local environment.
-- `.codex/install.sh` - This file stores the environment initialization script that sets up the sandbox environment for the Codex agent.  Generally, if the codex coding agent needs environment with systems like databases (as set up in `dev_install.sh`) that setup can be added here.
+- `.codex/install.sh` - This file stores the environment initialization script that sets up the sandbox environment for the Codex agent.  Generally, if the codex coding agent needs environment with systems like databases (as set up in `dev_init.sh`) that setup can be added here.
 - `frontend/package.json`,`backend/requirements.txt` - For any task that adds new depenencies, update these files.
 - Summarize Design and Technology considerations from the PRD not specifically referenced in tasks.
 

@@ -1,5 +1,5 @@
 # Task Module - As specified in AGENTS.md, this is triggered when the task description is 'TaskMaster'
-You have entered the codex task-based work module. The task list file for this project is `.project-management\tasks\current-tasks.md`.  Open it to view the tasks for this feature.  It will contain the current status of tasks in this format :
+You have entered the codex task-based work module. The task list file for this project is `.project-management\current-prd\tasks.*.md`.  Open it to view the tasks for this feature.  It will contain the current status of tasks in this format :
 - [x] 1.0 Parent Task Title 
   - [x] 1.1 [Sub-task description 1.1]
   - [c] 1.2 [Sub-task description 1.2]

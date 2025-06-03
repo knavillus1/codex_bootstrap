@@ -1,11 +1,13 @@
 
 # Contributor Guide
-This is the only AGENTS.md file, do not look for others.
+**This is the only AGENTS.md file, do not look for others.**
+
 ## Special Task Instructions
-- If the user task consists of just the word 'TaskMaster' then open `.project-management/process-tasks-cloud.md` for instructions, otherwise ignore this file.
-- If the user task description consists of just the word 
+- If the user task message consists of just the word 'TaskMaster' then open `.project-management/process-tasks-cloud.md` for instructions, otherwise ignore this file.
+- If the user task message consists of just the word 
 - `CreatePrd` then open `.project-management/create-prd.md` for instructions, otherwise ignore this file.
-- If the user task description consists of just the word `CreateTasks` then open `.project-management/generate-tasks.md` for instructions, otherwise ignore this file.
+- If the user task message consists of just the word `CreateTasks` then open `.project-management/generate-tasks.md` for instructions, otherwise ignore this file.
+- If the user task message consists of just the word `ClosePrd` then open `.project-management/close-prd.md` for instructions, otherwise ignore this file.
 
 ## CODEX Dev Environment Tips
 
@@ -36,7 +38,9 @@ Append a single line summary to CHANGELOG.md describing the changes with a prece
 if errors were encountered, list them indented below the changelog row with a single line summary
 
 ## DEVELOPMENT.md Instructions
-When components are added that require manual application startup for local testing/debug, document all steps and commands neccessary to set up the local environment and start services/components in DEVELOPMENT.md using explcit commands.  These changes will need to be mirrored on dev_int.sh (see below), which is a one-stop script to set up the environment from scratch and start the application for local testing.
+When components are added that require manual application startup for local testing/debug, document all steps and commands neccessary to set up the local environment and start services/components in DEVELOPMENT.md using explcit commands.  These changes will need to be mirrored on `dev_int.sh` (see below), which is a one-stop script to set up the environment from scratch and start the application for local testing.
+
+If environment variables are expected add `.env.template` with placeholders and add python-dotenv to `backend\requirements.txt`
 
 ## README.md Instructions
 

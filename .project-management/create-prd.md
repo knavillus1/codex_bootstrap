@@ -6,11 +6,12 @@ To guide an AI assistant in creating a detailed Product Requirements Document (P
 
 ## Process
 
-1.  **Receive Initial Prompt:** The user provides a description or request for a new feature or functionality. If files exist in `.project-management/prd-background` then read them and treat the content as additional user input of the request.
-2.  **Generate initial tree view of current project** generate a tree view of the project, ommitting verbose directories.  Output the tree then continue to the next step.
-3.  **Ask Clarifying Questions:** Before writing the PRD, the AI *must* ask clarifying questions to gather sufficient detail. The goal is to understand the "what" and "why" of the feature, not necessarily the "how" (which the developer will figure out).
-4.  **Generate PRD:** Based on the initial prompt and the user's answers to the clarifying questions, generate a PRD using the structure outlined below.
-5.  **Save PRD:** Save the generated document as `prd-[feature-name].md` inside the `.project-management/tasks` directory.
+1.  **Receive Initial Prompt:** The user may provide a description or request for a new feature or functionality. If you find `.project-management/current-prd/prd-background/feature-specification.md` then this will serve as the primary feature spec.  If other files exist in `.project-management/current-prd/prd-background` then read them and treat the content as additional input for the feature request.
+2.  **View Closed PRD tasks** If files are found matching `.project-management/closed-prd/tasks.*.md`, read them to see what features have been previously implemented.  Feature specification may be resubmitted for PRD generation if functionality was not fully implemented.
+3.  **Generate initial tree view of current project** generate a tree view of the project, ommitting verbose directories.  Output the tree then continue to the next step.
+4.  **Ask Clarifying Questions:** Before writing the PRD, the AI *must* ask clarifying questions to gather sufficient detail. The goal is to understand the "what" and "why" of the feature, not necessarily the "how" (which the developer will figure out).
+5.  **Generate PRD:** Based on the initial prompt and the user's answers to the clarifying questions, generate a PRD using the structure outlined below.
+6.  **Save PRD:** Save the generated document as `prd-[feature-name].md` inside the `.project-management/tasks` directory.
 
 ## Clarifying Questions (Examples)
 
@@ -41,13 +42,17 @@ The generated PRD should have this structure:
 ## 5.  Non-Goals (Out of Scope)
 - Clearly state what this feature will *not* include to manage scope.
 ## 6.  Design Considerations (Optional)
-- Describe UI/UX requirements, or mention relevant components/styles if applicable. If a design mockup (html) was found in `.project-management/prd-background`, then make explcit reference to this file with the full path.
+- Describe UI/UX requirements, or mention relevant components/styles if applicable. 
 ## 7.  Technical Considerations (Optional)
 - Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
 ## 8.  Success Metrics
 - How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
 ## 9.  Open Questions
 - List any remaining questions or areas needing further clarification.
+## 10. Referenced PRD-background files
+- if files included in  `.project-management/current-prd/prd-background` contain focused and specific guidance, reference the file (full file path) here with a description of what it describes
+- If a design mockup (html) was found in `.project-management/current-prd/prd-background`, then make explcit reference to this file with the full path.
+- Do not include `feature-specification.md`. The PRD generated here will suffice as the source of truth for this feature once generated.
 ```
 ## Target Audience
 
@@ -56,7 +61,7 @@ Assume the primary reader of the PRD is a **junior developer**. Therefore, requi
 ## Output
 
 *   **Format:** Markdown (`.md`)
-*   **Location:** `.project-management/tasks/`
+*   **Location:** `.project-management/current-prd/`
 *   **Filename:** `prd-[feature-name].md`
 
 ## Final instructions
