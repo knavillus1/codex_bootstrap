@@ -5,6 +5,7 @@ from typing import List
 from uuid import uuid4
 
 from backend.models.chat import Chat
+from backend.models.message import Message
 
 
 class ChatStorage:
@@ -46,3 +47,21 @@ class ChatStorage:
             chats.append(Chat(**data))
         chats.sort(key=lambda c: c.created_at, reverse=True)
         return chats
+
+    def add_message(self, chat_id: str, role: str, content: str) -> Message:
+        """Add a message to a chat and persist it."""
+        chat = self.load_chat(chat_id)
+        message = Message(
+            id=uuid4().hex,
+            chat_id=chat_id,
+            role=role,
+            content=content,
+        )
+        chat.messages.append(message)
+        self.save_chat(chat)
+        return message
+
+    def list_messages(self, chat_id: str) -> List[Message]:
+        """Return all messages for a chat."""
+        chat = self.load_chat(chat_id)
+        return chat.messages

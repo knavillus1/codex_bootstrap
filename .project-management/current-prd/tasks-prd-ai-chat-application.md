@@ -78,6 +78,8 @@
 - `backend/api/chat.py` - Add CRUD chat endpoints
 - `backend/services/chat_storage.py` - Add create, delete, and sorted list
 - `backend/tests/test_chat_api.py` - Tests for chat API endpoints
+- `backend/api/messages.py` - Message creation and list endpoints
+- `backend/tests/test_messages_api.py` - Tests for message API endpoints
 
 ### Notes
 
@@ -131,10 +133,10 @@
   - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
 
 - [ ] 5.0 Message System with AI Integration
-  - [ ] 5.1 Create message API endpoints for sending and retrieving messages
+  - [c] 5.1 Create message API endpoints for sending and retrieving messages
   - [ ] 5.2 Implement OpenAI GPT integration with proper model selection
   - [ ] 5.3 Add streaming response support for real-time AI responses
-  - [ ] 5.4 Create message persistence in chat JSON files
+  - [c] 5.4 Create message persistence in chat JSON files
   - [ ] 5.5 Implement message display with user/AI distinction
   - [ ] 5.6 Add "AI is thinking" indicators and loading states
   - [ ] 5.7 Handle OpenAI API errors and rate limiting gracefully
@@ -173,7 +175,7 @@
   - [ ] 8.8 Add streaming progress indicators and cancel functionality
 
 - [ ] 9.0 Testing and Quality Assurance
-  - [ ] 9.1 Write unit tests for all backend API endpoints
+  - [c] 9.1 Write unit tests for all backend API endpoints
   - [x] 9.2 Create tests for OpenAI service integration with mocking
   - [ ] 9.3 Add frontend component tests using React Testing Library
   - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
