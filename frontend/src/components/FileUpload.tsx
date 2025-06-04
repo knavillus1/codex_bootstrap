@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface Props {
   onUpload: (file: File) => Promise<void> | void;
@@ -6,6 +6,7 @@ interface Props {
 
 export default function FileUpload({ onUpload }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
 
   const handleClick = () => inputRef.current?.click();
 
@@ -16,8 +17,29 @@ export default function FileUpload({ onUpload }: Props) {
     e.target.value = '';
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleDragLeave = () => setDragging(false);
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      await onUpload(file);
+    }
+  };
+
   return (
-    <div className="flex items-center">
+    <div
+      className={`flex items-center ${dragging ? 'border border-dashed p-2' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       <button
         type="button"
         onClick={handleClick}

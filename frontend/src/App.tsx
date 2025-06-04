@@ -14,7 +14,7 @@ function Home() {
   } = useChat();
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col h-screen sm:flex-row">
       <Sidebar
         chats={chats}
         activeChatId={activeChatId}

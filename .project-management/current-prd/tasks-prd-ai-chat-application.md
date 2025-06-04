@@ -93,6 +93,7 @@
 - `frontend/src/components/ChatInput.tsx` - Message input with file attachment
 - `frontend/src/components/FileUpload.tsx` - File upload interface component
 - `frontend/src/components/ChatArea.tsx` - Main chat interface component
+- `frontend/src/App.tsx` - Responsive layout for mobile/desktop
 
 ### Notes
 
@@ -162,11 +163,11 @@
   - [ ] 6.3 Add document file text extraction (PDF, DOC, TXT, CSV)
   - [ ] 6.4 Create file storage system with organized directory structure
   - [ ] 6.5 Implement OpenAI vision API integration for image analysis
-  - [ ] 6.6 Add file attachment UI with drag-and-drop support
+  - [x] 6.6 Add file attachment UI with drag-and-drop support
   - [ ] 6.7 Create file preview components for different file types
   - [ ] 6.8 Handle file upload progress and error states
 
-- [ ] 7.0 User Interface Implementation with Design System
+- [x] 7.0 User Interface Implementation with Design System
   - [x] 7.1 Create main App component with sidebar + chat area layout
   - [x] 7.2 Implement Sidebar component with chat history and new chat button
   - [x] 7.3 Build ChatArea component with message display and input
@@ -174,7 +175,7 @@
   - [x] 7.5 Implement ChatInput component with auto-resizing textarea
   - [x] 7.6 Add FileUpload component with paperclip button integration
   - [x] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
-  - [ ] 7.8 Implement responsive design for mobile and desktop views
+  - [x] 7.8 Implement responsive design for mobile and desktop views
   - [x] 7.9 Add hover effects and interactive states for all buttons
   - [x] 7.10 Create custom scrollbar styling to match design mockup
 

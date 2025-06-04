@@ -10,7 +10,7 @@ interface Props {
 
 export default function Sidebar({ chats, activeChatId, onSelect, onNewChat }: Props) {
   return (
-    <aside className="w-1/4 border-r p-4">
+    <aside className="w-full sm:w-1/4 border-b sm:border-b-0 sm:border-r p-4">
       <button
         className="mb-4 px-2 py-1 bg-primary text-white rounded hover:bg-primary/80 transition-colors"
         onClick={onNewChat}
