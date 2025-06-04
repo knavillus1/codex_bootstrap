@@ -29,9 +29,19 @@ function drawMaze(ctx: CanvasRenderingContext2D, maze: string[]) {
   })
 }
 
+interface GameStateUpdate {
+  score?: number
+  lives?: number
+  level?: number
+  gameStatus?: 'title' | 'ready' | 'playing' | 'playerdeath' | 'gameover'
+  message?: string
+  showInitialsForm?: boolean
+}
+
 export function startGame(
   ctx: CanvasRenderingContext2D,
-  overlay?: HTMLDivElement
+  overlay?: HTMLDivElement,
+  onGameStateChange?: (newState: GameStateUpdate) => void
 ) {
   const player: Rect = {
     x: ctx.canvas.width / 2 - 10,
@@ -67,9 +77,27 @@ export function startGame(
   window.addEventListener('keydown', keyDown)
   window.addEventListener('keyup', keyUp)
 
+  const updateState = () => {
+    onGameStateChange?.({
+      score,
+      lives,
+      level,
+      gameStatus: state,
+      message: state === 'title' ? 'PRESS ENTER TO START' : 
+               state === 'ready' ? 'GET READY!' :
+               state === 'playerdeath' ? 'YOU DIED' :
+               state === 'gameover' ? `GAME OVER - SCORE: ${score}` : 
+               `LEVEL ${level}`,
+      showInitialsForm: state === 'gameover' && score > 0
+    })
+  }
+
   const step = () => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     drawMaze(ctx, mazeLayouts[mazeIndex])
+
+    // Update React state
+    updateState()
 
     if (state === 'title') {
       overlay && (overlay.innerText = 'PRESS ENTER TO START')
@@ -78,6 +106,7 @@ export function startGame(
         state = 'ready'
         stateTimer = 120
         keys.delete('Enter')
+        updateState()
       }
       requestAnimationFrame(step)
       return
@@ -90,6 +119,7 @@ export function startGame(
       if (stateTimer <= 0) {
         state = 'playing'
         overlay && (overlay.style.display = 'none')
+        updateState()
       }
       requestAnimationFrame(step)
       return
@@ -115,6 +145,7 @@ export function startGame(
     if (state === 'gameover') {
       overlay && (overlay.innerText = `GAME OVER - SCORE: ${score}`)
       overlay && (overlay.style.display = 'block')
+      updateState()
       return
     }
 
@@ -163,6 +194,7 @@ export function startGame(
         mazeIndex = (mazeIndex + 1) % mazeLayouts.length
         level += 1
         score += 100
+        updateState()
       }
     }
 
@@ -182,6 +214,7 @@ export function startGame(
           state = 'playerdeath'
           stateTimer = 120
         }
+        updateState()
       }
     }
 
@@ -204,6 +237,7 @@ export function startGame(
       if (intersects(p, player)) {
         pellets.splice(i, 1)
         score += 10
+        updateState()
       }
     }
 
@@ -245,6 +279,7 @@ export function startGame(
           bullets.splice(i, 1)
           score += 200
           ufo.active = false
+          updateState()
         }
       }
       if (!ufo.active) {

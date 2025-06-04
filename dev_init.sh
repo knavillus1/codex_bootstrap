@@ -35,15 +35,19 @@ fi
 alembic -c backend/alembic.ini upgrade head
 
 # Start backend
-uvicorn backend.app.main:app --reload --port 8000 &
+(cd backend && uvicorn app.main:app --reload --port 8000) &
 BACKEND_PID=$!
 
+# Wait for backend to be ready
+echo "Waiting for backend to start..."
+until curl -s http://localhost:8000/health > /dev/null 2>&1; do
+  sleep 1
+done
+echo "Backend is ready!"
+
 # Start frontend
-pushd frontend >/dev/null
-npm install
-npm run dev &
+(cd frontend && npm install && npm run dev) &
 FRONTEND_PID=$!
-popd >/dev/null
 
 trap 'kill $BACKEND_PID $FRONTEND_PID' EXIT
 wait

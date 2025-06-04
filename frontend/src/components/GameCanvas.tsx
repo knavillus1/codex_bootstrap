@@ -1,7 +1,20 @@
 import React, { useRef, useEffect } from 'react'
 import { startGame } from '../game/logic'
 
-const GameCanvas = () => {
+interface GameState {
+  score: number
+  lives: number
+  level: number
+  gameStatus: 'title' | 'ready' | 'playing' | 'playerdeath' | 'gameover'
+  message: string
+  showInitialsForm: boolean
+}
+
+interface Props {
+  onGameStateChange: (newState: Partial<GameState>) => void
+}
+
+const GameCanvas = ({ onGameStateChange }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const overlayRef = useRef<HTMLDivElement | null>(null)
 
@@ -11,19 +24,18 @@ const GameCanvas = () => {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    startGame(ctx, overlay ?? undefined)
-  }, [])
+    startGame(ctx, overlay ?? undefined, onGameStateChange)
+  }, [onGameStateChange])
 
   return (
-    <div className="game-canvas-area">
-      <div className="game-canvas-area__placeholder-text">(Game Canvas Area)</div>
+    <section className="game-canvas-area">
       <canvas ref={canvasRef} width={480} height={320} />
       <div
         ref={overlayRef}
         style={{ display: 'none' }}
         className="game-canvas-area__overlay-message"
       />
-    </div>
+    </section>
   )
 }
 
