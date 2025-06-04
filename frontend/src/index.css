@@ -11,3 +11,7 @@ body {
 canvas {
   image-rendering: pixelated;
 }
+
+.life-icon {
+  @apply inline-block mr-1 text-yellow-300;
+}

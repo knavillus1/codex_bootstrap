@@ -43,6 +43,7 @@ LICENSE
 - `frontend/src/components/GameCanvas.tsx` - Render multiple mazes and invaders
 - `frontend/src/components/HighScoresPanel.tsx` - Score table display
 - `frontend/src/components/GameFooter.tsx` - Score submission form
+- `frontend/src/index.css` - Global styles for Tailwind and custom classes
 - `backend/app/api/routes.py` - High score POST/GET endpoints with PostgreSQL
 - `dev_init.sh` - Include PostgreSQL startup and migration steps
 - `backend/requirements.txt` - Backend dependencies
@@ -64,7 +65,7 @@ LICENSE
   - [x] 2.1 Import the "Press Start 2P" font and configure Tailwind to use it
   - [x] 2.2 Apply mockup classes to `GameHeader`, `GameCanvas`, `HighScoresPanel` and `GameFooter`
   - [x] 2.3 Make the layout responsive so the high score panel stacks below the canvas on small screens
-  - [ ] 2.4 Style overlay messages and lives display as shown in the mock
+  - [x] 2.4 Style overlay messages and lives display as shown in the mock
 - [ ] 3.0 Build HTML5 Canvas game logic for Space Man Pac, Invaders, and UFO
   - [x] 3.1 Add `mazeLayouts.ts` containing at least three maze layouts
   - [ ] 3.2 Rotate layouts as the player progresses through levels

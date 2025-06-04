@@ -12,3 +12,4 @@
 2025-06-05 Added Alembic migrations and automatic Postgres startup
 2025-06-04 Marked completed tasks in PRD
 2025-06-04 Styled UI components and added maze layouts
+2025-06-04 Styled overlay messages and lives icons
