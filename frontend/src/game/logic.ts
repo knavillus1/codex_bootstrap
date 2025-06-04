@@ -14,7 +14,10 @@ function intersects(a: Rect, b: Rect): boolean {
   )
 }
 
-export function startGame(ctx: CanvasRenderingContext2D) {
+export function startGame(
+  ctx: CanvasRenderingContext2D,
+  overlay?: HTMLDivElement
+) {
   const player: Rect = {
     x: ctx.canvas.width / 2 - 10,
     y: ctx.canvas.height - 20,
@@ -35,7 +38,8 @@ export function startGame(ctx: CanvasRenderingContext2D) {
   let score = 0
   let lives = 3
   let level = 1
-  let state: 'title' | 'playing' | 'gameover' = 'title'
+  let state: 'title' | 'ready' | 'playing' | 'playerdeath' | 'gameover' = 'title'
+  let stateTimer = 0
   const keys = new Set<string>()
 
   const keyDown = (e: KeyboardEvent) => keys.add(e.code)
@@ -47,21 +51,49 @@ export function startGame(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
     if (state === 'title') {
-      ctx.fillStyle = 'green'
-      ctx.textAlign = 'center'
-      ctx.fillText('Press Enter to Start', ctx.canvas.width / 2, ctx.canvas.height / 2)
+      overlay && (overlay.innerText = 'PRESS ENTER TO START')
+      overlay && (overlay.style.display = 'block')
       if (keys.has('Enter')) {
-        state = 'playing'
+        state = 'ready'
+        stateTimer = 120
         keys.delete('Enter')
       }
       requestAnimationFrame(step)
       return
     }
 
+    if (state === 'ready') {
+      overlay && (overlay.innerText = 'GET READY!')
+      overlay && (overlay.style.display = 'block')
+      stateTimer--
+      if (stateTimer <= 0) {
+        state = 'playing'
+        overlay && (overlay.style.display = 'none')
+      }
+      requestAnimationFrame(step)
+      return
+    }
+
+    if (state === 'playerdeath') {
+      overlay && (overlay.innerText = 'YOU DIED')
+      overlay && (overlay.style.display = 'block')
+      stateTimer--
+      if (stateTimer <= 0) {
+        if (lives <= 0) {
+          state = 'gameover'
+        } else {
+          state = 'ready'
+          stateTimer = 120
+        }
+        overlay && (overlay.style.display = 'none')
+      }
+      requestAnimationFrame(step)
+      return
+    }
+
     if (state === 'gameover') {
-      ctx.fillStyle = 'green'
-      ctx.textAlign = 'center'
-      ctx.fillText(`Game Over - Score: ${score}`, ctx.canvas.width / 2, ctx.canvas.height / 2)
+      overlay && (overlay.innerText = `GAME OVER - SCORE: ${score}`)
+      overlay && (overlay.style.display = 'block')
       return
     }
 
@@ -123,6 +155,9 @@ export function startGame(ctx: CanvasRenderingContext2D) {
         lives -= 1
         if (lives <= 0) {
           state = 'gameover'
+        } else {
+          state = 'playerdeath'
+          stateTimer = 120
         }
       }
     }

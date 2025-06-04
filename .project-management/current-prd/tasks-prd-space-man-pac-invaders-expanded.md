@@ -41,6 +41,7 @@ LICENSE
 ### Existing Files Modified
 - `frontend/src/components/GameHeader.tsx` - Game title and stats display
 - `frontend/src/components/GameCanvas.tsx` - Render multiple mazes and invaders
+- `frontend/src/game/logic.ts` - Canvas game loop and state management
 - `frontend/src/components/HighScoresPanel.tsx` - Score table display
 - `frontend/src/components/GameFooter.tsx` - Score submission form
 - `frontend/src/index.css` - Global styles for Tailwind and custom classes
@@ -61,7 +62,7 @@ LICENSE
   - [x] 1.3 Create `.env.template` with database connection placeholders
   - [x] 1.4 Configure Alembic in `backend/app/migrations` and generate initial migration for `high_scores`
   - [x] 1.5 Document local database setup in `DEVELOPMENT.md`
-- [ ] 2.0 Implement UI per `prd-background/design-mock.html` with React and Tailwind
+- [x] 2.0 Implement UI per `prd-background/design-mock.html` with React and Tailwind
   - [x] 2.1 Import the "Press Start 2P" font and configure Tailwind to use it
   - [x] 2.2 Apply mockup classes to `GameHeader`, `GameCanvas`, `HighScoresPanel` and `GameFooter`
   - [x] 2.3 Make the layout responsive so the high score panel stacks below the canvas on small screens
@@ -71,7 +72,7 @@ LICENSE
   - [ ] 3.2 Rotate layouts as the player progresses through levels
   - [ ] 3.3 Implement Power Pellet frightened mode lasting seven seconds
   - [ ] 3.4 Add UFO invader logic in `ufo.ts` and integrate with game loop
-  - [ ] 3.5 Show game states for title, get ready, playing, player death and game over
+  - [x] 3.5 Show game states for title, get ready, playing, player death and game over
 - [x] 4.0 Expose high score API endpoints and connect frontend to store/retrieve scores
   - [x] 4.1 Ensure `GET /api/scores` returns the top 10 scores from PostgreSQL
   - [x] 4.2 Validate input to `POST /api/scores` and return the created record
