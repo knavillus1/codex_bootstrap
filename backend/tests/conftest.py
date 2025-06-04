@@ -14,13 +14,13 @@ def isolated_storage():
         # Set environment variable to redirect all storage to temp directory
         original_test_data_dir = os.environ.get('TEST_DATA_DIR')
         os.environ['TEST_DATA_DIR'] = str(tmp_dir)
-        
+
         # Clear any cached storage instances
         import api.chat
         import api.messages
         api.chat._storage = None
         api.messages._storage = None
-        
+
         try:
             yield Path(tmp_dir)
         finally:
@@ -29,7 +29,7 @@ def isolated_storage():
                 os.environ['TEST_DATA_DIR'] = original_test_data_dir
             else:
                 os.environ.pop('TEST_DATA_DIR', None)
-            
+
             # Clear cached storage instances again
             api.chat._storage = None
             api.messages._storage = None

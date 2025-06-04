@@ -51,5 +51,3 @@ async def delete_chat(chat_id: str) -> None:
         get_storage().delete_chat(chat_id)
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Chat not found")

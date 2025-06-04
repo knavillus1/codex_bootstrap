@@ -129,11 +129,12 @@
   - [x] 4.1 Implement backend API endpoints for chat CRUD operations
   - [x] 4.2 Create chat list retrieval with proper sorting (newest first)
   - [x] 4.3 Implement new chat creation with auto-generated titles
-  - [ ] 4.4 Add chat loading and switching functionality
+  - [x] 4.4 Add chat loading and switching functionality
   - [x] 4.5 Create chat deletion endpoint and confirmation flow
   - [x] 4.6 Implement chat title generation based on first message
   - [x] 4.7 Add chat metadata (creation date, message count, last activity)
   - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
+  - [x] 4.9 Fix duplicate exception handling in delete chat endpoint
 
 - [ ] 5.0 Message System with AI Integration
   - [x] 5.1 Create message API endpoints for sending and retrieving messages
