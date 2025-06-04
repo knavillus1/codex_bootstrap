@@ -2,3 +2,5 @@
 - 2025-06-04: add basic frontend structure, chat models, and status endpoint
 - 2025-06-04: configure tailwind color variables and update tasks
 - 2025-06-04: add API client, type interfaces, and updated ESLint config
+- 2025-06-04: mark chat storage service task committed
+- 2025-06-04: add chat storage service and tests
