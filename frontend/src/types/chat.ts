@@ -5,4 +5,6 @@ export interface Chat {
   title: string;
   messages: Message[];
   createdAt: string;
+  messageCount: number;
+  lastActivity: string;
 }

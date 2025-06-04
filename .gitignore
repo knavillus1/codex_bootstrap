@@ -3,6 +3,7 @@ venv/
 __pycache__/
 frontend/node_modules/
 frontend/dist/
+backend/data/
 *.pyc
 npm-debug.log*
 .env

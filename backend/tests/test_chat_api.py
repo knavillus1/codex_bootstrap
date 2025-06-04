@@ -29,7 +29,9 @@ def test_chat_crud(tmp_path):
 
     get_resp = client.get(f"/chats/{id1}")
     assert get_resp.status_code == 200
-    assert get_resp.json()["title"] == "First"
+    data = get_resp.json()
+    assert data["title"] == "First"
+    assert data["message_count"] == 0
 
     del_resp = client.delete(f"/chats/{id1}")
     assert del_resp.status_code == 204
