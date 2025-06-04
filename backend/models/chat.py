@@ -9,5 +9,5 @@ class Chat(BaseModel):
 
     id: str
     title: str
-    messages: List[Message] = []
+    messages: List[Message] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=datetime.utcnow)

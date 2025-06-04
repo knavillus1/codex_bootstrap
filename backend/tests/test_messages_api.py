@@ -33,3 +33,18 @@ def test_message_crud(tmp_path):
 
     missing = client.get("/messages/badid")
     assert missing.status_code == 404
+
+
+def test_first_message_sets_title(tmp_path):
+    client = setup_tmp_storage(tmp_path)
+    chat_resp = client.post("/chats/", json={})
+    chat_id = chat_resp.json()["id"]
+
+    content = "Hello from the first message"
+    client.post(
+        "/messages/",
+        json={"chat_id": chat_id, "role": "user", "content": content},
+    )
+
+    chat_data = client.get(f"/chats/{chat_id}").json()
+    assert chat_data["title"] == content[:40]
