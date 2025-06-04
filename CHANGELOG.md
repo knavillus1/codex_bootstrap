@@ -5,3 +5,4 @@
 - 2025-06-04: mark chat storage service task committed
 - 2025-06-04: add chat storage service and tests
 - 2025-06-04: add base API routers, logging middleware, react router, and custom hooks
+- 2025-06-04: add OpenAI service wrapper and uvicorn config

@@ -5,3 +5,4 @@ flake8
 httpx
 python-dotenv
 pydantic-settings
+openai
