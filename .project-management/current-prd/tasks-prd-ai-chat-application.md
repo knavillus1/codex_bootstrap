@@ -1,0 +1,179 @@
+# Tasks: AI Chat Application
+
+## Pre-Feature Development Project Tree
+```
+/Users/kevinsullivan/code/codex_bootstrap
+├── AGENTS.md
+├── CHANGELOG.md
+├── DEVELOPMENT.md
+├── LICENSE
+├── README.md
+├── backend
+│   └── requirements.txt
+├── dev_init.sh
+├── frontend
+│   ├── eslint.config.js
+│   └── package.json
+└── run_tests.sh
+```
+
+## Relevant Files
+
+### Proposed New Files
+- `backend/main.py` - FastAPI application entry point and server configuration
+- `backend/models/chat.py` - Pydantic models for chat data structures
+- `backend/models/message.py` - Pydantic models for message and file data structures  
+- `backend/api/chat.py` - API endpoints for chat operations (create, get, list)
+- `backend/api/messages.py` - API endpoints for message operations and AI responses
+- `backend/api/files.py` - API endpoints for file upload and processing
+- `backend/services/openai_service.py` - OpenAI API integration and response handling
+- `backend/services/file_service.py` - File processing and validation service
+- `backend/services/chat_storage.py` - JSON-based chat persistence service
+- `backend/config.py` - Environment configuration and settings
+- `backend/tests/test_chat_api.py` - Unit tests for chat API endpoints
+- `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
+- `frontend/src/main.tsx` - React application entry point
+- `frontend/src/App.tsx` - Main application component with layout
+- `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
+- `frontend/src/components/ChatArea.tsx` - Main chat interface component
+- `frontend/src/components/MessageBubble.tsx` - Individual message display component
+- `frontend/src/components/FileUpload.tsx` - File upload interface component
+- `frontend/src/components/ChatInput.tsx` - Message input with file attachment
+- `frontend/src/hooks/useChat.ts` - Custom hook for chat state management
+- `frontend/src/hooks/useMessages.ts` - Custom hook for message operations
+- `frontend/src/services/api.ts` - API client for backend communication
+- `frontend/src/types/chat.ts` - TypeScript interfaces for chat data
+- `frontend/src/types/message.ts` - TypeScript interfaces for message data
+- `frontend/src/utils/fileUtils.ts` - File handling utility functions
+- `frontend/src/styles/globals.css` - Global styles and color variables
+- `frontend/index.html` - HTML entry point
+- `frontend/vite.config.ts` - Vite build configuration
+- `frontend/tailwind.config.js` - Tailwind CSS configuration
+- `frontend/tsconfig.json` - TypeScript configuration
+- `frontend/src/__tests__/components/ChatArea.test.tsx` - Unit tests for chat area
+- `frontend/src/__tests__/hooks/useChat.test.ts` - Unit tests for chat hook
+
+### Existing Files Modified
+- `frontend/package.json` - Add React, Vite, Tailwind CSS, and testing dependencies
+- `backend/requirements.txt` - Add FastAPI, OpenAI, file processing dependencies
+- `dev_init.sh` - Add setup commands for both frontend and backend development
+- `.codex/install.sh` - Add environment setup for Codex agent (if needed)
+
+### Notes
+
+- The design mockup at `/Users/kevinsullivan/code/codex_bootstrap/.project-management/current-prd/prd-background/design-mock.html` provides the complete visual reference
+- Color palette must strictly follow: #A4CCD9, #C4E1E6, #EBFFD8, rgb(141, 188, 199)
+- OpenAI API integration requires streaming responses for real-time chat experience
+- File storage uses JSON format on backend filesystem for chat persistence
+- Vision capabilities needed for image analysis using OpenAI vision models
+- Responsive design must work across desktop and mobile devices
+
+## Tasks
+
+- [ ] 1.0 Project Setup and Environment Configuration
+  - [ ] 1.1 Create backend directory structure (api/, models/, services/, tests/)
+  - [ ] 1.2 Initialize FastAPI project with main.py and basic configuration
+  - [ ] 1.3 Set up frontend Vite + React + TypeScript project structure
+  - [ ] 1.4 Configure Tailwind CSS with custom color palette variables
+  - [ ] 1.5 Create environment configuration files (.env.example, config.py)
+  - [ ] 1.6 Update dev_init.sh script for full project initialization
+  - [ ] 1.7 Set up OpenAI API key configuration and validation
+  - [ ] 1.8 Create basic CORS configuration for frontend-backend communication
+
+- [ ] 2.0 Backend API Foundation and Core Services
+  - [ ] 2.1 Create Pydantic models for Chat, Message, and File data structures
+  - [ ] 2.2 Implement chat storage service using JSON file persistence
+  - [ ] 2.3 Create OpenAI service wrapper with error handling and retry logic
+  - [ ] 2.4 Set up file service for upload validation and processing
+  - [ ] 2.5 Create base API router structure and exception handlers
+  - [ ] 2.6 Implement health check and API status endpoints
+  - [ ] 2.7 Add logging configuration and request/response middleware
+  - [ ] 2.8 Configure uvicorn server settings and hot reload
+
+- [ ] 3.0 Frontend React Application Foundation
+  - [ ] 3.1 Set up React 18 with TypeScript and strict mode configuration
+  - [ ] 3.2 Create TypeScript interfaces for Chat, Message, and File types
+  - [ ] 3.3 Implement API service client with fetch wrapper and error handling
+  - [ ] 3.4 Set up React Router for future navigation (if needed)
+  - [ ] 3.5 Create custom hooks for chat state management (useChat, useMessages)
+  - [ ] 3.6 Implement file utility functions for validation and preview
+  - [ ] 3.7 Set up global CSS with design system color variables
+  - [ ] 3.8 Configure ESLint and TypeScript for code quality
+
+- [ ] 4.0 Chat Management System Implementation
+  - [ ] 4.1 Implement backend API endpoints for chat CRUD operations
+  - [ ] 4.2 Create chat list retrieval with proper sorting (newest first)
+  - [ ] 4.3 Implement new chat creation with auto-generated titles
+  - [ ] 4.4 Add chat loading and switching functionality
+  - [ ] 4.5 Create chat deletion endpoint and confirmation flow
+  - [ ] 4.6 Implement chat title generation based on first message
+  - [ ] 4.7 Add chat metadata (creation date, message count, last activity)
+  - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
+
+- [ ] 5.0 Message System with AI Integration
+  - [ ] 5.1 Create message API endpoints for sending and retrieving messages
+  - [ ] 5.2 Implement OpenAI GPT integration with proper model selection
+  - [ ] 5.3 Add streaming response support for real-time AI responses
+  - [ ] 5.4 Create message persistence in chat JSON files
+  - [ ] 5.5 Implement message display with user/AI distinction
+  - [ ] 5.6 Add "AI is thinking" indicators and loading states
+  - [ ] 5.7 Handle OpenAI API errors and rate limiting gracefully
+  - [ ] 5.8 Implement message timestamp and formatting
+
+- [ ] 6.0 File Upload and Processing System
+  - [ ] 6.1 Create file upload API endpoint with size and type validation
+  - [ ] 6.2 Implement image file processing and preview generation
+  - [ ] 6.3 Add document file text extraction (PDF, DOC, TXT, CSV)
+  - [ ] 6.4 Create file storage system with organized directory structure
+  - [ ] 6.5 Implement OpenAI vision API integration for image analysis
+  - [ ] 6.6 Add file attachment UI with drag-and-drop support
+  - [ ] 6.7 Create file preview components for different file types
+  - [ ] 6.8 Handle file upload progress and error states
+
+- [ ] 7.0 User Interface Implementation with Design System
+  - [ ] 7.1 Create main App component with sidebar + chat area layout
+  - [ ] 7.2 Implement Sidebar component with chat history and new chat button
+  - [ ] 7.3 Build ChatArea component with message display and input
+  - [ ] 7.4 Create MessageBubble component with user/AI styling distinction
+  - [ ] 7.5 Implement ChatInput component with auto-resizing textarea
+  - [ ] 7.6 Add FileUpload component with paperclip button integration
+  - [ ] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
+  - [ ] 7.8 Implement responsive design for mobile and desktop views
+  - [ ] 7.9 Add hover effects and interactive states for all buttons
+  - [ ] 7.10 Create custom scrollbar styling to match design mockup
+
+- [ ] 8.0 Real-time Features and Streaming
+  - [ ] 8.1 Implement Server-Sent Events (SSE) for streaming AI responses
+  - [ ] 8.2 Create frontend streaming response handler and display
+  - [ ] 8.3 Add real-time typing indicators during AI response generation
+  - [ ] 8.4 Implement auto-scroll to newest messages functionality
+  - [ ] 8.5 Add WebSocket support for future real-time features (optional)
+  - [ ] 8.6 Handle streaming interruption and reconnection scenarios
+  - [ ] 8.7 Optimize streaming performance for large responses
+  - [ ] 8.8 Add streaming progress indicators and cancel functionality
+
+- [ ] 9.0 Testing and Quality Assurance
+  - [ ] 9.1 Write unit tests for all backend API endpoints
+  - [ ] 9.2 Create tests for OpenAI service integration with mocking
+  - [ ] 9.3 Add frontend component tests using React Testing Library
+  - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
+  - [ ] 9.5 Implement integration tests for file upload and processing
+  - [ ] 9.6 Add end-to-end tests for complete chat flow
+  - [ ] 9.7 Test error handling scenarios and edge cases
+  - [ ] 9.8 Perform cross-browser compatibility testing
+  - [ ] 9.9 Test responsive design on various screen sizes
+  - [ ] 9.10 Validate API rate limiting and error recovery
+
+- [ ] 10.0 Final Integration and Deployment Preparation
+  - [ ] 10.1 Complete frontend-backend integration testing
+  - [ ] 10.2 Optimize build process and bundle size for production
+  - [ ] 10.3 Add environment-specific configuration management
+  - [ ] 10.4 Create production Docker configurations (optional)
+  - [ ] 10.5 Implement proper error logging and monitoring setup
+  - [ ] 10.6 Add API documentation with OpenAPI/Swagger
+  - [ ] 10.7 Perform security audit and vulnerability assessment
+  - [ ] 10.8 Create deployment scripts and documentation
+  - [ ] 10.9 Set up CI/CD pipeline configuration (optional)
+  - [ ] 10.10 Final user acceptance testing and performance optimization
+
+*End of document*
