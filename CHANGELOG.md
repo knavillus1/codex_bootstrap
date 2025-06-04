@@ -9,3 +9,4 @@
 - 2025-06-04: implement file service and utilities with tests
 - 2025-06-04: add chat CRUD API endpoints with storage and tests
 - 2025-06-04: implement message API with persistence and tests
+- 2025-06-04: auto-generate chat title from first message and fix chat model bug

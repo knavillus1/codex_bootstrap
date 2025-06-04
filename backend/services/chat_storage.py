@@ -51,6 +51,7 @@ class ChatStorage:
     def add_message(self, chat_id: str, role: str, content: str) -> Message:
         """Add a message to a chat and persist it."""
         chat = self.load_chat(chat_id)
+        is_first = len(chat.messages) == 0
         message = Message(
             id=uuid4().hex,
             chat_id=chat_id,
@@ -58,6 +59,8 @@ class ChatStorage:
             content=content,
         )
         chat.messages.append(message)
+        if is_first and chat.title.startswith("Chat "):
+            chat.title = content.split("\n", 1)[0][:40]
         self.save_chat(chat)
         return message
 

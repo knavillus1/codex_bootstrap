@@ -80,6 +80,8 @@
 - `backend/tests/test_chat_api.py` - Tests for chat API endpoints
 - `backend/api/messages.py` - Message creation and list endpoints
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
+- `backend/models/chat.py` - Chat data model definition
+- `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
 
 ### Notes
 
@@ -128,15 +130,15 @@
   - [x] 4.3 Implement new chat creation with auto-generated titles
   - [ ] 4.4 Add chat loading and switching functionality
   - [x] 4.5 Create chat deletion endpoint and confirmation flow
-  - [ ] 4.6 Implement chat title generation based on first message
+  - [x] 4.6 Implement chat title generation based on first message
   - [ ] 4.7 Add chat metadata (creation date, message count, last activity)
   - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
 
 - [ ] 5.0 Message System with AI Integration
-  - [c] 5.1 Create message API endpoints for sending and retrieving messages
+  - [x] 5.1 Create message API endpoints for sending and retrieving messages
   - [ ] 5.2 Implement OpenAI GPT integration with proper model selection
   - [ ] 5.3 Add streaming response support for real-time AI responses
-  - [c] 5.4 Create message persistence in chat JSON files
+  - [x] 5.4 Create message persistence in chat JSON files
   - [ ] 5.5 Implement message display with user/AI distinction
   - [ ] 5.6 Add "AI is thinking" indicators and loading states
   - [ ] 5.7 Handle OpenAI API errors and rate limiting gracefully
