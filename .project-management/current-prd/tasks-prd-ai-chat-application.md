@@ -84,6 +84,10 @@
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
 - `backend/models/chat.py` - Chat data model with metadata fields
 - `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
+- `backend/services/openai_service.py` - OpenAI model configuration and error handling
+- `backend/config.py` - Add OPENAI_MODEL setting
+- `.env.template` - Example environment configuration with model variable
+- `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
 - `backend/api/files.py` - API endpoints for file upload and processing
 - `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
 - `frontend/src/components/ChatInput.tsx` - Message input with file attachment
@@ -144,12 +148,12 @@
 
 - [ ] 5.0 Message System with AI Integration
   - [x] 5.1 Create message API endpoints for sending and retrieving messages
-  - [ ] 5.2 Implement OpenAI GPT integration with proper model selection
+  - [x] 5.2 Implement OpenAI GPT integration with proper model selection
   - [ ] 5.3 Add streaming response support for real-time AI responses
   - [x] 5.4 Create message persistence in chat JSON files
   - [x] 5.5 Implement message display with user/AI distinction
   - [x] 5.6 Add "AI is thinking" indicators and loading states
-  - [ ] 5.7 Handle OpenAI API errors and rate limiting gracefully
+  - [x] 5.7 Handle OpenAI API errors and rate limiting gracefully
   - [x] 5.8 Implement message timestamp and formatting
 
 - [ ] 6.0 File Upload and Processing System
@@ -169,7 +173,7 @@
   - [x] 7.4 Create MessageBubble component with user/AI styling distinction
   - [x] 7.5 Implement ChatInput component with auto-resizing textarea
   - [x] 7.6 Add FileUpload component with paperclip button integration
-  - [ ] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
+  - [x] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
   - [ ] 7.8 Implement responsive design for mobile and desktop views
   - [x] 7.9 Add hover effects and interactive states for all buttons
   - [x] 7.10 Create custom scrollbar styling to match design mockup

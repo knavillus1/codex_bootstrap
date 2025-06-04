@@ -54,3 +54,21 @@ def test_chat_completion_retries(monkeypatch):
     )
     assert result["choices"][0]["message"]["content"] == "ok"
     assert len(fake.ChatCompletion.calls) == 3
+
+
+def test_default_model_from_settings(monkeypatch):
+    fake = FakeOpenAI()
+    fake_response = {"choices": [{"message": {"content": "hello"}}]}
+    fake.ChatCompletion = FakeOpenAI.ChatCompletion([fake_response])
+    monkeypatch.setattr(
+        "backend.services.openai_service.openai", fake, raising=False
+    )
+    monkeypatch.setattr(
+        "backend.services.openai_service.settings.OPENAI_MODEL",
+        "gpt-test",
+        raising=False,
+    )
+
+    service = OpenAIService(api_key="key")
+    service.chat_completion([{"role": "user", "content": "hi"}])
+    assert fake.ChatCompletion.calls[0]["model"] == "gpt-test"
