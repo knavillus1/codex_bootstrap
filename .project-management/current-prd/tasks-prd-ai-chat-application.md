@@ -38,6 +38,7 @@
 - `backend/services/chat_storage.py` - JSON-based chat persistence service
 - `backend/tests/test_chat_api.py` - Unit tests for chat API endpoints
 - `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
+- `backend/tests/test_chat_storage.py` - Unit tests for chat storage
 - `backend/tests/test_status.py` - Unit test for status endpoint
 - `frontend/src/main.tsx` - React application entry point
 - `frontend/src/App.tsx` - Main application component with layout
@@ -97,7 +98,7 @@
 
 - [ ] 2.0 Backend API Foundation and Core Services
   - [x] 2.1 Create Pydantic models for Chat, Message, and File data structures
-  - [ ] 2.2 Implement chat storage service using JSON file persistence
+  - [x] 2.2 Implement chat storage service using JSON file persistence
   - [ ] 2.3 Create OpenAI service wrapper with error handling and retry logic
   - [ ] 2.4 Set up file service for upload validation and processing
   - [ ] 2.5 Create base API router structure and exception handlers
