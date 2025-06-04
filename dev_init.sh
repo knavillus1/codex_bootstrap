@@ -19,12 +19,20 @@ fi
 source .venv/bin/activate
 pip install -r backend/requirements.txt
 
-# Ensure database schema is up to date
-python - <<'EOF'
-from backend.app.db import engine
-from backend.app.models import Base
-Base.metadata.create_all(bind=engine)
-EOF
+# Ensure PostgreSQL is running
+if command -v brew >/dev/null && brew services list | grep -q postgresql; then
+  brew services start postgresql >/dev/null
+fi
+
+# Wait for Postgres to accept connections
+if command -v pg_isready >/dev/null; then
+  until pg_isready >/dev/null 2>&1; do
+    sleep 1
+  done
+fi
+
+# Apply database migrations
+alembic -c backend/alembic.ini upgrade head
 
 # Start backend
 uvicorn backend.app.main:app --reload --port 8000 &
