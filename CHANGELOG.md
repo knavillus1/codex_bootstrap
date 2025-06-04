@@ -12,3 +12,4 @@
 - 2025-06-04: auto-generate chat title from first message and fix chat model bug
 - 2025-06-04: add tests for file API endpoint
 - 2025-06-04: add chat metadata fields and tests
+- 2025-06-04: add frontend chat loading and fix delete endpoint

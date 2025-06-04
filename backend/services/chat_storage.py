@@ -14,13 +14,13 @@ class ChatStorage:
 
     def __init__(self, data_dir: Path | None = None):
         if data_dir is None:
-            # Allow overriding the data directory with an environment variable (useful for testing)
+            # Allow overriding data directory with env var during tests
             test_data_dir = os.environ.get('TEST_DATA_DIR')
             if test_data_dir:
                 data_dir = Path(test_data_dir)
             else:
                 data_dir = Path(__file__).resolve().parent.parent / "data"
-        
+
         self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
 
