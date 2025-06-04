@@ -4,7 +4,26 @@ from backend.main import app
 client = TestClient(app)
 
 
-def test_upload_file_not_implemented():
-    response = client.post('/files/')
-    assert response.status_code == 501
-    assert response.json()['detail'] == 'Not implemented'
+def test_upload_file_success(tmp_path):
+    file_path = tmp_path / "test.txt"
+    file_path.write_text("hello")
+    with file_path.open("rb") as f:
+        response = client.post(
+            "/files/",
+            files={"file": (file_path.name, f, "text/plain")},
+        )
+    assert response.status_code == 201
+    data = response.json()
+    assert "filename" in data
+
+
+def test_upload_file_invalid_type(tmp_path):
+    bad_path = tmp_path / "malware.exe"
+    bad_path.write_text("bad")
+    with bad_path.open("rb") as f:
+        response = client.post(
+            "/files/",
+            files={"file": (bad_path.name, f, "application/octet-stream")},
+        )
+    assert response.status_code == 400
+    assert "Unsupported file type" in response.json()["detail"]

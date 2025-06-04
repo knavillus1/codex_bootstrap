@@ -3,6 +3,7 @@ import useMessages from '../hooks/useMessages';
 import type { Chat } from '../types/chat';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
+import { api } from '../services/api';
 
 interface Props {
   activeChat: Chat | null;
@@ -26,6 +27,10 @@ export default function ChatArea({ activeChat }: Props) {
     setLoading(false);
   };
 
+  const handleFileUpload = async (file: File) => {
+    await api.postFile<{ filename: string }>('/files/', file);
+  };
+
   if (!activeChat) {
     return <div className="flex-1 p-4">Select a chat to begin</div>;
   }
@@ -39,7 +44,7 @@ export default function ChatArea({ activeChat }: Props) {
         ))}
         {loading && <div className="text-sm text-gray-500">AI is thinking...</div>}
       </div>
-      <ChatInput onSend={handleSend} loading={loading} />
+      <ChatInput onSend={handleSend} onUpload={handleFileUpload} loading={loading} />
     </main>
   );
 }
