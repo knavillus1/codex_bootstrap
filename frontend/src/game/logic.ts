@@ -1,3 +1,6 @@
+import mazeLayouts from './mazeLayouts'
+import { createUFO, updateUFO, UFO, Rect as UfoRect } from './ufo'
+
 interface Rect {
   x: number
   y: number
@@ -12,6 +15,18 @@ function intersects(a: Rect, b: Rect): boolean {
     a.y < b.y + b.h &&
     a.y + a.h > b.y
   )
+}
+
+function drawMaze(ctx: CanvasRenderingContext2D, maze: string[]) {
+  const cell = 20
+  ctx.fillStyle = 'blue'
+  maze.forEach((row, y) => {
+    for (let x = 0; x < row.length; x++) {
+      if (row[x] === '#') {
+        ctx.fillRect(x * cell, y * cell, cell, cell)
+      }
+    }
+  })
 }
 
 export function startGame(
@@ -33,6 +48,11 @@ export function startGame(
   const bullets: Rect[] = []
   const enemyBullets: Rect[] = []
   const pellets: Rect[] = []
+  let powerPellet: Rect | null = null
+  let frightenedTimer = 0
+  let ufo: UFO | null = null
+  let ufoSpawnTimer = 600
+  let mazeIndex = 0
   let enemyDx = 2
   let enemyShootTimer = 0
   let score = 0
@@ -49,6 +69,7 @@ export function startGame(
 
   const step = () => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    drawMaze(ctx, mazeLayouts[mazeIndex])
 
     if (state === 'title') {
       overlay && (overlay.innerText = 'PRESS ENTER TO START')
@@ -109,7 +130,8 @@ export function startGame(
     }
 
     // enemy movement
-    enemy.x += enemyDx
+    const currentEnemyDx = frightenedTimer > 0 ? enemyDx / 2 : enemyDx
+    enemy.x += currentEnemyDx
     if (enemy.x <= 0 || enemy.x + enemy.w >= ctx.canvas.width) {
       enemyDx *= -1
       enemy.y += 20
@@ -117,7 +139,7 @@ export function startGame(
 
     // enemy shooting
     enemyShootTimer--
-    if (enemyShootTimer <= 0) {
+    if (enemyShootTimer <= 0 && frightenedTimer <= 0) {
       enemyBullets.push({
         x: enemy.x + enemy.w / 2 - 2,
         y: enemy.y + enemy.h,
@@ -138,12 +160,13 @@ export function startGame(
         bullets.splice(i, 1)
         enemy.y = 20
         enemy.x = Math.random() * (ctx.canvas.width - enemy.w)
+        mazeIndex = (mazeIndex + 1) % mazeLayouts.length
         level += 1
         score += 100
       }
     }
 
-    enemyBullets.forEach((b) => (b.y += 3))
+    enemyBullets.forEach((b) => (b.y += frightenedTimer > 0 ? 1 : 3))
     for (let i = enemyBullets.length - 1; i >= 0; i--) {
       const b = enemyBullets[i]
       if (b.y > ctx.canvas.height) {
@@ -184,8 +207,53 @@ export function startGame(
       }
     }
 
+    // power pellet
+    if (!powerPellet && Math.random() < 0.002) {
+      powerPellet = {
+        x: Math.random() * (ctx.canvas.width - 8),
+        y: Math.random() * (ctx.canvas.height - 8),
+        w: 8,
+        h: 8,
+      }
+    }
+    if (powerPellet) {
+      if (intersects(player, powerPellet)) {
+        powerPellet = null
+        frightenedTimer = 420
+      } else {
+        ctx.fillStyle = 'orange'
+        ctx.fillRect(powerPellet.x, powerPellet.y, powerPellet.w, powerPellet.h)
+      }
+    }
+
+    if (frightenedTimer > 0) {
+      frightenedTimer--
+    }
+
+    // UFO logic
+    ufoSpawnTimer--
+    if (ufoSpawnTimer <= 0 && !ufo) {
+      ufo = createUFO(ctx.canvas.width)
+      ufoSpawnTimer = 600 + Math.random() * 600
+    }
+    if (ufo) {
+      updateUFO(ufo, ctx.canvas.width)
+      ctx.fillStyle = 'pink'
+      ctx.fillRect(ufo.x, ufo.y, ufo.w, ufo.h)
+      for (let i = bullets.length - 1; i >= 0; i--) {
+        if (intersects(bullets[i], ufo as UfoRect)) {
+          bullets.splice(i, 1)
+          score += 200
+          ufo.active = false
+        }
+      }
+      if (!ufo.active) {
+        ufo = null
+      }
+    }
+
     // draw objects
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = frightenedTimer > 0 ? 'blue' : 'red'
     ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h)
 
     ctx.fillStyle = 'green'
