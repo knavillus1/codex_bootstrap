@@ -3,3 +3,5 @@ uvicorn
 pytest
 flake8
 httpx
+python-dotenv
+pydantic-settings

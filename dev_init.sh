@@ -1,33 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# NOTE TO Codex agent: If you are reading this, it means you are bootstraping a new project.
-# It is your responsibility to fill in the missing parts of this script, the headings below
-# are just a guide to help you with common development application startup tasks.
-# Remove these comments and complete the script as needed.
+if [ -f .env ]; then
+  # shellcheck disable=SC2046
+  export $(grep -v '^#' .env | xargs)
+fi
 
+python -m venv venv
+source venv/bin/activate
+pip install -r backend/requirements.txt
 
+pushd backend >/dev/null
+uvicorn backend.main:app --reload &
+BACKEND_PID=$!
+popd >/dev/null
 
-# Export optional debug environment variables if provided
+pushd frontend >/dev/null
+npm install
+npm run dev &
+FRONTEND_PID=$!
+popd >/dev/null
 
-# Example CORS allowed origins for the backend (comma-separated)
-#: "${ALLOW_ORIGINS:=http://localhost:5173}"
-#export ALLOW_ORIGINS
+sleep 2
 
-# Kill existing processes
-
-# Create virtual environment if it doesn't exist
-
-# Activate virtual environment
-
-# Install  dependencies
-
-# Start backend in background
-
-# Start frontend in background
-
-# Wait briefly for servers to start
-
-# Open in default browser (macOS or Linux)
-
-#  Wait for servers to shut down manually
+wait $BACKEND_PID $FRONTEND_PID

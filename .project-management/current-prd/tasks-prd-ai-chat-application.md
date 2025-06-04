@@ -21,6 +21,13 @@
 
 ### Proposed New Files
 - `backend/main.py` - FastAPI application entry point and server configuration
+- `backend/config.py` - Environment configuration and settings
+- `backend/api/__init__.py` - Package initialization for API module
+- `backend/models/__init__.py` - Package initialization for models module
+- `backend/services/__init__.py` - Package initialization for services module
+- `backend/tests/__init__.py` - Package initialization for tests module
+- `backend/tests/test_health.py` - Unit test for health check endpoint
+- `.env.template` - Example environment configuration file
 - `backend/models/chat.py` - Pydantic models for chat data structures
 - `backend/models/message.py` - Pydantic models for message and file data structures  
 - `backend/api/chat.py` - API endpoints for chat operations (create, get, list)
@@ -29,7 +36,6 @@
 - `backend/services/openai_service.py` - OpenAI API integration and response handling
 - `backend/services/file_service.py` - File processing and validation service
 - `backend/services/chat_storage.py` - JSON-based chat persistence service
-- `backend/config.py` - Environment configuration and settings
 - `backend/tests/test_chat_api.py` - Unit tests for chat API endpoints
 - `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
 - `frontend/src/main.tsx` - React application entry point
@@ -58,6 +64,8 @@
 - `backend/requirements.txt` - Add FastAPI, OpenAI, file processing dependencies
 - `dev_init.sh` - Add setup commands for both frontend and backend development
 - `.codex/install.sh` - Add environment setup for Codex agent (if needed)
+- `CHANGELOG.md` - Record of repository changes
+- `DEVELOPMENT.md` - Local development instructions
 
 ### Notes
 
@@ -70,15 +78,15 @@
 
 ## Tasks
 
-- [ ] 1.0 Project Setup and Environment Configuration
-  - [ ] 1.1 Create backend directory structure (api/, models/, services/, tests/)
-  - [ ] 1.2 Initialize FastAPI project with main.py and basic configuration
+- [x] 1.0 Project Setup and Environment Configuration
+  - [x] 1.1 Create backend directory structure (api/, models/, services/, tests/)
+  - [x] 1.2 Initialize FastAPI project with main.py and basic configuration
   - [ ] 1.3 Set up frontend Vite + React + TypeScript project structure
   - [ ] 1.4 Configure Tailwind CSS with custom color palette variables
-  - [ ] 1.5 Create environment configuration files (.env.example, config.py)
-  - [ ] 1.6 Update dev_init.sh script for full project initialization
-  - [ ] 1.7 Set up OpenAI API key configuration and validation
-  - [ ] 1.8 Create basic CORS configuration for frontend-backend communication
+  - [x] 1.5 Create environment configuration files (.env.example, config.py)
+  - [x] 1.6 Update dev_init.sh script for full project initialization
+  - [x] 1.7 Set up OpenAI API key configuration and validation
+  - [x] 1.8 Create basic CORS configuration for frontend-backend communication
 
 - [ ] 2.0 Backend API Foundation and Core Services
   - [ ] 2.1 Create Pydantic models for Chat, Message, and File data structures
