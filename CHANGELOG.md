@@ -17,3 +17,4 @@
 - 2025-06-04: add message timestamps in UI and mark chat system complete
 - 2025-06-04: implement file upload endpoint and component
     - tests failed: RuntimeError requiring python-multipart
+- 2025-06-04: add button hover states and auto-scroll feature
