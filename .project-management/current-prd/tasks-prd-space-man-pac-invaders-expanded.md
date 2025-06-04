@@ -51,11 +51,11 @@ LICENSE
 - Follow Tailwind classes outlined in the mock HTML for layout.
 
 ## Tasks
-- [ ] 1.0 Integrate PostgreSQL database using guidelines in `prd-background/postgres-docs.md`
+- [x] 1.0 Integrate PostgreSQL database using guidelines in `prd-background/postgres-docs.md`
   - [x] 1.1 Add `psycopg2` and migration tooling to `backend/requirements.txt`
   - [x] 1.2 Update `backend/app/db.py` to read `DATABASE_URL` from environment variables
   - [x] 1.3 Create `.env.template` with database connection placeholders
-  - [c] 1.4 Configure Alembic in `backend/app/migrations` and generate initial migration for `high_scores`
+  - [x] 1.4 Configure Alembic in `backend/app/migrations` and generate initial migration for `high_scores`
   - [x] 1.5 Document local database setup in `DEVELOPMENT.md`
 - [ ] 2.0 Implement UI per `prd-background/design-mock.html` with React and Tailwind
   - [ ] 2.1 Import the "Press Start 2P" font and configure Tailwind to use it
@@ -74,7 +74,7 @@ LICENSE
   - [x] 4.3 Write tests for both endpoints in `backend/tests`
   - [x] 4.4 Update `frontend/src/api.ts` and components to submit and display scores
   - [x] 4.5 Display the high score table on the title and game over screens
-- [ ] 5.0 Update environment scripts and documentation for full local setup
-  - [c] 5.1 Add PostgreSQL startup and migration commands to `dev_init.sh`
-  - [c] 5.2 Document the setup process in `DEVELOPMENT.md`
+- [x] 5.0 Update environment scripts and documentation for full local setup
+  - [x] 5.1 Add PostgreSQL startup and migration commands to `dev_init.sh`
+  - [x] 5.2 Document the setup process in `DEVELOPMENT.md`
   - [x] 5.3 Record new dependencies and setup steps in `CHANGELOG.md`
