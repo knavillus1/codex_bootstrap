@@ -58,7 +58,7 @@
 - `frontend/index.html` - HTML entry point
 - `frontend/vite.config.ts` - Vite build configuration
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
-- `frontend/tsconfig.json` - TypeScript configuration
+ - `frontend/tsconfig.json` - TypeScript configuration
 - `frontend/src/placeholder.js` - Placeholder file to satisfy ESLint
 - `frontend/src/__tests__/components/ChatArea.test.tsx` - Unit tests for chat area
 - `frontend/src/__tests__/hooks/useChat.test.ts` - Unit tests for chat hook
@@ -75,6 +75,9 @@
 - `run_tests.sh` - Set default OPENAI_API_KEY for tests
 - `frontend/src/styles/globals.css` - Global styles and color variables
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
+- `backend/api/chat.py` - Add CRUD chat endpoints
+- `backend/services/chat_storage.py` - Add create, delete, and sorted list
+- `backend/tests/test_chat_api.py` - Tests for chat API endpoints
 
 ### Notes
 
@@ -118,11 +121,11 @@
   - [x] 3.8 Configure ESLint and TypeScript for code quality
 
 - [ ] 4.0 Chat Management System Implementation
-  - [ ] 4.1 Implement backend API endpoints for chat CRUD operations
-  - [ ] 4.2 Create chat list retrieval with proper sorting (newest first)
-  - [ ] 4.3 Implement new chat creation with auto-generated titles
+  - [x] 4.1 Implement backend API endpoints for chat CRUD operations
+  - [x] 4.2 Create chat list retrieval with proper sorting (newest first)
+  - [x] 4.3 Implement new chat creation with auto-generated titles
   - [ ] 4.4 Add chat loading and switching functionality
-  - [ ] 4.5 Create chat deletion endpoint and confirmation flow
+  - [x] 4.5 Create chat deletion endpoint and confirmation flow
   - [ ] 4.6 Implement chat title generation based on first message
   - [ ] 4.7 Add chat metadata (creation date, message count, last activity)
   - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
