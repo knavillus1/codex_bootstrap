@@ -99,12 +99,12 @@
 - [ ] 2.0 Backend API Foundation and Core Services
   - [x] 2.1 Create Pydantic models for Chat, Message, and File data structures
   - [x] 2.2 Implement chat storage service using JSON file persistence
-  - [ ] 2.3 Create OpenAI service wrapper with error handling and retry logic
+  - [x] 2.3 Create OpenAI service wrapper with error handling and retry logic
   - [ ] 2.4 Set up file service for upload validation and processing
   - [x] 2.5 Create base API router structure and exception handlers
   - [x] 2.6 Implement health check and API status endpoints
   - [x] 2.7 Add logging configuration and request/response middleware
-  - [ ] 2.8 Configure uvicorn server settings and hot reload
+  - [x] 2.8 Configure uvicorn server settings and hot reload
 
 - [ ] 3.0 Frontend React Application Foundation
 - [ ] 3.1 Set up React 18 with TypeScript and strict mode configuration
@@ -170,7 +170,7 @@
 
 - [ ] 9.0 Testing and Quality Assurance
   - [ ] 9.1 Write unit tests for all backend API endpoints
-  - [ ] 9.2 Create tests for OpenAI service integration with mocking
+  - [x] 9.2 Create tests for OpenAI service integration with mocking
   - [ ] 9.3 Add frontend component tests using React Testing Library
   - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
   - [ ] 9.5 Implement integration tests for file upload and processing
