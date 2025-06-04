@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Message } from '../types/message';
+import { formatTimestamp } from '../utils/dateUtils';
 
 interface Props {
   message: Message;
@@ -13,7 +14,10 @@ export default function MessageBubble({ message }: Props) {
         isUser ? 'bg-secondary self-end' : 'bg-accent self-start'
       }`}
     >
-      {message.content}
+      <div className="text-xs text-gray-500 mb-1">
+        {formatTimestamp(message.createdAt)}
+      </div>
+      <div>{message.content}</div>
     </div>
   );
 }
