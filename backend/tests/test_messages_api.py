@@ -1,19 +1,9 @@
 from fastapi.testclient import TestClient
-import backend.api.chat as chat_api
-import backend.api.messages as messages_api
 from backend.main import app
-from backend.services.chat_storage import ChatStorage
 
 
-def setup_tmp_storage(tmp_path):
-    storage = ChatStorage(data_dir=tmp_path)
-    chat_api._storage = storage
-    messages_api._storage = storage
-    return TestClient(app)
-
-
-def test_message_crud(tmp_path):
-    client = setup_tmp_storage(tmp_path)
+def test_message_crud():
+    client = TestClient(app)
     chat_resp = client.post("/chats/", json={"title": "chat"})
     chat_id = chat_resp.json()["id"]
 
@@ -38,8 +28,8 @@ def test_message_crud(tmp_path):
     assert missing.status_code == 404
 
 
-def test_first_message_sets_title(tmp_path):
-    client = setup_tmp_storage(tmp_path)
+def test_first_message_sets_title():
+    client = TestClient(app)
     chat_resp = client.post("/chats/", json={})
     chat_id = chat_resp.json()["id"]
 

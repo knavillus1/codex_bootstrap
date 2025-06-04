@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import List
@@ -12,7 +13,15 @@ class ChatStorage:
     """Persist chats to JSON files in a directory."""
 
     def __init__(self, data_dir: Path | None = None):
-        self.data_dir = data_dir or Path(__file__).resolve().parent.parent / "data"
+        if data_dir is None:
+            # Allow overriding the data directory with an environment variable (useful for testing)
+            test_data_dir = os.environ.get('TEST_DATA_DIR')
+            if test_data_dir:
+                data_dir = Path(test_data_dir)
+            else:
+                data_dir = Path(__file__).resolve().parent.parent / "data"
+        
+        self.data_dir = data_dir
         self.data_dir.mkdir(parents=True, exist_ok=True)
 
     def _chat_path(self, chat_id: str) -> Path:
@@ -28,6 +37,8 @@ class ChatStorage:
 
     def save_chat(self, chat: Chat) -> None:
         """Write chat data to disk."""
+        # Ensure directory exists before writing
+        self.data_dir.mkdir(parents=True, exist_ok=True)
         self._chat_path(chat.id).write_text(chat.json(), encoding="utf-8")
 
     def load_chat(self, chat_id: str) -> Chat:
@@ -42,6 +53,9 @@ class ChatStorage:
     def list_chats(self) -> List[Chat]:
         """Return all stored chats sorted by newest first."""
         chats: List[Chat] = []
+        # Ensure directory exists before trying to list files
+        if not self.data_dir.exists():
+            return chats
         for file in self.data_dir.glob("*.json"):
             data = json.loads(file.read_text(encoding="utf-8"))
             chats.append(Chat(**data))

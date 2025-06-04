@@ -1,18 +1,10 @@
 from fastapi.testclient import TestClient
-import backend.api.chat as chat_api
 from backend.main import app
-from backend.services.chat_storage import ChatStorage
 import time
 
 
-def setup_tmp_storage(tmp_path):
-    chat_api._storage = ChatStorage(data_dir=tmp_path)
-    return TestClient(app)
-
-
-def test_chat_crud(tmp_path):
-    client = setup_tmp_storage(tmp_path)
-
+def test_chat_crud():
+    client = TestClient(app)
     res1 = client.post("/chats/", json={"title": "First"})
     assert res1.status_code == 201
     id1 = res1.json()["id"]
@@ -40,8 +32,8 @@ def test_chat_crud(tmp_path):
     assert missing.status_code == 404
 
 
-def test_create_auto_title(tmp_path):
-    client = setup_tmp_storage(tmp_path)
+def test_create_auto_title():
+    client = TestClient(app)
     resp = client.post("/chats/", json={})
     assert resp.status_code == 201
     assert resp.json()["title"].startswith("Chat ")

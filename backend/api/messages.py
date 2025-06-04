@@ -7,7 +7,15 @@ from services.chat_storage import ChatStorage
 
 router = APIRouter(prefix="/messages", tags=["messages"])
 
-_storage = ChatStorage()
+_storage = None
+
+
+def get_storage():
+    """Get the chat storage instance, creating it if needed."""
+    global _storage
+    if _storage is None:
+        _storage = ChatStorage()
+    return _storage
 
 
 class MessageCreate(BaseModel):
@@ -20,7 +28,7 @@ class MessageCreate(BaseModel):
 async def list_messages(chat_id: str):
     """List messages for a chat."""
     try:
-        return _storage.list_messages(chat_id)
+        return get_storage().list_messages(chat_id)
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")
 
@@ -29,7 +37,7 @@ async def list_messages(chat_id: str):
 async def create_message(payload: MessageCreate):
     """Create a new message for a chat."""
     try:
-        return _storage.add_message(
+        return get_storage().add_message(
             chat_id=payload.chat_id,
             role=payload.role,
             content=payload.content,
