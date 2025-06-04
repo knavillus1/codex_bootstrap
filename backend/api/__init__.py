@@ -2,9 +2,9 @@
 
 from fastapi import APIRouter
 
-from .chat import router as chat_router
-from .messages import router as message_router
-from .files import router as file_router
+from api.chat import router as chat_router
+from api.messages import router as message_router
+from api.files import router as file_router
 
 
 api_router = APIRouter()

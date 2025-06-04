@@ -3,7 +3,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from backend.services.chat_storage import ChatStorage
+from services.chat_storage import ChatStorage
 
 router = APIRouter(prefix="/chats", tags=["chats"])
 
