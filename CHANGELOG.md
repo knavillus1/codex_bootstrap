@@ -15,3 +15,4 @@
 2025-06-04 Styled overlay messages and lives icons
 2025-06-04 Implemented game state overlay messages
 2025-06-04 Implemented maze rotation, power pellet mode and UFO
+2025-06-04 Refined retro design with new CSS and component markup

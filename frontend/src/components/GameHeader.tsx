@@ -6,15 +6,15 @@ interface Props {
 }
 
 const GameHeader = ({ score, lives }: Props) => (
-  <header className="game-header w-full max-w-screen-md flex justify-between items-center pb-4 border-b-2 border-dashed border-pink-500">
-    <h1 className="game-header__title text-2xl text-yellow-300 drop-shadow-[2px_2px_0_#ff00ff]">Pac Invaders</h1>
-    <div className="game-header__stats text-cyan-300 text-right flex gap-4">
-      <span className="game-header__stat-item"><span className="label text-gray-300">SCORE:</span> <span className="value text-white">{score}</span></span>
-      <span className="game-header__stat-item flex items-center">
-        <span className="label text-gray-300 mr-1">LIVES:</span>
-        <span className="value flex">
+  <header className="game-header">
+    <h1 className="game-header__title">Pac Invaders</h1>
+    <div className="game-header__stats">
+      <span className="game-header__stat-item"><span className="label">SCORE:</span> <span className="value">{score}</span></span>
+      <span className="game-header__stat-item">
+        <span className="label">LIVES:</span>
+        <span className="value">
           {Array.from({ length: lives }).map((_, i) => (
-            <span key={i} className="life-icon text-yellow-300 mr-1 text-lg">●</span>
+            <span key={i} className="life-icon">●</span>
           ))}
         </span>
       </span>

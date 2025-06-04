@@ -22,9 +22,9 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-black text-green-500 font-pixel">
+    <div className="game-wrapper" id="spaceManPacInvadersApp">
       <GameHeader score={0} lives={3} />
-      <div className="game-main-content flex flex-col md:flex-row gap-5 w-full max-w-screen-md flex-wrap">
+      <div className="game-main-content">
         <GameCanvas />
         <HighScoresPanel scores={scores} />
       </div>
