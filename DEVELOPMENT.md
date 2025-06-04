@@ -11,7 +11,8 @@ This section describes development environment setup and is maintained by the co
    cd frontend
    npm install
    ```
-3. Start the Vite dev server:
+3. Start the Vite dev server (configured to proxy `/api` requests to the
+   backend running on port `8000`):
    ```bash
    npm run dev
    ```
