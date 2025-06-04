@@ -55,7 +55,7 @@
 - `frontend/src/types/chat.ts` - TypeScript interfaces for chat data with metadata
 - `frontend/src/types/message.ts` - TypeScript interfaces for message data
 - `frontend/src/utils/fileUtils.ts` - File handling utility functions
-- `frontend/src/styles/globals.css` - Global styles and color variables
+- `frontend/src/styles/globals.css` - Global styles, color variables, and custom scrollbar
 - `frontend/src/utils/dateUtils.ts` - Timestamp formatting utilities
 - `frontend/index.html` - HTML entry point
 - `frontend/vite.config.ts` - Vite build configuration
@@ -75,7 +75,7 @@
 - `backend/main.py` - Add status endpoint
 - `backend/models/__init__.py` - Export chat and message models
 - `run_tests.sh` - Set default OPENAI_API_KEY for tests
-- `frontend/src/styles/globals.css` - Global styles and color variables
+- `frontend/src/styles/globals.css` - Global styles, color variables, and custom scrollbar
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
 - `backend/api/chat.py` - Add CRUD chat endpoints
 - `backend/services/chat_storage.py` - Add create, delete, sorted list, and metadata updates
@@ -172,7 +172,7 @@
   - [ ] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
   - [ ] 7.8 Implement responsive design for mobile and desktop views
   - [x] 7.9 Add hover effects and interactive states for all buttons
-  - [ ] 7.10 Create custom scrollbar styling to match design mockup
+  - [x] 7.10 Create custom scrollbar styling to match design mockup
 
 - [ ] 8.0 Real-time Features and Streaming
   - [ ] 8.1 Implement Server-Sent Events (SSE) for streaming AI responses
