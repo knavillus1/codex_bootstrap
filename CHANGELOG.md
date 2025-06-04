@@ -10,3 +10,4 @@
 2025-06-03 Expanded Space Man Pac Invaders tasks with subtasks
 2025-06-04 Added alembic dependency and database setup docs
 2025-06-05 Added Alembic migrations and automatic Postgres startup
+2025-06-04 Marked completed tasks in PRD
