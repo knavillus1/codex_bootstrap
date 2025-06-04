@@ -8,4 +8,5 @@ fi
 
 echo "Running pytest..."
 export PYTHONPATH="${PYTHONPATH:-}:$(pwd)"
+export OPENAI_API_KEY="test-key"
 pytest backend/tests "$@"

@@ -14,8 +14,15 @@ app.add_middleware(
 
 
 @app.get("/health")
-async def health_check():
+async def health_check() -> dict:
+    """Basic liveness probe."""
     return {"status": "ok"}
+
+
+@app.get("/status")
+async def status() -> dict:
+    """Return simple application status info."""
+    return {"app": "AI Chat Application", "status": "running"}
 
 
 if __name__ == "__main__":

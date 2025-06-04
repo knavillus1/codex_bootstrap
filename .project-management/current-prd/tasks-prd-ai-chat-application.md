@@ -38,6 +38,7 @@
 - `backend/services/chat_storage.py` - JSON-based chat persistence service
 - `backend/tests/test_chat_api.py` - Unit tests for chat API endpoints
 - `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
+- `backend/tests/test_status.py` - Unit test for status endpoint
 - `frontend/src/main.tsx` - React application entry point
 - `frontend/src/App.tsx` - Main application component with layout
 - `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
@@ -56,6 +57,7 @@
 - `frontend/vite.config.ts` - Vite build configuration
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
 - `frontend/tsconfig.json` - TypeScript configuration
+- `frontend/src/placeholder.js` - Placeholder file to satisfy ESLint
 - `frontend/src/__tests__/components/ChatArea.test.tsx` - Unit tests for chat area
 - `frontend/src/__tests__/hooks/useChat.test.ts` - Unit tests for chat hook
 
@@ -66,6 +68,9 @@
 - `.codex/install.sh` - Add environment setup for Codex agent (if needed)
 - `CHANGELOG.md` - Record of repository changes
 - `DEVELOPMENT.md` - Local development instructions
+- `backend/main.py` - Add status endpoint
+- `backend/models/__init__.py` - Export chat and message models
+- `run_tests.sh` - Set default OPENAI_API_KEY for tests
 
 ### Notes
 
@@ -81,7 +86,7 @@
 - [x] 1.0 Project Setup and Environment Configuration
   - [x] 1.1 Create backend directory structure (api/, models/, services/, tests/)
   - [x] 1.2 Initialize FastAPI project with main.py and basic configuration
-  - [ ] 1.3 Set up frontend Vite + React + TypeScript project structure
+  - [x] 1.3 Set up frontend Vite + React + TypeScript project structure
   - [ ] 1.4 Configure Tailwind CSS with custom color palette variables
   - [x] 1.5 Create environment configuration files (.env.example, config.py)
   - [x] 1.6 Update dev_init.sh script for full project initialization
@@ -89,12 +94,12 @@
   - [x] 1.8 Create basic CORS configuration for frontend-backend communication
 
 - [ ] 2.0 Backend API Foundation and Core Services
-  - [ ] 2.1 Create Pydantic models for Chat, Message, and File data structures
+  - [x] 2.1 Create Pydantic models for Chat, Message, and File data structures
   - [ ] 2.2 Implement chat storage service using JSON file persistence
   - [ ] 2.3 Create OpenAI service wrapper with error handling and retry logic
   - [ ] 2.4 Set up file service for upload validation and processing
   - [ ] 2.5 Create base API router structure and exception handlers
-  - [ ] 2.6 Implement health check and API status endpoints
+  - [x] 2.6 Implement health check and API status endpoints
   - [ ] 2.7 Add logging configuration and request/response middleware
   - [ ] 2.8 Configure uvicorn server settings and hot reload
 

@@ -6,6 +6,11 @@ This section describes development environment setup and is maintained by the co
 
 ### Frontend
 
+The frontend is a Vite + React application. The main entry point is
+`frontend/src/main.tsx` and the HTML template is `frontend/index.html`.
+Global styles live in `frontend/src/styles/globals.css` and Tailwind CSS
+configuration is defined in `frontend/tailwind.config.js`.
+
 
 ### Backend
 
