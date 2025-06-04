@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-black text-green-500 font-pixel">
-      <GameHeader />
-      <div className="flex flex-row w-full max-w-screen-md">
+      <GameHeader score={0} lives={3} />
+      <div className="game-main-content flex flex-col md:flex-row gap-5 w-full max-w-screen-md flex-wrap">
         <GameCanvas />
         <HighScoresPanel scores={scores} />
       </div>
