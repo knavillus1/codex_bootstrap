@@ -5,7 +5,17 @@
 @tailwind utilities;
 
 body {
-  @apply bg-black text-green-500 font-pixel;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #0A001F;
+  color: #E0E0E0;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 canvas {
@@ -13,5 +23,200 @@ canvas {
 }
 
 .life-icon {
-  @apply inline-block mr-1 text-yellow-300;
+  color: #FFFF00;
+  margin-right: 4px;
+  display: inline-block;
+  font-size: 1.2em;
+}
+
+.game-wrapper {
+  width: 100%;
+  max-width: 960px;
+  border: 3px solid #39FF14;
+  background-color: rgba(10, 5, 30, 0.85);
+  padding: 20px;
+  box-shadow: 0 0 20px #39FF14, 0 0 30px #39FF14 inset;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 2px dashed #FF00FF;
+}
+
+.game-header__title {
+  font-size: 24px;
+  color: #FFFF00;
+  text-shadow: 2px 2px #FF00FF;
+}
+
+.game-header__stats {
+  font-size: 16px;
+  color: #00FFFF;
+  text-align: right;
+}
+
+.game-header__stat-item {
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+.game-header__stat-item .label {
+  color: #CCCCCC;
+}
+
+.game-header__stat-item .value {
+  color: #FFFFFF;
+}
+
+.game-main-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.game-canvas-area {
+  flex-grow: 1;
+  min-width: 320px;
+  height: 480px;
+  background-color: #000000;
+  border: 2px solid #00FFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #555555;
+  font-size: 20px;
+  box-shadow: 0 0 15px #00FFFF inset;
+  position: relative;
+}
+
+.game-canvas-area__overlay-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFFF00;
+  font-size: 28px;
+  text-shadow: 2px 2px #FF00FF;
+  z-index: 10;
+  text-align: center;
+}
+
+.high-scores-panel {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 15px;
+  background-color: rgba(30, 0, 20, 0.7);
+  border: 2px solid #FF00FF;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .game-main-content {
+    flex-direction: column;
+  }
+  .high-scores-panel {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .game-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .game-header__stats {
+    width: 100%;
+    text-align: left;
+  }
+  .game-header__stat-item {
+    margin-left: 0;
+    margin-right: 20px;
+    display: inline-block;
+  }
+}
+
+.high-scores-panel__title {
+  font-size: 20px;
+  color: #39FF14;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #39FF14;
+}
+
+.high-scores-panel__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.high-scores-panel__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 2px;
+  font-size: 14px;
+  border-bottom: 1px dotted rgba(224, 224, 224, 0.3);
+}
+
+.high-scores-panel__item:last-child {
+  border-bottom: none;
+}
+
+.high-scores-panel__item-rank {
+  color: #00FFFF;
+  width: 30px;
+}
+
+.high-scores-panel__item-initials {
+  color: #FFFF00;
+  width: 60px;
+  text-align: center;
+}
+
+.high-scores-panel__item-score {
+  color: #FFFFFF;
+  text-align: right;
+  flex-grow: 1;
+}
+
+.game-footer {
+  padding-top: 15px;
+  border-top: 2px dashed #00FFFF;
+  text-align: center;
+}
+
+.game-footer__message {
+  font-size: 18px;
+  color: #FF69B4;
+  margin-bottom: 10px;
+  min-height: 25px;
+}
+
+.game-footer__initials-form label {
+  margin-right: 10px;
+  color: #CCCCCC;
+}
+
+.game-footer__initials-input {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #222222;
+  color: #FFFFFF;
+  border: 2px solid #FFFF00;
+  padding: 8px;
+  font-size: 18px;
+  width: 80px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.game-footer__initials-input:focus {
+  outline: 2px solid #FF00FF;
 }

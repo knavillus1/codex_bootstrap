@@ -15,12 +15,13 @@ const GameCanvas = () => {
   }, [])
 
   return (
-    <div className="game-canvas-area relative flex justify-center items-center flex-grow min-w-[320px]">
-      <canvas ref={canvasRef} width={480} height={320} className="bg-black border-2 border-cyan-400 shadow-inner shadow-cyan-400" />
+    <div className="game-canvas-area">
+      <div className="game-canvas-area__placeholder-text">(Game Canvas Area)</div>
+      <canvas ref={canvasRef} width={480} height={320} />
       <div
         ref={overlayRef}
         style={{ display: 'none' }}
-        className="game-canvas-area__overlay-message absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-yellow-300 drop-shadow-[2px_2px_0_#ff00ff] text-2xl text-center z-10"
+        className="game-canvas-area__overlay-message"
       />
     </div>
   )

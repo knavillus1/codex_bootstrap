@@ -22,28 +22,19 @@ const GameFooter = ({ onScoreSubmitted }: Props) => {
   }
 
   return (
-    <footer className="game-footer w-full max-w-screen-md pt-4 border-t-2 border-dashed border-cyan-400 text-center">
-      <form onSubmit={handleSubmit} className="game-footer__initials-form flex gap-2 justify-center mb-2">
-        <label htmlFor="initials" className="sr-only">Initials</label>
+    <footer className="game-footer">
+      <form onSubmit={handleSubmit} className="game-footer__initials-form">
+        <label htmlFor="initials">ENTER INITIALS:</label>
         <input
           id="initials"
           value={initials}
           onChange={(e) => setInitials(e.target.value.toUpperCase())}
           maxLength={3}
-          placeholder="AAA"
-          className="game-footer__initials-input bg-gray-800 border border-green-500 p-1 w-16 text-center font-pixel"
+          className="game-footer__initials-input"
         />
-        <input
-          type="number"
-          value={score}
-          onChange={(e) => setScore(parseInt(e.target.value) || 0)}
-          className="bg-gray-800 border border-green-500 p-1 w-20 text-right"
-        />
-        <button type="submit" className="border border-green-500 px-2">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
-      <div className="game-footer__message text-pink-400 min-h-[25px]">Use arrow keys to move. Space to shoot.</div>
+      <div className="game-footer__message">Use arrow keys to move. Space to shoot.</div>
     </footer>
   )
 }
