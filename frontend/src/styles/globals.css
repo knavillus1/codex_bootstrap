@@ -8,3 +8,23 @@
   --color-accent: #EBFFD8;
   --color-highlight: rgb(141, 188, 199);
 }
+
+/* Custom scrollbar styling */
+* {
+  scrollbar-color: var(--color-highlight) var(--color-secondary);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-highlight);
+  border-radius: 4px;
+}
