@@ -71,6 +71,8 @@
 - `backend/main.py` - Add status endpoint
 - `backend/models/__init__.py` - Export chat and message models
 - `run_tests.sh` - Set default OPENAI_API_KEY for tests
+- `frontend/src/styles/globals.css` - Global styles and color variables
+- `frontend/tailwind.config.js` - Tailwind CSS configuration
 
 ### Notes
 
@@ -87,7 +89,7 @@
   - [x] 1.1 Create backend directory structure (api/, models/, services/, tests/)
   - [x] 1.2 Initialize FastAPI project with main.py and basic configuration
   - [x] 1.3 Set up frontend Vite + React + TypeScript project structure
-  - [ ] 1.4 Configure Tailwind CSS with custom color palette variables
+  - [x] 1.4 Configure Tailwind CSS with custom color palette variables
   - [x] 1.5 Create environment configuration files (.env.example, config.py)
   - [x] 1.6 Update dev_init.sh script for full project initialization
   - [x] 1.7 Set up OpenAI API key configuration and validation
@@ -110,7 +112,7 @@
   - [ ] 3.4 Set up React Router for future navigation (if needed)
   - [ ] 3.5 Create custom hooks for chat state management (useChat, useMessages)
   - [ ] 3.6 Implement file utility functions for validation and preview
-  - [ ] 3.7 Set up global CSS with design system color variables
+  - [x] 3.7 Set up global CSS with design system color variables
   - [ ] 3.8 Configure ESLint and TypeScript for code quality
 
 - [ ] 4.0 Chat Management System Implementation

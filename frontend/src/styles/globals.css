@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #A4CCD9;
+  --color-secondary: #C4E1E6;
+  --color-accent: #EBFFD8;
+  --color-highlight: rgb(141, 188, 199);
+}
