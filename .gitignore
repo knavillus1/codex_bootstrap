@@ -8,3 +8,4 @@ backend/data/
 npm-debug.log*
 .env
 
+backend/uploads/

@@ -19,3 +19,4 @@
     - tests failed: RuntimeError requiring python-multipart
 - 2025-06-04: add button hover states and auto-scroll feature
 - 2025-06-04: add OPENAI model config, improved error handling, and update tasks
+- 2025-06-04: add drag-and-drop upload and responsive layout
