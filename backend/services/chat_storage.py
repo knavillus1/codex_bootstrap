@@ -59,6 +59,8 @@ class ChatStorage:
             content=content,
         )
         chat.messages.append(message)
+        chat.message_count = len(chat.messages)
+        chat.last_activity = message.created_at
         if is_first and chat.title.startswith("Chat "):
             chat.title = content.split("\n", 1)[0][:40]
         self.save_chat(chat)

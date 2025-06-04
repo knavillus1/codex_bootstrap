@@ -38,7 +38,7 @@
 - `backend/services/chat_storage.py` - JSON-based chat persistence service
 - `backend/tests/test_chat_api.py` - Unit tests for chat API endpoints
 - `backend/tests/test_openai_service.py` - Unit tests for OpenAI service
-- `backend/tests/test_chat_storage.py` - Unit tests for chat storage
+ - `backend/tests/test_chat_storage.py` - Unit tests for chat storage and metadata
 - `backend/tests/test_file_service.py` - Unit tests for file service
 - `backend/tests/test_status.py` - Unit test for status endpoint
 - `backend/tests/test_files_api.py` - Unit test for file API endpoint
@@ -52,7 +52,7 @@
 - `frontend/src/hooks/useChat.ts` - Custom hook for chat state management
 - `frontend/src/hooks/useMessages.ts` - Custom hook for message operations
 - `frontend/src/services/api.ts` - API client for backend communication
-- `frontend/src/types/chat.ts` - TypeScript interfaces for chat data
+- `frontend/src/types/chat.ts` - TypeScript interfaces for chat data with metadata
 - `frontend/src/types/message.ts` - TypeScript interfaces for message data
 - `frontend/src/utils/fileUtils.ts` - File handling utility functions
 - `frontend/src/styles/globals.css` - Global styles and color variables
@@ -77,11 +77,11 @@
 - `frontend/src/styles/globals.css` - Global styles and color variables
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
 - `backend/api/chat.py` - Add CRUD chat endpoints
-- `backend/services/chat_storage.py` - Add create, delete, and sorted list
+- `backend/services/chat_storage.py` - Add create, delete, sorted list, and metadata updates
 - `backend/tests/test_chat_api.py` - Tests for chat API endpoints
 - `backend/api/messages.py` - Message creation and list endpoints
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
-- `backend/models/chat.py` - Chat data model definition
+- `backend/models/chat.py` - Chat data model with metadata fields
 - `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
 
 ### Notes
@@ -132,7 +132,7 @@
   - [ ] 4.4 Add chat loading and switching functionality
   - [x] 4.5 Create chat deletion endpoint and confirmation flow
   - [x] 4.6 Implement chat title generation based on first message
-  - [ ] 4.7 Add chat metadata (creation date, message count, last activity)
+  - [x] 4.7 Add chat metadata (creation date, message count, last activity)
   - [ ] 4.8 Create frontend chat history sidebar with active chat highlighting
 
 - [ ] 5.0 Message System with AI Integration

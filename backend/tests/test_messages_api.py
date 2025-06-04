@@ -25,6 +25,9 @@ def test_message_crud(tmp_path):
     msg_id = create.json()["id"]
     assert create.json()["content"] == "hi"
 
+    chat_data = client.get(f"/chats/{chat_id}").json()
+    assert chat_data["message_count"] == 1
+
     list_resp = client.get(f"/messages/{chat_id}")
     assert list_resp.status_code == 200
     messages = list_resp.json()
