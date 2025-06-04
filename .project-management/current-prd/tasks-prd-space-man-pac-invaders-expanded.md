@@ -32,7 +32,7 @@ LICENSE
 - `.project-management/current-prd/prd-background/design-mock.html` - UI layout reference
 - `.project-management/current-prd/prd-background/postgres-docs.md` - local PostgreSQL setup
 
-### Proposed New Files
+### New Files Added
 - `frontend/src/game/mazeLayouts.ts` - Maze layout definitions
 - `frontend/src/game/ufo.ts` - Logic for special UFO invader
 - `backend/app/migrations/` - Database migration scripts
@@ -67,11 +67,11 @@ LICENSE
   - [x] 2.2 Apply mockup classes to `GameHeader`, `GameCanvas`, `HighScoresPanel` and `GameFooter`
   - [x] 2.3 Make the layout responsive so the high score panel stacks below the canvas on small screens
   - [x] 2.4 Style overlay messages and lives display as shown in the mock
-- [ ] 3.0 Build HTML5 Canvas game logic for Space Man Pac, Invaders, and UFO
+- [x] 3.0 Build HTML5 Canvas game logic for Space Man Pac, Invaders, and UFO
   - [x] 3.1 Add `mazeLayouts.ts` containing at least three maze layouts
-  - [ ] 3.2 Rotate layouts as the player progresses through levels
-  - [ ] 3.3 Implement Power Pellet frightened mode lasting seven seconds
-  - [ ] 3.4 Add UFO invader logic in `ufo.ts` and integrate with game loop
+  - [x] 3.2 Rotate layouts as the player progresses through levels
+  - [x] 3.3 Implement Power Pellet frightened mode lasting seven seconds
+  - [x] 3.4 Add UFO invader logic in `ufo.ts` and integrate with game loop
   - [x] 3.5 Show game states for title, get ready, playing, player death and game over
 - [x] 4.0 Expose high score API endpoints and connect frontend to store/retrieve scores
   - [x] 4.1 Ensure `GET /api/scores` returns the top 10 scores from PostgreSQL
