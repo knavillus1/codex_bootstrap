@@ -41,6 +41,7 @@
 - `backend/tests/test_chat_storage.py` - Unit tests for chat storage
 - `backend/tests/test_file_service.py` - Unit tests for file service
 - `backend/tests/test_status.py` - Unit test for status endpoint
+- `backend/tests/test_files_api.py` - Unit test for file API endpoint
 - `frontend/src/main.tsx` - React application entry point
 - `frontend/src/App.tsx` - Main application component with layout
 - `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
@@ -177,7 +178,7 @@
   - [ ] 8.8 Add streaming progress indicators and cancel functionality
 
 - [ ] 9.0 Testing and Quality Assurance
-  - [c] 9.1 Write unit tests for all backend API endpoints
+  - [x] 9.1 Write unit tests for all backend API endpoints
   - [x] 9.2 Create tests for OpenAI service integration with mocking
   - [ ] 9.3 Add frontend component tests using React Testing Library
   - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
