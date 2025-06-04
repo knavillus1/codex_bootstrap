@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
+import FileUpload from './FileUpload';
 
 interface Props {
   onSend: (content: string) => Promise<void> | void;
+  onUpload?: (file: File) => Promise<void> | void;
   loading: boolean;
 }
 
-export default function ChatInput({ onSend, loading }: Props) {
+export default function ChatInput({ onSend, onUpload, loading }: Props) {
   const [text, setText] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -28,6 +30,7 @@ export default function ChatInput({ onSend, loading }: Props) {
 
   return (
     <div className="flex items-end gap-2 mt-2">
+      {onUpload && <FileUpload onUpload={onUpload} />}
       <textarea
         ref={textareaRef}
         value={text}

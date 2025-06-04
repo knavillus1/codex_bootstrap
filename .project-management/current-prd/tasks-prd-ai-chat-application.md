@@ -148,7 +148,7 @@
   - [x] 5.8 Implement message timestamp and formatting
 
 - [ ] 6.0 File Upload and Processing System
-  - [ ] 6.1 Create file upload API endpoint with size and type validation
+  - [x] 6.1 Create file upload API endpoint with size and type validation
   - [ ] 6.2 Implement image file processing and preview generation
   - [ ] 6.3 Add document file text extraction (PDF, DOC, TXT, CSV)
   - [ ] 6.4 Create file storage system with organized directory structure
@@ -163,7 +163,7 @@
   - [x] 7.3 Build ChatArea component with message display and input
   - [x] 7.4 Create MessageBubble component with user/AI styling distinction
   - [x] 7.5 Implement ChatInput component with auto-resizing textarea
-  - [ ] 7.6 Add FileUpload component with paperclip button integration
+  - [x] 7.6 Add FileUpload component with paperclip button integration
   - [ ] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
   - [ ] 7.8 Implement responsive design for mobile and desktop views
   - [ ] 7.9 Add hover effects and interactive states for all buttons
