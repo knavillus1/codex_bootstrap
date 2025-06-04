@@ -4,3 +4,4 @@
 - 2025-06-04: add API client, type interfaces, and updated ESLint config
 - 2025-06-04: mark chat storage service task committed
 - 2025-06-04: add chat storage service and tests
+- 2025-06-04: add base API routers, logging middleware, react router, and custom hooks
