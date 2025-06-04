@@ -11,5 +11,19 @@ export default function useMessages(initialMessages: Message[] = []) {
   };
 
   const addMessage = (msg: Message) => setMessages(prev => [...prev, msg]);
-  return { messages, setMessages, addMessage, loadMessages };
+
+  const sendMessage = async (
+    chatId: string,
+    content: string,
+    role: 'user' | 'assistant' = 'user',
+  ) => {
+    const msg = await api.post<Message>('/messages/', {
+      chat_id: chatId,
+      role,
+      content,
+    });
+    addMessage(msg);
+    return msg;
+  };
+  return { messages, setMessages, addMessage, loadMessages, sendMessage };
 }

@@ -18,6 +18,13 @@ export default function useChat(initialChats: Chat[] = []) {
 
   const addChat = (chat: Chat) => setChats(prev => [...prev, chat]);
 
+  const createChat = async (title: string | null = null) => {
+    const chat = await api.post<Chat>('/chats/', { title });
+    addChat(chat);
+    setActiveChatId(chat.id);
+    return chat;
+  };
+
   useEffect(() => {
     void loadChats();
   }, []);
@@ -28,6 +35,7 @@ export default function useChat(initialChats: Chat[] = []) {
     chats,
     setChats,
     addChat,
+    createChat,
     loadChats,
     activeChatId,
     activeChat,

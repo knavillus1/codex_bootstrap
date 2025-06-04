@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from 'react';
+import useMessages from '../hooks/useMessages';
+import type { Chat } from '../types/chat';
+import MessageBubble from './MessageBubble';
+import ChatInput from './ChatInput';
+
+interface Props {
+  activeChat: Chat | null;
+}
+
+export default function ChatArea({ activeChat }: Props) {
+  const { messages, loadMessages, sendMessage } = useMessages();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (activeChat) {
+      void loadMessages(activeChat.id);
+    }
+  }, [activeChat]);
+
+  const handleSend = async (content: string) => {
+    if (!activeChat) return;
+    setLoading(true);
+    await sendMessage(activeChat.id, content);
+    // placeholder for AI response
+    setLoading(false);
+  };
+
+  if (!activeChat) {
+    return <div className="flex-1 p-4">Select a chat to begin</div>;
+  }
+
+  return (
+    <main className="flex-1 p-4 flex flex-col">
+      <h1 className="text-2xl font-bold mb-4">{activeChat.title}</h1>
+      <div className="flex-1 flex flex-col space-y-2 overflow-y-auto">
+        {messages.map(m => (
+          <MessageBubble key={m.id} message={m} />
+        ))}
+        {loading && <div className="text-sm text-gray-500">AI is thinking...</div>}
+      </div>
+      <ChatInput onSend={handleSend} loading={loading} />
+    </main>
+  );
+}
