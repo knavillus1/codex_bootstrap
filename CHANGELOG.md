@@ -1,2 +1,3 @@
 - 2025-06-04: add initial backend app, config with env vars, dev_init setup, and health endpoint
 - 2025-06-04: add basic frontend structure, chat models, and status endpoint
+- 2025-06-04: configure tailwind color variables and update tasks
