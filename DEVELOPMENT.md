@@ -38,9 +38,11 @@ This section describes development environment setup and is maintained by the co
 2. Create the development database and apply migrations:
    ```bash
    createdb pac_invaders
-   alembic upgrade head
+   alembic -c backend/alembic.ini upgrade head
    ```
 
 ### Combined development
-Run `./dev_init.sh` to start both servers concurrently.
+Run `./dev_init.sh` to start both servers concurrently. The script ensures
+PostgreSQL is running, applies Alembic migrations and then launches the
+backend and frontend.
 
