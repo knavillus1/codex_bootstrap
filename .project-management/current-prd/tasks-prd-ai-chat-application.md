@@ -56,6 +56,7 @@
 - `frontend/src/types/message.ts` - TypeScript interfaces for message data
 - `frontend/src/utils/fileUtils.ts` - File handling utility functions
 - `frontend/src/styles/globals.css` - Global styles and color variables
+- `frontend/src/utils/dateUtils.ts` - Timestamp formatting utilities
 - `frontend/index.html` - HTML entry point
 - `frontend/vite.config.ts` - Vite build configuration
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
@@ -125,7 +126,7 @@
   - [x] 3.7 Set up global CSS with design system color variables
   - [x] 3.8 Configure ESLint and TypeScript for code quality
 
-- [ ] 4.0 Chat Management System Implementation
+- [x] 4.0 Chat Management System Implementation
   - [x] 4.1 Implement backend API endpoints for chat CRUD operations
   - [x] 4.2 Create chat list retrieval with proper sorting (newest first)
   - [x] 4.3 Implement new chat creation with auto-generated titles
@@ -144,7 +145,7 @@
   - [x] 5.5 Implement message display with user/AI distinction
   - [x] 5.6 Add "AI is thinking" indicators and loading states
   - [ ] 5.7 Handle OpenAI API errors and rate limiting gracefully
-  - [ ] 5.8 Implement message timestamp and formatting
+  - [x] 5.8 Implement message timestamp and formatting
 
 - [ ] 6.0 File Upload and Processing System
   - [ ] 6.1 Create file upload API endpoint with size and type validation

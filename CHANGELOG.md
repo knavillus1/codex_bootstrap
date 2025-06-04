@@ -14,3 +14,4 @@
 - 2025-06-04: add chat metadata fields and tests
 - 2025-06-04: add frontend chat loading and fix delete endpoint
 - 2025-06-04: add basic chat UI components and hooks
+- 2025-06-04: add message timestamps in UI and mark chat system complete
