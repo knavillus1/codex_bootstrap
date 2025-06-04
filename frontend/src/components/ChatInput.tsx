@@ -42,7 +42,7 @@ export default function ChatInput({ onSend, onUpload, loading }: Props) {
       <button
         onClick={handleSend}
         disabled={loading}
-        className="px-3 py-2 bg-highlight text-white rounded disabled:opacity-50"
+        className="px-3 py-2 bg-highlight text-white rounded disabled:opacity-50 hover:bg-highlight/80 transition-colors"
       >
         {loading ? 'Sending...' : 'Send'}
       </button>

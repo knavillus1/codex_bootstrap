@@ -84,6 +84,11 @@
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
 - `backend/models/chat.py` - Chat data model with metadata fields
 - `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
+- `backend/api/files.py` - API endpoints for file upload and processing
+- `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
+- `frontend/src/components/ChatInput.tsx` - Message input with file attachment
+- `frontend/src/components/FileUpload.tsx` - File upload interface component
+- `frontend/src/components/ChatArea.tsx` - Main chat interface component
 
 ### Notes
 
@@ -166,14 +171,14 @@
   - [x] 7.6 Add FileUpload component with paperclip button integration
   - [ ] 7.7 Apply exact color palette from design mockup (#A4CCD9, #C4E1E6, #EBFFD8)
   - [ ] 7.8 Implement responsive design for mobile and desktop views
-  - [ ] 7.9 Add hover effects and interactive states for all buttons
+  - [x] 7.9 Add hover effects and interactive states for all buttons
   - [ ] 7.10 Create custom scrollbar styling to match design mockup
 
 - [ ] 8.0 Real-time Features and Streaming
   - [ ] 8.1 Implement Server-Sent Events (SSE) for streaming AI responses
   - [ ] 8.2 Create frontend streaming response handler and display
   - [ ] 8.3 Add real-time typing indicators during AI response generation
-  - [ ] 8.4 Implement auto-scroll to newest messages functionality
+  - [x] 8.4 Implement auto-scroll to newest messages functionality
   - [ ] 8.5 Add WebSocket support for future real-time features (optional)
   - [ ] 8.6 Handle streaming interruption and reconnection scenarios
   - [ ] 8.7 Optimize streaming performance for large responses

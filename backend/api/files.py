@@ -17,7 +17,7 @@ def get_service() -> FileService:
     return _service
 
 
-@router.post("/")
+@router.post("/", status_code=201)
 async def upload_file(file: UploadFile = File(...)) -> dict:
     """Validate and save an uploaded file."""
     try:

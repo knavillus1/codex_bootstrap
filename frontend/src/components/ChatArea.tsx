@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useMessages from '../hooks/useMessages';
 import type { Chat } from '../types/chat';
 import MessageBubble from './MessageBubble';
@@ -12,12 +12,17 @@ interface Props {
 export default function ChatArea({ activeChat }: Props) {
   const { messages, loadMessages, sendMessage } = useMessages();
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (activeChat) {
       void loadMessages(activeChat.id);
     }
   }, [activeChat]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
 
   const handleSend = async (content: string) => {
     if (!activeChat) return;
@@ -43,6 +48,7 @@ export default function ChatArea({ activeChat }: Props) {
           <MessageBubble key={m.id} message={m} />
         ))}
         {loading && <div className="text-sm text-gray-500">AI is thinking...</div>}
+        <div ref={messagesEndRef} />
       </div>
       <ChatInput onSend={handleSend} onUpload={handleFileUpload} loading={loading} />
     </main>
