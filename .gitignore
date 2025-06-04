@@ -5,3 +5,5 @@ frontend/node_modules/
 frontend/dist/
 *.pyc
 npm-debug.log*
+.env
+
