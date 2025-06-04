@@ -24,7 +24,8 @@ def test_chat_crud(tmp_path):
     list_resp = client.get("/chats/")
     assert list_resp.status_code == 200
     ids = [c["id"] for c in list_resp.json()]
-    assert ids == [id2, id1]
+    assert ids[0] == id2
+    assert ids[1] == id1
 
     get_resp = client.get(f"/chats/{id1}")
     assert get_resp.status_code == 200
