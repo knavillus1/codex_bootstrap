@@ -11,7 +11,7 @@ source venv/bin/activate
 pip install -r backend/requirements.txt
 
 pushd backend >/dev/null
-uvicorn backend.main:app --host "${HOST:-0.0.0.0}" --port "${PORT:-8000}" --reload &
+uvicorn main:app --host "${HOST:-0.0.0.0}" --port "${PORT:-8000}" --reload &
 BACKEND_PID=$!
 popd >/dev/null
 
