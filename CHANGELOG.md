@@ -7,3 +7,4 @@
 2025-06-03 Implemented core game mechanics, styling polish, and ensured dev_init creates DB tables
 2025-06-03 Archived Space Man Pac Invaders PRD
 2025-06-03 Added expanded PRD for Space Man Pac Invaders
+2025-06-03 Expanded Space Man Pac Invaders tasks with subtasks
