@@ -32,6 +32,15 @@ This section describes development environment setup and is maintained by the co
    uvicorn backend.app.main:app --reload
    ```
 
+### Database Setup
+1. Install and start PostgreSQL as described in
+   `.project-management/current-prd/prd-background/postgres-docs.md`.
+2. Create the development database and apply migrations:
+   ```bash
+   createdb pac_invaders
+   alembic upgrade head
+   ```
+
 ### Combined development
 Run `./dev_init.sh` to start both servers concurrently.
 

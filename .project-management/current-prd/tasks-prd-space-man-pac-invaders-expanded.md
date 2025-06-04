@@ -41,6 +41,9 @@ LICENSE
 - `frontend/src/GameCanvas.tsx` - Render multiple mazes and invaders
 - `backend/app/api/routes.py` - High score POST/GET endpoints with PostgreSQL
 - `dev_init.sh` - Include PostgreSQL startup and migration steps
+- `backend/requirements.txt` - Backend dependencies
+- `DEVELOPMENT.md` - Local setup instructions
+- `CHANGELOG.md` - Project changelog
 
 ### Notes
 - Unit tests should live next to implementation files.
@@ -48,11 +51,11 @@ LICENSE
 
 ## Tasks
 - [ ] 1.0 Integrate PostgreSQL database using guidelines in `prd-background/postgres-docs.md`
-  - [ ] 1.1 Add `psycopg2` and migration tooling to `backend/requirements.txt`
-  - [ ] 1.2 Update `backend/app/db.py` to read `DATABASE_URL` from environment variables
-  - [ ] 1.3 Create `.env.template` with database connection placeholders
+  - [x] 1.1 Add `psycopg2` and migration tooling to `backend/requirements.txt`
+  - [x] 1.2 Update `backend/app/db.py` to read `DATABASE_URL` from environment variables
+  - [x] 1.3 Create `.env.template` with database connection placeholders
   - [ ] 1.4 Configure Alembic in `backend/app/migrations` and generate initial migration for `high_scores`
-  - [ ] 1.5 Document local database setup in `DEVELOPMENT.md`
+  - [x] 1.5 Document local database setup in `DEVELOPMENT.md`
 - [ ] 2.0 Implement UI per `prd-background/design-mock.html` with React and Tailwind
   - [ ] 2.1 Import the "Press Start 2P" font and configure Tailwind to use it
   - [ ] 2.2 Apply mockup classes to `GameHeader`, `GameCanvas`, `HighScoresPanel` and `GameFooter`
@@ -73,4 +76,4 @@ LICENSE
 - [ ] 5.0 Update environment scripts and documentation for full local setup
   - [ ] 5.1 Add PostgreSQL startup and migration commands to `dev_init.sh`
   - [ ] 5.2 Document the setup process in `DEVELOPMENT.md`
-  - [ ] 5.3 Record new dependencies and setup steps in `CHANGELOG.md`
+  - [x] 5.3 Record new dependencies and setup steps in `CHANGELOG.md`
