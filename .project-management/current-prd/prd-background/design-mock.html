@@ -1,1 +1,576 @@
-*PLACEHOLDER FILE*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat with History</title>
+    <style>
+        :root {
+            --color-primary-dark: #A4CCD9; /* rgb(164, 204, 217) */
+            --color-primary-medium: #C4E1E6; /* rgb(196, 225, 230) */
+            --color-accent: #EBFFD8; /* rgb(235, 255, 216) */
+            --color-secondary-dark: rgb(141, 188, 199);
+            
+            --text-dark: #333;
+            --text-light: #f8f8f8;
+            --border-light: #d1d1d1;
+            --sidebar-text: #2c3e50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-primary-medium);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            color: var(--text-dark);
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--color-primary-dark);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--color-secondary-dark);
+            color: var(--sidebar-text);
+        }
+
+        .sidebar h2 {
+            color: var(--text-light); /* Or var(--sidebar-text) if preferred darker */
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 1px solid var(--color-primary-medium);
+            padding-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .new-chat-btn {
+            background-color: var(--color-accent);
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .new-chat-btn:hover {
+            background-color: rgb(215, 235, 196);
+        }
+
+        .chat-history-container {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .chat-history-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: var(--sidebar-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chat-history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .chat-history-list li {
+            padding: 10px 12px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background-color 0.2s;
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .chat-history-list li:hover {
+            background-color: rgba(255,255,255,0.4);
+        }
+
+        .chat-history-list li.active-chat {
+            background-color: var(--color-accent);
+            color: var(--text-dark);
+            font-weight: bold;
+        }
+
+
+        .chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-primary-medium);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .message img.preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 8px;
+            display: block;
+            background-color: #f0f0f0; /* Placeholder while loading or if src is broken */
+        }
+        
+        .message .file-info {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+            background-color: rgba(0,0,0,0.05);
+            padding: 5px 8px;
+            border-radius: 5px;
+        }
+
+
+        .user-message {
+            background-color: var(--color-accent);
+            color: var(--text-dark);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background-color: #fff;
+            color: var(--text-dark);
+            align-self: flex-start;
+            border: 1px solid var(--border-light);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .thinking-message {
+            font-style: italic;
+            color: #777;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px 20px;
+            border-top: 1px solid var(--color-secondary-dark);
+            background-color: var(--color-primary-dark);
+            align-items: center;
+        }
+
+        .chat-input-area textarea {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--color-secondary-dark);
+            border-radius: 20px;
+            resize: none;
+            font-size: 16px;
+            min-height: 24px;
+            max-height: 100px;
+            overflow-y: auto;
+            margin-right: 10px;
+            background-color: #fff;
+        }
+        .chat-input-area textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(235, 255, 216, 0.5);
+        }
+
+        .chat-input-area button {
+            background-color: var(--color-accent);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            margin-left: 5px;
+            flex-shrink: 0;
+        }
+
+        .chat-input-area button:hover {
+            background-color: rgb(215, 235, 196);
+        }
+        
+        .chat-input-area #file-upload-btn {
+            background-color: var(--color-primary-medium);
+        }
+        .chat-input-area #file-upload-btn:hover {
+            background-color: rgb(180, 210, 220);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        /* Scrollbar styling */
+        .chat-messages::-webkit-scrollbar, .chat-history-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track, .chat-history-container::-webkit-scrollbar-track {
+            background: var(--color-primary-medium);
+        }
+        .chat-messages::-webkit-scrollbar-thumb, .chat-history-container::-webkit-scrollbar-thumb {
+            background: var(--color-secondary-dark);
+            border-radius: 4px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover, .chat-history-container::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary-dark);
+        }
+        textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>My ChatBot</h2>
+        <button id="new-chat-btn" class="new-chat-btn">✨ New Chat</button>
+        <div class="chat-history-container">
+            <h3>History</h3>
+            <ul id="chat-history-list" class="chat-history-list">
+                <!-- Historical chats will be listed here -->
+            </ul>
+        </div>
+    </aside>
+
+    <main class="chat-container">
+        <div id="chat-messages" class="chat-messages">
+            <!-- Messages will be appended here -->
+        </div>
+
+        <div class="chat-input-area">
+            <input type="file" id="file-input" accept="image/*,application/pdf,.doc,.docx,.txt,.csv">
+            <button id="file-upload-btn" title="Upload File">📎</button>
+            <textarea id="message-input" placeholder="Type your message..." rows="1"></textarea>
+            <button id="send-button" title="Send Message">➤</button>
+        </div>
+    </main>
+
+    <script>
+        const chatMessagesEl = document.getElementById('chat-messages');
+        const messageInputEl = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const newChatButton = document.getElementById('new-chat-btn');
+        const fileUploadButton = document.getElementById('file-upload-btn');
+        const fileInput = document.getElementById('file-input');
+        const chatHistoryListEl = document.getElementById('chat-history-list');
+
+        const CHAT_HISTORY_KEY = 'simpleChatAppHistory';
+        let chats = []; // Array of chat objects: {id, title, messages: [{type, text, contentHTML, timestamp}]}
+        let currentChatId = null;
+
+        function generateChatId() {
+            return `chat_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        }
+
+        function saveChatsToStorage() {
+            try {
+                localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(chats));
+            } catch (e) {
+                console.error("Error saving chats to localStorage:", e);
+                // Potentially notify user if storage is full
+            }
+        }
+
+        function loadChatsFromStorage() {
+            const storedChats = localStorage.getItem(CHAT_HISTORY_KEY);
+            if (storedChats) {
+                try {
+                    chats = JSON.parse(storedChats);
+                    // Ensure all chats have a messages array
+                    chats.forEach(chat => {
+                        if (!chat.messages) chat.messages = [];
+                    });
+                } catch (e) {
+                    console.error("Error parsing chats from localStorage:", e);
+                    chats = []; // Reset if parsing fails
+                }
+            }
+        }
+        
+        function getChatById(id) {
+            return chats.find(chat => chat.id === id);
+        }
+
+        function getCurrentChat() {
+            return getChatById(currentChatId);
+        }
+        
+        function displayMessages(messagesToDisplay) {
+            chatMessagesEl.innerHTML = ''; // Clear current messages
+            messagesToDisplay.forEach(msg => {
+                _addMessageToDOM(msg.text, msg.type, msg.contentHTML);
+            });
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }
+
+        function loadChat(chatId) {
+            if (currentChatId === chatId) return; // Already active
+
+            const chatToLoad = getChatById(chatId);
+            if (chatToLoad) {
+                currentChatId = chatId;
+                displayMessages(chatToLoad.messages);
+                renderChatHistory(); // To update active state
+                messageInputEl.value = ""; // Clear input when switching chats
+                messageInputEl.style.height = 'auto';
+            }
+        }
+
+        function renderChatHistory() {
+            chatHistoryListEl.innerHTML = '';
+            if (chats.length === 0) {
+                 const noHistoryItem = document.createElement('li');
+                 noHistoryItem.textContent = "No past chats yet.";
+                 noHistoryItem.style.fontStyle = "italic";
+                 noHistoryItem.style.cursor = "default";
+                 chatHistoryListEl.appendChild(noHistoryItem);
+                 return;
+            }
+
+            // Sort chats by the timestamp of their last message, or creation if no messages
+            const sortedChats = [...chats].sort((a, b) => {
+                const lastMsgATime = a.messages.length > 0 ? a.messages[a.messages.length - 1].timestamp : (new Date(parseInt(a.id.split('_')[1])).getTime());
+                const lastMsgBTime = b.messages.length > 0 ? b.messages[b.messages.length - 1].timestamp : (new Date(parseInt(b.id.split('_')[1])).getTime());
+                return lastMsgBTime - lastMsgATime; // Newest first
+            });
+
+
+            sortedChats.forEach(chat => {
+                const listItem = document.createElement('li');
+                listItem.textContent = chat.title || "Untitled Chat";
+                listItem.dataset.chatId = chat.id;
+                if (chat.id === currentChatId) {
+                    listItem.classList.add('active-chat');
+                }
+                listItem.addEventListener('click', () => loadChat(chat.id));
+                chatHistoryListEl.appendChild(listItem);
+            });
+        }
+        
+        function _addMessageToDOM(text, type, contentHTML = '') {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', type + '-message');
+            
+            const p = document.createElement('p');
+            // Sanitize text before inserting to prevent XSS if text could come from untrusted source
+            // For this demo, assuming text is safe. For production, use DOMPurify or similar.
+            p.textContent = text; 
+            messageDiv.appendChild(p);
+
+            if (contentHTML) {
+                const contentDiv = document.createElement('div');
+                // WARNING: Potentially unsafe if contentHTML is not controlled.
+                // For this example, it's generated by FileReader or fixed strings.
+                contentDiv.innerHTML = contentHTML; 
+                messageDiv.appendChild(contentDiv);
+            }
+            
+            chatMessagesEl.appendChild(messageDiv);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            return messageDiv;
+        }
+
+        function addMessage(text, type, contentHTML = '', fileInfo = null) {
+            _addMessageToDOM(text, type, contentHTML); // Add to visual display
+
+            const currentChat = getCurrentChat();
+            if (currentChat) {
+                const newMessage = {
+                    type: type,
+                    text: text,
+                    contentHTML: contentHTML || '', // Ensure it's always a string
+                    timestamp: Date.now()
+                };
+                if (fileInfo) { // Store basic file info, not the File object
+                    newMessage.fileInfo = { name: fileInfo.name, size: fileInfo.size, type: fileInfo.type };
+                }
+                currentChat.messages.push(newMessage);
+
+                // Update chat title if it's the first user message and title is default
+                if (type === 'user-message' && currentChat.messages.filter(m => m.type === 'user-message').length === 1) {
+                    const newTitle = text.substring(0, 30) + (text.length > 30 ? "..." : "");
+                    if (currentChat.title !== newTitle && !currentChat.title.startsWith("Chat about")) { // Avoid overwriting specific titles
+                         currentChat.title = newTitle || "Chat";
+                         renderChatHistory(); // Re-render to show new title
+                    }
+                }
+                 saveChatsToStorage();
+            }
+        }
+
+        function createNewChat(isInitial = false) {
+            const newId = generateChatId();
+            const newChat = {
+                id: newId,
+                title: `New Chat ${new Date().toLocaleTimeString()}`,
+                messages: []
+            };
+            chats.push(newChat);
+            currentChatId = newId;
+            
+            if (!isInitial) { // Don't save if it's the very first load and no chats exist
+                saveChatsToStorage();
+            }
+            
+            displayMessages(newChat.messages); // Will be empty
+            addMessage("Hello! How can I help you today?", "bot-message"); // Adds to new chat and saves
+            
+            renderChatHistory();
+            messageInputEl.value = "";
+            messageInputEl.style.height = 'auto';
+            messageInputEl.focus();
+        }
+
+
+        function simulateBotResponse(userInput, fileData = null) {
+            const thinkingMsgDOM = _addMessageToDOM("Bot is thinking...", "bot-message thinking-message");
+            
+            setTimeout(() => {
+                if (chatMessagesEl.contains(thinkingMsgDOM)) {
+                    chatMessagesEl.removeChild(thinkingMsgDOM);
+                }
+
+                let botReply = "I received your message: \"" + userInput + "\"";
+                if (fileData) {
+                    botReply += `\nAnd I see you've uploaded: ${fileData.name} (${(fileData.size / 1024).toFixed(2)} KB).`;
+                    if (fileData.type.startsWith('image/')) {
+                         botReply += "\nThat's a nice image!";
+                         // Update chat title if it's a new chat and first interaction is image upload
+                         const currentC = getCurrentChat();
+                         if (currentC && currentC.messages.filter(m => m.type === 'user-message').length === 1 && currentC.title.startsWith("New Chat")) {
+                            currentC.title = `Chat about ${fileData.name}`;
+                            renderChatHistory();
+                         }
+                    } else {
+                         botReply += "\nI'll process this file.";
+                    }
+                }
+                
+                if (userInput.toLowerCase().includes("hello") || userInput.toLowerCase().includes("hi")) {
+                    botReply = "Hello there! How are you doing today?";
+                } else if (userInput.toLowerCase().includes("how are you")) {
+                    botReply = "I'm just a bunch of code, but I'm doing great! Thanks for asking.";
+                } else if (userInput.toLowerCase().includes("name")) {
+                    botReply = "You can call me SimpleChatBot.";
+                } else if (userInput.toLowerCase().includes("bye")) {
+                    botReply = "Goodbye! Have a great day.";
+                }
+
+                addMessage(botReply, "bot-message"); // This will also save to storage
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function handleSendMessage() {
+            const text = messageInputEl.value.trim();
+            if (text) {
+                addMessage(text, "user-message");
+                simulateBotResponse(text);
+                messageInputEl.value = "";
+                messageInputEl.style.height = 'auto';
+            }
+        }
+
+        sendButton.addEventListener('click', handleSendMessage);
+        messageInputEl.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                handleSendMessage();
+            }
+        });
+        messageInputEl.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        newChatButton.addEventListener('click', () => createNewChat(false));
+
+        fileUploadButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                let filePreviewHTML = '';
+                let userMessageText = `You uploaded: ${file.name}`;
+
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // WARNING: Storing full data URLs for images in localStorage can quickly fill it up.
+                        // For a real app, upload to a server and store a URL.
+                        filePreviewHTML = `<img src="${e.target.result}" alt="Preview" class="preview">`;
+                        addMessage(userMessageText, "user-message", filePreviewHTML, file);
+                        simulateBotResponse("I've uploaded an image.", file);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    filePreviewHTML = `<div class="file-info">📄 ${file.name} (${(file.size / 1024).toFixed(2)} KB)</div>`;
+                    addMessage(userMessageText, "user-message", filePreviewHTML, file);
+                    simulateBotResponse("I've uploaded a file.", file);
+                }
+                fileInput.value = ''; 
+            }
+        });
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadChatsFromStorage();
+            if (chats.length > 0) {
+                // Try to load the last viewed chat or the most recent one
+                // For simplicity, let's just load the most recent one (first in sorted by last message time)
+                const sortedForLoad = [...chats].sort((a, b) => {
+                     const lastMsgATime = a.messages.length > 0 ? a.messages[a.messages.length - 1].timestamp : 0;
+                     const lastMsgBTime = b.messages.length > 0 ? b.messages[b.messages.length - 1].timestamp : 0;
+                     return lastMsgBTime - lastMsgATime;
+                });
+                loadChat(sortedForLoad[0].id);
+            } else {
+                createNewChat(true); // Create an initial new chat
+            }
+            renderChatHistory(); // Initial render of history
+        });
+
+    </script>
+</body>
+</html>
