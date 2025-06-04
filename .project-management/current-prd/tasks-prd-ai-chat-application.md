@@ -101,17 +101,17 @@
   - [x] 2.2 Implement chat storage service using JSON file persistence
   - [ ] 2.3 Create OpenAI service wrapper with error handling and retry logic
   - [ ] 2.4 Set up file service for upload validation and processing
-  - [ ] 2.5 Create base API router structure and exception handlers
+  - [x] 2.5 Create base API router structure and exception handlers
   - [x] 2.6 Implement health check and API status endpoints
-  - [ ] 2.7 Add logging configuration and request/response middleware
+  - [x] 2.7 Add logging configuration and request/response middleware
   - [ ] 2.8 Configure uvicorn server settings and hot reload
 
 - [ ] 3.0 Frontend React Application Foundation
 - [ ] 3.1 Set up React 18 with TypeScript and strict mode configuration
   - [x] 3.2 Create TypeScript interfaces for Chat, Message, and File types
   - [x] 3.3 Implement API service client with fetch wrapper and error handling
-  - [ ] 3.4 Set up React Router for future navigation (if needed)
-  - [ ] 3.5 Create custom hooks for chat state management (useChat, useMessages)
+  - [x] 3.4 Set up React Router for future navigation (if needed)
+  - [x] 3.5 Create custom hooks for chat state management (useChat, useMessages)
   - [ ] 3.6 Implement file utility functions for validation and preview
   - [x] 3.7 Set up global CSS with design system color variables
   - [x] 3.8 Configure ESLint and TypeScript for code quality
