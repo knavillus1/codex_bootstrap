@@ -64,6 +64,7 @@
 - `frontend/src/placeholder.js` - Placeholder file to satisfy ESLint
 - `frontend/src/__tests__/components/ChatArea.test.tsx` - Unit tests for chat area
 - `frontend/src/__tests__/hooks/useChat.test.ts` - Unit tests for chat hook
+- `frontend/src/__tests__/hooks/useMessages.test.ts` - Unit tests for messages hook
 
 ### Existing Files Modified
 - `frontend/package.json` - Add React, Vite, Tailwind CSS, and testing dependencies
@@ -193,7 +194,7 @@
   - [x] 9.1 Write unit tests for all backend API endpoints
   - [x] 9.2 Create tests for OpenAI service integration with mocking
   - [x] 9.3 Add frontend component tests using React Testing Library
-  - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
+  - [x] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
   - [ ] 9.5 Implement integration tests for file upload and processing
   - [ ] 9.6 Add end-to-end tests for complete chat flow
   - [ ] 9.7 Test error handling scenarios and edge cases
