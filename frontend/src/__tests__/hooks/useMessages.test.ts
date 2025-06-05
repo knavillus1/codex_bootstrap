@@ -27,7 +27,7 @@ describe('useMessages', () => {
 
   it('sends message and appends to list', async () => {
     const msg = { id: '2', chat_id: 'c', role: 'user', content: 'hello', created_at: '' };
-    (api.post as unknown as any).mockResolvedValue(msg);
+    (api.post as unknown as any).mockResolvedValue({ user: msg });
     const { result } = renderHook(() => useMessages());
     await act(async () => {
       await result.current.sendMessage('c', 'hello');
