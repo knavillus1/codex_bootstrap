@@ -46,6 +46,7 @@ def test_upload_and_attach_file(tmp_path, monkeypatch):
     msgs = client.get(f"/messages/{chat_id}").json()
     assert len(msgs) == 2
     assert msgs[0]["file"]["filename"] == filename
+    assert msgs[0]["file"]["url"].endswith(filename)
     assert "data_uri" not in msgs[0]["file"] or msgs[0]["file"]["data_uri"] is None
     assert msgs[1]["role"] == "assistant"
 
@@ -84,4 +85,5 @@ def test_image_base64(tmp_path, monkeypatch):
 
     msgs = client.get(f"/messages/{chat_id}").json()
     assert msgs[0]["file"]["filename"] == filename
+    assert msgs[0]["file"]["url"].endswith(filename)
     assert msgs[0]["file"]["data_uri"].startswith("data:image/png;base64,")
