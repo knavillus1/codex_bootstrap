@@ -27,6 +27,16 @@ class OpenAIService:
             self._client = openai.ChatCompletion
         self.default_model = model or settings.OPENAI_MODEL
 
+    def _to_dict(self, resp: Any) -> dict:
+        """Convert OpenAI response object to dict for compatibility."""
+        if hasattr(resp, "model_dump"):
+            return resp.model_dump()
+        if hasattr(resp, "to_dict"):
+            return resp.to_dict()
+        if isinstance(resp, dict):
+            return resp
+        return dict(resp)
+
     def chat_completion(
         self,
         messages: List[dict],
@@ -48,10 +58,16 @@ class OpenAIService:
             try:
                 if hasattr(self._client, "chat"):
                     # openai>=1.0 client
-                    return self._client.chat.completions.create(
+                    resp = self._client.chat.completions.create(
                         model=model, messages=messages
                     )
-                return self._client.create(model=model, messages=messages)
+                    resp_dict = self._to_dict(resp)
+                    logger.debug(f"OpenAI response: {resp_dict}")
+                    return resp_dict
+                resp = self._client.create(model=model, messages=messages)
+                resp_dict = self._to_dict(resp)
+                logger.debug(f"OpenAI response: {resp_dict}")
+                return resp_dict
             except RateLimitErr as exc:  # type: ignore[misc]
                 last_error = exc
                 delay = backoff * (2 ** attempt)

@@ -53,7 +53,7 @@ async def list_messages(chat_id: str):
 async def create_message(payload: MessageCreate):
     """Create a new message for a chat."""
     try:
-        msg = get_storage().add_message(
+        user_msg = get_storage().add_message(
             chat_id=payload.chat_id,
             role=payload.role,
             content=payload.content,
@@ -73,11 +73,23 @@ async def create_message(payload: MessageCreate):
                     role="assistant",
                     content=ai_content,
                 )
+                # Return all messages for the chat, including the new AI one
+                return get_storage().list_messages(payload.chat_id)
             except Exception as exc:  # pragma: no cover - network failures
                 logger = logging.getLogger(__name__)
                 logger.error("Failed to generate AI response: %s", exc)
-        return msg
+                # If AI fails, still return the user's message and any prior messages
+                return get_storage().list_messages(payload.chat_id)
+        # If not a user message, or if AI response failed and we already returned.
+        # This part should ideally not be reached if role is 'user' due to returns above.
+        # However, to be safe, return the user_msg if it's not a user role,
+        # or all messages if something went wrong with AI and we fell through.
+        if payload.role != "user":
+            return [user_msg]  # Return as a list for consistency
+        return get_storage().list_messages(payload.chat_id)  # Fallback
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")
-    except Exception:
-        raise HTTPException(status_code=500, detail="Failed to generate AI response")
+    except Exception as e:
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error in create_message: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to create message or generate AI response")
