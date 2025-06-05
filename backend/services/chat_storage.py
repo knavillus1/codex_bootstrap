@@ -62,7 +62,9 @@ class ChatStorage:
         chats.sort(key=lambda c: c.created_at, reverse=True)
         return chats
 
-    def add_message(self, chat_id: str, role: str, content: str, file: File = None) -> Message:
+    def add_message(
+        self, chat_id: str, role: str, content: str, file: File = None
+    ) -> Message:
         """Add a message to a chat and persist it."""
         chat = self.load_chat(chat_id)
         is_first = len(chat.messages) == 0

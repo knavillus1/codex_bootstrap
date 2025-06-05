@@ -42,6 +42,7 @@
 - `backend/tests/test_file_service.py` - Unit tests for file service
 - `backend/tests/test_status.py` - Unit test for status endpoint
 - `backend/tests/test_files_api.py` - Unit test for file API endpoint
+- `backend/tests/test_file_integration.py` - Integration test for file upload and message attachment
 - `frontend/src/main.tsx` - React application entry point
 - `frontend/src/App.tsx` - Main application component with layout
 - `frontend/src/components/Sidebar.tsx` - Chat history sidebar component
@@ -84,6 +85,7 @@
 - `backend/tests/test_chat_api.py` - Tests for chat API endpoints
 - `backend/api/messages.py` - Message creation and list endpoints
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
+- `backend/tests/test_file_integration.py` - Integration tests for file uploads and messages
 - `backend/models/chat.py` - Chat data model with metadata fields
 - `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
 - `backend/services/openai_service.py` - OpenAI model configuration and error handling
@@ -165,7 +167,7 @@
   - [x] 5.7 Handle OpenAI API errors and rate limiting gracefully
   - [x] 5.8 Implement message timestamp and formatting
   - [x] 5.9 Fix Invalid Date display by ensuring all messages and chats have valid timestamp fields and are correctly formatted in the frontend.  Protect from regression with unit tests.
-  - [ ] 5.10 Integrate OpenAI response generation in message creation endpoint - modify create_message to call OpenAI service after storing user message, generate AI response, and store assistant message with proper error handling and conversation context
+  - [x] 5.10 Integrate OpenAI response generation in message creation endpoint - modify create_message to call OpenAI service after storing user message, generate AI response, and store assistant message with proper error handling and conversation context
   - [ ] 5.11 Fix file upload integration with messages - modify message creation to accept file attachments, store file references in message JSON, and ensure uploaded files are properly linked to messages instead of being orphaned uploads
 
 - [ ] 6.0 File Upload and Processing System
@@ -205,7 +207,7 @@
   - [x] 9.2 Create tests for OpenAI service integration with mocking
   - [x] 9.3 Add frontend component tests using React Testing Library
   - [x] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
-  - [ ] 9.5 Implement integration tests for file upload and processing
+  - [x] 9.5 Implement integration tests for file upload and processing
   - [ ] 9.6 Add end-to-end tests for complete chat flow
   - [ ] 9.7 Test error handling scenarios and edge cases
   - [ ] 9.8 Perform cross-browser compatibility testing
