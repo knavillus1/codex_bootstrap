@@ -4,6 +4,9 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 import logging
+import base64
+import mimetypes
+import api.files as files_api
 
 from config import settings
 from services.openai_service import OpenAIService
@@ -15,6 +18,13 @@ router = APIRouter(prefix="/messages", tags=["messages"])
 
 _storage = None
 _openai_service: OpenAIService | None = None
+
+
+def _to_data_uri(path: str) -> str:
+    mime, _ = mimetypes.guess_type(path)
+    with open(path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("ascii")
+    return f"data:{mime or 'image/png'};base64,{b64}"
 
 
 def get_storage():
@@ -53,21 +63,44 @@ async def list_messages(chat_id: str):
 async def create_message(payload: MessageCreate):
     """Create a new message for a chat."""
     try:
+        file = payload.file
+        if file and file.content_type.startswith("image/"):
+            path = files_api.get_service().get_file_path(file.filename)
+            if path.exists():
+                data = file.model_dump(exclude={"data_uri"})
+                file = File(**data, data_uri=_to_data_uri(str(path)))
+
         user_msg = get_storage().add_message(
             chat_id=payload.chat_id,
             role=payload.role,
             content=payload.content,
-            file=payload.file,
+            file=file,
         )
         if payload.role == "user":
             # Build conversation for AI response
-            history: List[Dict[str, str]] = [
-                {"role": m.role, "content": m.content}
-                for m in get_storage().list_messages(payload.chat_id)
-            ]
+            history: List[Dict[str, object]] = []
+            for m in get_storage().list_messages(payload.chat_id):
+                if m.file and m.file.data_uri:
+                    history.append(
+                        {
+                            "role": m.role,
+                            "content": [
+                                m.content,
+                                {
+                                    "type": "input_image",
+                                    "image_url": m.file.data_uri,
+                                },
+                            ],
+                        }
+                    )
+                else:
+                    history.append({"role": m.role, "content": m.content})
             try:
                 ai_resp = get_openai_service().chat_completion(history)
-                ai_content = ai_resp["choices"][0]["message"]["content"]
+                ai_content = (
+                    ai_resp.get("output_text")
+                    or ai_resp["choices"][0]["message"]["content"]
+                )
                 get_storage().add_message(
                     chat_id=payload.chat_id,
                     role="assistant",

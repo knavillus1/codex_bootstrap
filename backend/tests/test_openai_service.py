@@ -14,7 +14,7 @@ class FakeOpenAI:
     error.OpenAIError = OpenAIError
     error.RateLimitError = RateLimitError
 
-    class ChatCompletions:
+    class Responses:
         def __init__(self, responses):
             self._responses = iter(responses)
             self.calls = []
@@ -28,14 +28,14 @@ class FakeOpenAI:
 
     class Client:
         def __init__(self, parent):
-            parent.completions = FakeOpenAI.ChatCompletions(parent._responses)
-            self.chat = type("Chat", (), {"completions": parent.completions})()
+            parent.responses_obj = FakeOpenAI.Responses(parent._responses)
+            self.responses = parent.responses_obj
 
     def __init__(self):
         self._responses = []
-        self.completions = None
+        self.responses_obj = None
 
-    completions: "FakeOpenAI.ChatCompletions"
+    responses_obj: "FakeOpenAI.Responses"
 
     def OpenAI(self, api_key=None):
         return FakeOpenAI.Client(self)
@@ -46,7 +46,7 @@ class FakeOpenAI:
 
 def test_chat_completion_success(monkeypatch):
     fake = FakeOpenAI()
-    fake_response = {"choices": [{"message": {"content": "hello"}}]}
+    fake_response = {"output_text": "hello"}
     fake.set_responses([fake_response])
     monkeypatch.setattr(
         "backend.services.openai_service.openai", fake, raising=False
@@ -55,7 +55,7 @@ def test_chat_completion_success(monkeypatch):
     service = OpenAIService(api_key="key")
     result = service.chat_completion([{"role": "user", "content": "hi"}])
     assert result == fake_response
-    assert fake.completions.calls[0]["model"] == "gpt-3.5-turbo"
+    assert fake.responses_obj.calls[0]["model"] == "gpt-3.5-turbo"
 
 
 def test_chat_completion_retries(monkeypatch):
@@ -63,7 +63,7 @@ def test_chat_completion_retries(monkeypatch):
     responses = [
         FakeOpenAI.error.RateLimitError(),
         FakeOpenAI.error.RateLimitError(),
-        {"choices": [{"message": {"content": "ok"}}]},
+        {"output_text": "ok"},
     ]
     fake.set_responses(responses)
     monkeypatch.setattr(
@@ -74,13 +74,13 @@ def test_chat_completion_retries(monkeypatch):
     result = service.chat_completion(
         [{"role": "user", "content": "hi"}], retries=3, backoff=0
     )
-    assert result["choices"][0]["message"]["content"] == "ok"
-    assert len(fake.completions.calls) == 3
+    assert result["output_text"] == "ok"
+    assert len(fake.responses_obj.calls) == 3
 
 
 def test_default_model_from_settings(monkeypatch):
     fake = FakeOpenAI()
-    fake_response = {"choices": [{"message": {"content": "hello"}}]}
+    fake_response = {"output_text": "hello"}
     fake.set_responses([fake_response])
     monkeypatch.setattr(
         "backend.services.openai_service.openai", fake, raising=False
@@ -93,4 +93,4 @@ def test_default_model_from_settings(monkeypatch):
 
     service = OpenAIService(api_key="key")
     service.chat_completion([{"role": "user", "content": "hi"}])
-    assert fake.completions.calls[0]["model"] == "gpt-test"
+    assert fake.responses_obj.calls[0]["model"] == "gpt-test"
