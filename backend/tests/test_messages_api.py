@@ -42,3 +42,30 @@ def test_first_message_sets_title():
 
     chat_data = client.get(f"/chats/{chat_id}").json()
     assert chat_data["title"] == content[:40]
+
+
+def test_ai_failure_does_not_error(monkeypatch):
+    class BadAI:
+        def __init__(self, *a, **kw):
+            pass
+
+        def chat_completion(self, _messages):
+            raise RuntimeError("boom")
+
+    import api.messages as messages_api
+
+    monkeypatch.setattr(messages_api, "OpenAIService", BadAI)
+    messages_api._openai_service = None
+
+    client = TestClient(app)
+    chat_id = client.post("/chats/", json={"title": "fail"}).json()["id"]
+
+    resp = client.post(
+        "/messages/",
+        json={"chat_id": chat_id, "role": "user", "content": "hi"},
+    )
+    assert resp.status_code == 201
+    assert resp.json()["role"] == "user"
+
+    chat_data = client.get(f"/chats/{chat_id}").json()
+    assert chat_data["message_count"] == 1
