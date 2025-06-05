@@ -16,3 +16,6 @@ def test_save_upload(tmp_path: Path) -> None:
     dest = service.save_upload(upload)
     assert dest.exists()
     assert dest.read_bytes() == b"hello"
+    # file should be saved inside a dated subdirectory (YYYY/MM/DD)
+    rel_parts = dest.relative_to(tmp_path).parts
+    assert len(rel_parts) == 4  # yyyy/mm/dd/filename
