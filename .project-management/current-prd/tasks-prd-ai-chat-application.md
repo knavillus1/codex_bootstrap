@@ -157,6 +157,9 @@
   - [x] 5.6 Add "AI is thinking" indicators and loading states
   - [x] 5.7 Handle OpenAI API errors and rate limiting gracefully
   - [x] 5.8 Implement message timestamp and formatting
+  - [ ] 5.9 Fix Invalid Date display by ensuring all messages and chats have valid timestamp fields and are correctly formatted in the frontend.  Protect from regression with unit tests.
+  - [ ] 5.10 Integrate OpenAI response generation in message creation endpoint - modify create_message to call OpenAI service after storing user message, generate AI response, and store assistant message with proper error handling and conversation context
+  - [ ] 5.11 Fix file upload integration with messages - modify message creation to accept file attachments, store file references in message JSON, and ensure uploaded files are properly linked to messages instead of being orphaned uploads
 
 - [ ] 6.0 File Upload and Processing System
   - [x] 6.1 Create file upload API endpoint with size and type validation
