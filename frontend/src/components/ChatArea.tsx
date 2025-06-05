@@ -33,7 +33,19 @@ export default function ChatArea({ activeChat }: Props) {
   };
 
   const handleFileUpload = async (file: File) => {
-    await api.postFile<{ filename: string }>('/files/', file);
+    if (!activeChat) return;
+    
+    // Upload the file first
+    const response = await api.postFile<{ filename: string }>('/files/', file);
+    
+    // Create a message with the file attachment
+    const fileAttachment = {
+      filename: response.filename,
+      content_type: file.type,
+      url: `/files/${response.filename}` // Assuming files can be accessed via this URL
+    };
+    
+    await sendMessage(activeChat.id, `Uploaded file: ${file.name}`, 'user', fileAttachment);
   };
 
   if (!activeChat) {

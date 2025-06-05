@@ -6,7 +6,7 @@ from typing import List
 from uuid import uuid4
 
 from models.chat import Chat
-from models.message import Message
+from models.message import Message, File
 
 
 class ChatStorage:
@@ -62,7 +62,7 @@ class ChatStorage:
         chats.sort(key=lambda c: c.created_at, reverse=True)
         return chats
 
-    def add_message(self, chat_id: str, role: str, content: str) -> Message:
+    def add_message(self, chat_id: str, role: str, content: str, file: File = None) -> Message:
         """Add a message to a chat and persist it."""
         chat = self.load_chat(chat_id)
         is_first = len(chat.messages) == 0
@@ -71,6 +71,7 @@ class ChatStorage:
             chat_id=chat_id,
             role=role,
             content=content,
+            file=file,
         )
         chat.messages.append(message)
         chat.message_count = len(chat.messages)

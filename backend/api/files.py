@@ -1,6 +1,8 @@
 """File upload API endpoints."""
 
 from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi.responses import FileResponse
+from pathlib import Path
 
 from services.file_service import FileService
 
@@ -25,3 +27,15 @@ async def upload_file(file: UploadFile = File(...)) -> dict:
     except ValueError as exc:  # invalid type or size
         raise HTTPException(status_code=400, detail=str(exc))
     return {"filename": path.name}
+
+
+@router.get("/{filename}")
+async def get_file(filename: str):
+    """Serve an uploaded file."""
+    service = get_service()
+    file_path = service.get_file_path(filename)
+
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    return FileResponse(file_path)

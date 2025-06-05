@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Message } from '../types/message';
+import type { Message, File } from '../types/message';
 import { api } from '../services/api';
 
 export default function useMessages(initialMessages: Message[] = []) {
@@ -16,12 +16,23 @@ export default function useMessages(initialMessages: Message[] = []) {
     chatId: string,
     content: string,
     role: 'user' | 'assistant' = 'user',
+    file?: File,
   ) => {
-    const msg = await api.post<Message>('/messages/', {
+    const payload: any = {
       chat_id: chatId,
       role,
       content,
-    });
+    };
+    
+    if (file) {
+      payload.file = {
+        filename: file.filename,
+        content_type: file.content_type,
+        url: file.url,
+      };
+    }
+    
+    const msg = await api.post<Message>('/messages/', payload);
     addMessage(msg);
     return msg;
   };

@@ -2,8 +2,10 @@
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+from typing import Optional
 
 from services.chat_storage import ChatStorage
+from models.message import File
 
 router = APIRouter(prefix="/messages", tags=["messages"])
 
@@ -22,6 +24,7 @@ class MessageCreate(BaseModel):
     chat_id: str
     role: str = "user"
     content: str
+    file: Optional[File] = None
 
 
 @router.get("/{chat_id}")
@@ -41,6 +44,7 @@ async def create_message(payload: MessageCreate):
             chat_id=payload.chat_id,
             role=payload.role,
             content=payload.content,
+            file=payload.file,
         )
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")

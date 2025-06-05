@@ -46,3 +46,24 @@ class FileService:
         dest.write_bytes(data)
         upload.file.seek(0)
         return dest
+
+    def get_file_path(self, filename: str) -> Path:
+        """Find an uploaded file by filename across all date directories."""
+        # First try the direct path (legacy files)
+        direct_path = self.upload_dir / filename
+        if direct_path.exists():
+            return direct_path
+
+        # Search in date-organized directories
+        for year_dir in self.upload_dir.iterdir():
+            if year_dir.is_dir() and year_dir.name.isdigit():
+                for month_dir in year_dir.iterdir():
+                    if month_dir.is_dir() and month_dir.name.isdigit():
+                        for day_dir in month_dir.iterdir():
+                            if day_dir.is_dir() and day_dir.name.isdigit():
+                                file_path = day_dir / filename
+                                if file_path.exists():
+                                    return file_path
+
+        # Return the expected path even if it doesn't exist (for 404 handling)
+        return self.upload_dir / filename

@@ -1,6 +1,6 @@
 export interface File {
   filename: string;
-  contentType: string;
+  content_type: string;
   url?: string;
 }
 
