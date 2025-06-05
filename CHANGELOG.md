@@ -26,3 +26,4 @@
 - 2025-06-05: organize uploads into dated subdirectories
 - 2025-06-05: integrate openai responses and add file integration tests
 - 2025-06-05: handle openai failures without returning 500
+- 2025-06-05: fix OpenAI error compatibility for v1

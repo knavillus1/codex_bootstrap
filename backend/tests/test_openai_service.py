@@ -2,12 +2,17 @@ from backend.services.openai_service import OpenAIService
 
 
 class FakeOpenAI:
-    class error:
-        class OpenAIError(Exception):
-            pass
+    class OpenAIError(Exception):
+        pass
 
-        class RateLimitError(OpenAIError):
-            pass
+    class RateLimitError(OpenAIError):
+        pass
+
+    class error:
+        pass
+
+    error.OpenAIError = OpenAIError
+    error.RateLimitError = RateLimitError
 
     class ChatCompletion:
         def __init__(self, responses):
