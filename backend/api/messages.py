@@ -82,13 +82,16 @@ async def create_message(payload: MessageCreate):
             history: List[Dict[str, object]] = []
             for m in get_storage().list_messages(payload.chat_id):
                 content = m.content
-                # If message has a file with data_uri, ensure content is a list and append the image object
+                # If message has a file with data_uri, ensure content is a list
+                # and append the image object
                 if m.file and m.file.data_uri:
                     image_part = {"type": "input_image", "image_url": m.file.data_uri}
                     if isinstance(content, list):
                         # Only add image if not already present
                         has_image = any(
-                            isinstance(part, dict) and part.get("type") == "input_image" for part in content
+                            isinstance(part, dict)
+                            and part.get("type") == "input_image"
+                            for part in content
                         )
                         if not has_image:
                             content = content + [image_part]
@@ -96,7 +99,8 @@ async def create_message(payload: MessageCreate):
                         content = [content, image_part]
                     else:
                         content = [image_part]
-                # --- FIX: Wrap string parts in {type: "text", text: ...} if content is a list ---
+                # --- FIX: Wrap string parts in {type: "text", text: ...} if
+                # content is a list ---
                 if isinstance(content, list):
                     new_content = []
                     for part in content:
@@ -106,7 +110,8 @@ async def create_message(payload: MessageCreate):
                             new_content.append(part)
                     content = new_content
                 elif isinstance(content, str):
-                    # If content is a string, leave as-is (OpenAI accepts string for pure text)
+                    # If content is a string, leave as-is (OpenAI accepts
+                    # string for pure text)
                     pass
                 history.append({"role": m.role, "content": content})
             try:
