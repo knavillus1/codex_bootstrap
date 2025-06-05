@@ -43,7 +43,7 @@ export default function FileUpload({ onUpload }: Props) {
       <button
         type="button"
         onClick={handleClick}
-        className="p-2 text-highlight hover:text-primary transition-colors focus:outline-none"
+        className="p-2 text-[var(--color-accent-secondary)] hover:text-[var(--color-text-primary)] transition-colors focus:outline-none rounded-md hover:bg-gray-100"
       >
         📎
       </button>

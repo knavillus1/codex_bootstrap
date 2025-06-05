@@ -9,6 +9,7 @@ fi
 echo "Running pytest..."
 export PYTHONPATH="${PYTHONPATH:-}:$(pwd)"
 export OPENAI_API_KEY="test-key"
+export OPENAI_MODEL="gpt-3.5-turbo"
 pytest backend/tests "$@"
 echo "Running vitest..."
 cd frontend
