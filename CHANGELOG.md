@@ -34,3 +34,4 @@
 - 2025-06-05: refresh messages after sending to include AI responses
 - 2025-06-05: add tests for missing chat and oversized file uploads
 - 2025-06-05: include file URL in message attachments
+- 2025-06-05: add streaming endpoint and tests

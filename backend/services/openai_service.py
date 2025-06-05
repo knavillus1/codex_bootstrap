@@ -83,3 +83,21 @@ class OpenAIService:
                 break
         if last_error:
             raise RuntimeError("OpenAI request failed") from last_error
+
+    async def chat_completion_stream(
+        self,
+        messages: List[dict],
+        model: str | None = None,
+    ):
+        """Yield streaming chat completion chunks."""
+        model = model or self.default_model
+        if hasattr(self._client, "chat"):
+            stream = self._client.chat.completions.create(
+                model=model, messages=messages, stream=True
+            )
+        else:
+            stream = self._client.create(
+                model=model, messages=messages, stream=True
+            )
+        for chunk in stream:
+            yield self._to_dict(chunk)

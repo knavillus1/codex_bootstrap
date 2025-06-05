@@ -11,6 +11,10 @@
 ## Relevant Files
 - backend/api/stream.py - SSE endpoint for streaming responses
 - backend/services/openai_service.py - OpenAI service for chat completions
+- backend/tests/test_stream_endpoint.py - tests for streaming endpoint
+- backend/tests/test_openai_service_stream.py - tests for OpenAI streaming
+- backend/config.py - application configuration with feature flag
+- backend/api/__init__.py - includes stream router when enabled
 - frontend/hooks/useMessages.ts - existing hook for sending messages
 - frontend/components/ChatArea.tsx - chat UI component
 - frontend/package.json - frontend dependencies
@@ -18,6 +22,8 @@
 ### Proposed New Files
 - frontend/hooks/useStream.ts - React hook for consuming SSE streams
 - frontend/hooks/useStream.test.ts - Unit tests for the `useStream` hook
+- backend/tests/test_stream_endpoint.py - backend tests for streaming route
+- backend/tests/test_openai_service_stream.py - backend tests for OpenAI stream
 
 ### Existing Files Modified
 - backend/api/stream.py - add `/stream/` SSE route implementation
@@ -32,17 +38,17 @@
 
 ## Tasks
 - [ ] 1.0 Implement Backend Streaming Endpoint
-  - [ ] 1.1 Define `format_sse` helper in `backend/api/stream.py`.
-  - [ ] 1.2 Add POST `/stream/` route in `backend/api/stream.py` returning `StreamingResponse` with `text/event-stream`.
-  - [ ] 1.3 Create unit tests for `/stream/` endpoint in `tests/test_stream_endpoint.py`.
+  - [x] 1.1 Define `format_sse` helper in `backend/api/stream.py`.
+  - [x] 1.2 Add POST `/stream/` route in `backend/api/stream.py` returning `StreamingResponse` with `text/event-stream`.
+  - [x] 1.3 Create unit tests for `/stream/` endpoint in `tests/test_stream_endpoint.py`.
 
 - [ ] 2.0 Enhance OpenAIService with Streaming Method
-  - [ ] 2.1 Implement `async def chat_completion_stream` in `backend/services/openai_service.py`.
-  - [ ] 2.2 Add unit tests for `chat_completion_stream` in `tests/test_openai_service_stream.py`.
+  - [x] 2.1 Implement `async def chat_completion_stream` in `backend/services/openai_service.py`.
+  - [x] 2.2 Add unit tests for `chat_completion_stream` in `tests/test_openai_service_stream.py`.
 
 - [ ] 3.0 Add Feature Flag and Fallback Logic
-  - [ ] 3.1 Introduce `FEATURE_STREAMING` env var in `config.py`.
-  - [ ] 3.2 Guard `/stream/` route activation in `backend/api/stream.py` with the feature flag.
+  - [x] 3.1 Introduce `FEATURE_STREAMING` env var in `config.py`.
+  - [x] 3.2 Guard `/stream/` route activation in `backend/api/stream.py` with the feature flag.
   - [ ] 3.3 Implement client-side fallback to `/messages/` in `frontend/src/hooks/useStream.ts` when `response.body` is undefined.
 
 - [ ] 4.0 Create Frontend `useStream` Hook
