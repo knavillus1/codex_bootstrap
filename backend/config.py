@@ -10,7 +10,7 @@ load_dotenv()
 
 class Settings(BaseSettings):
     OPENAI_API_KEY: str
-    OPENAI_MODEL: str = "gpt-3.5-turbo"
+    OPENAI_MODEL: str = "gpt-4.1"
     ALLOW_ORIGINS: str = "http://localhost:5173"
 
     @validator("OPENAI_API_KEY")
