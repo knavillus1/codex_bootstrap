@@ -10,7 +10,10 @@ cd frontend
 # Ensure we have a clean node_modules if package-lock.json exists
 if [ -f package-lock.json ]; then
   echo "Using npm ci for clean install..."
-  npm ci
+  if ! npm ci; then
+    echo "npm ci failed (lockfile mismatch), falling back to npm install..."
+    npm install
+  fi
 else
   echo "Using npm install..."
   npm install
