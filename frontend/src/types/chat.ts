@@ -4,7 +4,7 @@ export interface Chat {
   id: string;
   title: string;
   messages: Message[];
-  createdAt: string;
-  messageCount: number;
-  lastActivity: string;
+  created_at: string;
+  message_count: number;
+  last_activity: string;
 }
