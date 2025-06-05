@@ -12,6 +12,11 @@ export OPENAI_API_KEY="test-key"
 pytest backend/tests "$@"
 echo "Running vitest..."
 cd frontend
+# Ensure dependencies are installed before checking vitest
+if ! npm list jsdom >/dev/null 2>&1; then
+  echo "Installing missing frontend dependencies..."
+  npm install
+fi
 if ! npx vitest --version >/dev/null 2>&1; then
   echo "vitest not installed, skipping frontend tests"
 else

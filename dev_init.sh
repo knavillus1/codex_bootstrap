@@ -16,6 +16,7 @@ BACKEND_PID=$!
 popd >/dev/null
 
 pushd frontend >/dev/null
+# Ensure all dependencies are properly installed
 npm install
 npm run dev &
 FRONTEND_PID=$!
