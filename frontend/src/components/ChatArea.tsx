@@ -39,10 +39,14 @@ export default function ChatArea({ activeChat }: Props) {
     const response = await api.postFile<{ filename: string }>('/files/', file);
     
     // Create a message with the file attachment
+    // Use backend API base URL for file URLs
+    // Vite exposes env vars as import.meta.env.VITE_*
+    // @ts-ignore
+    const backendBaseUrl = (import.meta as any).env.VITE_API_URL || 'http://localhost:8000';
     const fileAttachment = {
       filename: response.filename,
       content_type: file.type,
-      url: `/files/${response.filename}` // Assuming files can be accessed via this URL
+      url: `${backendBaseUrl}/files/${response.filename}` // Assuming files can be accessed via this URL
     };
     
     await sendMessage(activeChat.id, `Uploaded file: ${file.name}`, 'user', fileAttachment);

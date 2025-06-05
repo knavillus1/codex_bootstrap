@@ -9,23 +9,16 @@ interface Props {
 export default function MessageBubble({ message }: Props) {
   const isUser = message.role === 'user';
   
+  // Only show the file thumbnail if it is not already rendered in content
+  // For user messages, only show the file image if it is not already rendered by renderFileAttachment or renderContent
+  // Remove renderFileAttachment for image files, rely on renderContent and shouldShowFileImage logic
   const renderFileAttachment = () => {
     if (!message.file) return null;
-    
     const { filename, content_type, url } = message.file;
     const isImage = content_type.startsWith('image/');
-    
     if (isImage && url) {
-      return (
-        <div className="mt-2">
-          <img
-            src={url}
-            alt={filename}
-            className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
-            style={{ maxWidth: '200px', maxHeight: '150px' }}
-          />
-        </div>
-      );
+      // Do not render here, handled by renderContent or shouldShowFileImage
+      return null;
     } else {
       return (
         <div className="mt-2 p-2 bg-gray-100 rounded text-sm">
@@ -38,13 +31,16 @@ export default function MessageBubble({ message }: Props) {
     }
   };
   
+  // --- Show image thumbnail for outgoing user message if file is image ---
+  const showUserImage = message.role === 'user' && message.file && message.file.content_type.startsWith('image/') && message.file.url;
+
   // Helper to render OpenAI-style content (string or array of parts)
   const renderContent = (content: Message["content"]) => {
     if (typeof content === 'string') return <span>{content}</span>;
     // If content is an array, render each part
     return content.map((part, idx) => {
       if (typeof part === 'string') return <span key={idx}>{part}</span>;
-      if (part.type === 'input_image' && part.image_url) {
+      if (part.type === 'input_image' && 'image_url' in part) {
         return (
           <div className="mt-2" key={idx}>
             <img
@@ -56,10 +52,22 @@ export default function MessageBubble({ message }: Props) {
           </div>
         );
       }
+      if (part.type === 'input_text' && 'text' in part) {
+        return <span key={idx}>{String(part.text)}</span>;
+      }
       // fallback for unknown part
       return <span key={idx}>[Unsupported content]</span>;
     });
   };
+
+  // Only show the file thumbnail if it is not already rendered in content
+  // For user messages, only show the file image if it is not already rendered by renderFileAttachment or renderContent
+  const shouldShowFileImage = showUserImage && (
+    (typeof message.content === 'string' && !message.content.includes(message.file?.filename || '')) ||
+    (Array.isArray(message.content) && !message.content.some(
+      part => typeof part === 'object' && part.type === 'input_image')
+    )
+  );
 
   return (
     <div
@@ -80,6 +88,16 @@ export default function MessageBubble({ message }: Props) {
       </div>
       <div>{renderContent(message.content)}</div>
       {renderFileAttachment()}
+      {shouldShowFileImage && message.file && (
+        <div className="mt-2">
+          <img
+            src={message.file.url}
+            alt={message.file.filename}
+            className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
+            style={{ maxWidth: '200px', maxHeight: '150px' }}
+          />
+        </div>
+      )}
     </div>
   );
 }
