@@ -27,6 +27,8 @@ export default function useChat(initialChats: Chat[] = []) {
         const remaining = previous.filter(c => c.id !== chatId);
         setActiveChatId(remaining.length ? remaining[0].id : null);
       }
+      // Ensure UI matches backend state after deletion
+      await loadChats();
     } catch (err) {
       setChats(previous);
       throw err;

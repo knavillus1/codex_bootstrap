@@ -7,6 +7,7 @@ from uuid import uuid4
 
 from ..models.chat import Chat
 from ..models.message import Message, File
+from .file_service import FileService
 
 
 class ChatStorage:
@@ -47,10 +48,21 @@ class ChatStorage:
         return Chat(**data)
 
     def delete_chat(self, chat_id: str) -> None:
-        """Remove a chat from storage."""
+        """Remove a chat from storage and delete all uploaded files referenced by its messages."""
         path = self._chat_path(chat_id)
         if not path.exists():
             raise FileNotFoundError(chat_id)
+        # Cascade delete: remove all uploaded files referenced by messages
+        chat = self.load_chat(chat_id)
+        file_service = FileService()
+        for message in chat.messages:
+            if message.file and message.file.filename:
+                file_path = file_service.get_file_path(message.file.filename)
+                if file_path.exists():
+                    try:
+                        file_path.unlink()
+                    except Exception:
+                        pass  # Ignore errors deleting files
         path.unlink()
 
     def list_chats(self) -> List[Chat]:

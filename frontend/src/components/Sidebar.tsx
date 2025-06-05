@@ -12,7 +12,10 @@ interface Props {
 
 export default function Sidebar({ chats, activeChatId, onSelect, onNewChat, onDeleteChat }: Props) {
   return (
-    <aside className="w-full sm:w-72 bg-[var(--color-bg-sidebar)] border-b sm:border-b-0 sm:border-r border-[var(--color-border-subtle)] p-4 flex flex-col">
+    <aside
+      key={chats.map(c => c.id).join('-')}
+      className="w-full sm:w-72 bg-[var(--color-bg-sidebar)] border-b sm:border-b-0 sm:border-r border-[var(--color-border-subtle)] p-4 flex flex-col"
+    >
       <button
         className="mb-4 px-4 py-2 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-lg hover:bg-[var(--color-button-primary-bg)]/90 transition-colors font-semibold shadow-subtle"
         onClick={onNewChat}
