@@ -30,3 +30,4 @@
 - 2025-06-05: update OpenAI service for new API and adjust tests
 - 2025-06-05: update design mock styling
 - 2025-06-05: apply new UI style and update test config
+- 2025-06-05: switch to Responses API and embed base64 images

@@ -9,6 +9,7 @@ class File(BaseModel):
     filename: str
     content_type: str
     url: Optional[str] = None
+    data_uri: Optional[str] = None
 
 
 class Message(BaseModel):

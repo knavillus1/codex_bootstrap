@@ -2,7 +2,19 @@ from fastapi.testclient import TestClient
 from backend.main import app
 
 
-def test_message_crud():
+class DummyAI:
+    def __init__(self, *a, **kw):
+        pass
+
+    def chat_completion(self, messages):
+        return {"output_text": "hello"}
+
+
+def test_message_crud(monkeypatch):
+    import api.messages as messages_api
+    monkeypatch.setattr(messages_api, "OpenAIService", DummyAI)
+    messages_api._openai_service = None
+
     client = TestClient(app)
     chat_resp = client.post("/chats/", json={"title": "chat"})
     chat_id = chat_resp.json()["id"]
