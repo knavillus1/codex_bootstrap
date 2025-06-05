@@ -16,13 +16,14 @@ def test_message_crud():
     assert create.json()["content"] == "hi"
 
     chat_data = client.get(f"/chats/{chat_id}").json()
-    assert chat_data["message_count"] == 1
+    assert chat_data["message_count"] == 2
 
     list_resp = client.get(f"/messages/{chat_id}")
     assert list_resp.status_code == 200
     messages = list_resp.json()
-    assert len(messages) == 1
+    assert len(messages) == 2
     assert messages[0]["id"] == msg_id
+    assert messages[1]["role"] == "assistant"
 
     missing = client.get("/messages/badid")
     assert missing.status_code == 404

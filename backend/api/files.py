@@ -2,7 +2,6 @@
 
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
-from pathlib import Path
 
 from services.file_service import FileService
 
