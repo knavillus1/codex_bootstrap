@@ -28,3 +28,4 @@
 - 2025-06-05: handle openai failures without returning 500
 - 2025-06-05: fix OpenAI error compatibility for v1
 - 2025-06-05: update OpenAI service for new API and adjust tests
+- 2025-06-05: update design mock styling

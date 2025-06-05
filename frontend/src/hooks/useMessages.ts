@@ -32,10 +32,9 @@ export default function useMessages(initialMessages: Message[] = []) {
       };
     }
     
-    // The backend now returns all messages for the chat
-    const updatedMessages = await api.post<Message[]>('/messages/', payload);
-    setMessages(updatedMessages); // Update state with the full list
-    // No need to return msg specifically, as the state is updated
+    const msg = await api.post<Message>('/messages/', payload);
+    addMessage(msg);
+    return msg;
   };
   return { messages, setMessages, addMessage, loadMessages, sendMessage };
 }
