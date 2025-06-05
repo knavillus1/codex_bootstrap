@@ -91,10 +91,16 @@ export default function MessageBubble({ message }: Props) {
       {shouldShowFileImage && message.file && (
         <div className="mt-2">
           <img
-            src={message.file.url}
+            src={message.file.url || (message.file as any).data_uri}
             alt={message.file.filename}
             className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
             style={{ maxWidth: '200px', maxHeight: '150px' }}
+            onError={e => {
+              const file = message.file as any;
+              if (file.data_uri && (e.target as HTMLImageElement).src !== file.data_uri) {
+                (e.target as HTMLImageElement).src = file.data_uri;
+              }
+            }}
           />
         </div>
       )}
