@@ -53,6 +53,7 @@
 - `frontend/src/components/ChatManagementMenu.test.tsx` - Unit tests for ChatManagementMenu component.
 - `frontend/src/components/ChatListItem.tsx` - Individual chat item component with hover effects and menu integration.
 - `frontend/src/components/ChatListItem.test.tsx` - Unit tests for ChatListItem component.
+- `backend/tests/test_chat_delete_integration.py` - Integration test covering chat deletion end-to-end.
 
 ### Existing Files Modified
 - `frontend/src/components/Sidebar.tsx` - Update to use new ChatListItem components and handle chat list rendering with management capabilities.
@@ -90,13 +91,13 @@
   - [x] 2.4 Add appropriate icons for Delete (trash can) and Rename (pencil/edit) options using existing icon library or create SVG components
   - [x] 2.5 Implement visual state management for hover effects and menu visibility in ChatListItem
 
-- [ ] 3.0 Integrate Chat List with Management Capabilities
+ - [x] 3.0 Integrate Chat List with Management Capabilities
   - [x] 3.1 Refactor `Sidebar.tsx` to use new ChatListItem components instead of direct chat rendering
   - [x] 3.2 Pass necessary props (chat data, active chat ID, delete handler) to ChatListItem components
   - [x] 3.3 Implement active chat detection logic to disable/hide delete option for currently open chat
   - [x] 3.4 Add empty state handling when all chats are deleted (display "No chats available" message)
 
-- [ ] 4.0 Implement Frontend Delete Functionality and State Management
+ - [x] 4.0 Implement Frontend Delete Functionality and State Management
   - [x] 4.1 Add deleteChat function to `useChat.ts` hook that calls API and updates local state
   - [x] 4.2 Implement optimistic UI updates that immediately remove chat from list before API confirmation
   - [x] 4.3 Add error handling and rollback mechanism if delete API call fails
@@ -108,6 +109,6 @@
   - [x] 5.2 Write unit tests for ChatListItem component covering hover states, menu integration, and active chat detection
   - [x] 5.3 Add tests to existing `useChat.test.ts` for deleteChat functionality, error handling, and state updates
   - [x] 5.4 Write backend API tests in `test_chat_api.py` for DELETE endpoint including success, failure, and validation scenarios
-  - [ ] 5.5 Add integration tests verifying end-to-end chat deletion flow from UI interaction to backend storage removal
+  - [x] 5.5 Add integration tests verifying end-to-end chat deletion flow from UI interaction to backend storage removal
 
 *End of document*

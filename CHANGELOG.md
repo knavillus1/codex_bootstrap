@@ -40,3 +40,4 @@
 - 2025-06-05: add active chat validation and tests for delete endpoint
 - 2025-06-05: add chat list management components
 - 2025-06-05: implement chat deletion hook and empty state
+- 2025-06-05: add integration test for chat deletion
