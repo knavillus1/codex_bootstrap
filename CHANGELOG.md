@@ -32,3 +32,4 @@
 - 2025-06-05: apply new UI style and update test config
 - 2025-06-05: switch to Responses API and embed base64 images
 - 2025-06-05: refresh messages after sending to include AI responses
+- 2025-06-05: add tests for missing chat and oversized file uploads
