@@ -64,11 +64,14 @@ async def create_message(payload: MessageCreate):
     """Create a new message for a chat."""
     try:
         file = payload.file
-        if file and file.content_type.startswith("image/"):
+        if file:
             path = files_api.get_service().get_file_path(file.filename)
-            if path.exists():
-                data = file.model_dump(exclude={"data_uri"})
-                file = File(**data, data_uri=_to_data_uri(str(path)))
+            url = f"/files/{file.filename}"
+            data = file.model_dump(exclude={"data_uri", "url"})
+            data_uri = None
+            if file.content_type.startswith("image/") and path.exists():
+                data_uri = _to_data_uri(str(path))
+            file = File(**data, url=url, data_uri=data_uri)
 
         user_msg = get_storage().add_message(
             chat_id=payload.chat_id,

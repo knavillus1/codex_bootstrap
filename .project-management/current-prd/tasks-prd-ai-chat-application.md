@@ -83,9 +83,9 @@
 - `backend/api/chat.py` - Add CRUD chat endpoints
 - `backend/services/chat_storage.py` - Add create, delete, sorted list, and metadata updates
 - `backend/tests/test_chat_api.py` - Tests for chat API endpoints
-- `backend/api/messages.py` - Message creation and list endpoints
+- `backend/api/messages.py` - Message creation and list endpoints, add file URL handling
 - `backend/tests/test_messages_api.py` - Tests for message API endpoints
-- `backend/tests/test_file_integration.py` - Integration tests for file uploads and messages
+- `backend/tests/test_file_integration.py` - Integration tests for file uploads and messages, and file URLs
 - `backend/models/chat.py` - Chat data model with metadata fields
 - `.project-management/current-prd/tasks-prd-ai-chat-application.md` - Task list for the AI chat feature
 - `backend/services/openai_service.py` - OpenAI model configuration and error handling
@@ -168,9 +168,9 @@
   - [x] 5.8 Implement message timestamp and formatting
   - [x] 5.9 Fix Invalid Date display by ensuring all messages and chats have valid timestamp fields and are correctly formatted in the frontend.  Protect from regression with unit tests.
   - [x] 5.10 Integrate OpenAI response generation in message creation endpoint - modify create_message to call OpenAI service after storing user message, generate AI response, and store assistant message with proper error handling and conversation context
-  - [ ] 5.11 Fix file upload integration with messages - modify message creation to accept file attachments, store file references in message JSON, and ensure uploaded files are properly linked to messages instead of being orphaned uploads
+  - [x] 5.11 Fix file upload integration with messages - modify message creation to accept file attachments, store file references in message JSON, and ensure uploaded files are properly linked to messages instead of being orphaned uploads
 
-- [ ] 6.0 File Upload and Processing System
+- [x] 6.0 File Upload and Processing System
   - [x] 6.1 Create file upload API endpoint with size and type validation
   - [x] 6.4 Create file storage system with organized directory structure
   - [x] 6.6 Add file attachment UI with drag-and-drop support
