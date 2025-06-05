@@ -56,6 +56,7 @@
 
 ### Existing Files Modified
 - `frontend/src/components/Sidebar.tsx` - Update to use new ChatListItem components and handle chat list rendering with management capabilities.
+- `frontend/src/App.tsx` - Pass delete handler prop to Sidebar.
 - `frontend/src/hooks/useChat.ts` - Add delete chat functionality and state management.
 - `frontend/src/services/api.ts` - Add API call for deleting chats.
 - `backend/api/chat.py` - Add DELETE endpoint with active chat validation and proper error handling.
@@ -82,17 +83,17 @@
   - [x] 1.3 Add error handling for non-existent chat IDs and proper HTTP status codes (404, 403, 200)
   - [x] 1.4 Update FastAPI route registration in `backend/main.py` to include the new DELETE endpoint
 
-- [ ] 2.0 Create Frontend Chat Management UI Components
-  - [ ] 2.1 Create `ChatManagementMenu.tsx` component with three-dot icon trigger and dropdown menu containing Delete and Rename options
-  - [ ] 2.2 Implement proper menu positioning, styling, and click-outside-to-close functionality in ChatManagementMenu
-  - [ ] 2.3 Create `ChatListItem.tsx` component with hover effects (background color change) and integration with ChatManagementMenu
-  - [ ] 2.4 Add appropriate icons for Delete (trash can) and Rename (pencil/edit) options using existing icon library or create SVG components
-  - [ ] 2.5 Implement visual state management for hover effects and menu visibility in ChatListItem
+- [x] 2.0 Create Frontend Chat Management UI Components
+  - [x] 2.1 Create `ChatManagementMenu.tsx` component with three-dot icon trigger and dropdown menu containing Delete and Rename options
+  - [x] 2.2 Implement proper menu positioning, styling, and click-outside-to-close functionality in ChatManagementMenu
+  - [x] 2.3 Create `ChatListItem.tsx` component with hover effects (background color change) and integration with ChatManagementMenu
+  - [x] 2.4 Add appropriate icons for Delete (trash can) and Rename (pencil/edit) options using existing icon library or create SVG components
+  - [x] 2.5 Implement visual state management for hover effects and menu visibility in ChatListItem
 
 - [ ] 3.0 Integrate Chat List with Management Capabilities
-  - [ ] 3.1 Refactor `Sidebar.tsx` to use new ChatListItem components instead of direct chat rendering
-  - [ ] 3.2 Pass necessary props (chat data, active chat ID, delete handler) to ChatListItem components
-  - [ ] 3.3 Implement active chat detection logic to disable/hide delete option for currently open chat
+  - [x] 3.1 Refactor `Sidebar.tsx` to use new ChatListItem components instead of direct chat rendering
+  - [x] 3.2 Pass necessary props (chat data, active chat ID, delete handler) to ChatListItem components
+  - [x] 3.3 Implement active chat detection logic to disable/hide delete option for currently open chat
   - [ ] 3.4 Add empty state handling when all chats are deleted (display "No chats available" message)
 
 - [ ] 4.0 Implement Frontend Delete Functionality and State Management
