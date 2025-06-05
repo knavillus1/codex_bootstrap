@@ -34,6 +34,16 @@ export default function MessageBubble({ message }: Props) {
   // --- Show image thumbnail for outgoing user message if file is image ---
   const showUserImage = message.role === 'user' && message.file && message.file.content_type.startsWith('image/') && message.file.url;
 
+  // Helper to get full URL for file access
+  const getFileUrl = (url: string) => {
+    if (url.startsWith('http')) {
+      return url; // Already absolute URL
+    }
+    // Convert relative URL to absolute URL for frontend display
+    const backendBaseUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+    return `${backendBaseUrl}${url}`;
+  };
+
   // Helper to render OpenAI-style content (string or array of parts)
   const renderContent = (content: Message["content"]) => {
     if (typeof content === 'string') return <span>{content}</span>;
@@ -44,7 +54,7 @@ export default function MessageBubble({ message }: Props) {
         return (
           <div className="mt-2" key={idx}>
             <img
-              src={part.image_url}
+              src={getFileUrl(part.image_url)}
               alt="uploaded"
               className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
               style={{ maxWidth: '200px', maxHeight: '150px' }}
@@ -91,7 +101,7 @@ export default function MessageBubble({ message }: Props) {
       {shouldShowFileImage && message.file && (
         <div className="mt-2">
           <img
-            src={message.file.url || (message.file as any).data_uri}
+            src={getFileUrl(message.file.url || (message.file as any).data_uri)}
             alt={message.file.filename}
             className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
             style={{ maxWidth: '200px', maxHeight: '150px' }}

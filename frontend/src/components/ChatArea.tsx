@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useMessages from '../hooks/useMessages';
 import useStream from '../hooks/useStream';
 import type { Chat } from '../types/chat';
+import type { Message } from '../types/message';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import { api } from '../services/api';
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export default function ChatArea({ activeChat }: Props) {
-  const { messages, loadMessages, sendMessage } = useMessages();
+  const { messages, setMessages, loadMessages, sendMessage } = useMessages();
   const { sendStream } = useStream();
   const [loading, setLoading] = useState(false);
   const [partial, setPartial] = useState('');
@@ -29,6 +30,19 @@ export default function ChatArea({ activeChat }: Props) {
 
   const handleSend = async (content: string) => {
     if (!activeChat) return;
+    
+    // Create optimistic user message and add it immediately to UI
+    const userMessage: Message = {
+      id: `temp-${Date.now()}`, // Temporary ID
+      chat_id: activeChat.id,
+      role: 'user',
+      content,
+      created_at: new Date().toISOString(),
+    };
+    
+    // Add user message to UI immediately
+    setMessages(prev => [...prev, userMessage]);
+    
     setLoading(true);
     setPartial('');
     await sendStream(
@@ -48,22 +62,43 @@ export default function ChatArea({ activeChat }: Props) {
   const handleFileUpload = async (file: File) => {
     if (!activeChat) return;
     
-    // Upload the file first
-    const response = await api.postFile<{ filename: string }>('/files/', file);
-    
-    // Create a message with the file attachment
-    // Use backend API base URL for file URLs
-    // Vite exposes env vars as import.meta.env.VITE_*
-    // @ts-ignore
-    const backendBaseUrl = (import.meta as any).env.VITE_API_URL || 'http://localhost:8000';
-    const fileAttachment = {
-      filename: response.filename,
-      content_type: file.type,
-      url: `${backendBaseUrl}/files/${response.filename}` // Assuming files can be accessed via this URL
+    // Create optimistic user message and add it immediately to UI
+    const userMessage: Message = {
+      id: `temp-file-${Date.now()}`, // Temporary ID for file uploads
+      chat_id: activeChat.id,
+      role: 'user',
+      content: `Uploaded file: ${file.name}`,
+      created_at: new Date().toISOString(),
     };
     
-    await sendMessage(activeChat.id, `Uploaded file: ${file.name}`, 'user', fileAttachment);
-    await loadMessages(activeChat.id);
+    // Add user message to UI immediately
+    setMessages(prev => [...prev, userMessage]);
+    
+    setLoading(true);
+    
+    try {
+      // Upload the file first
+      const response = await api.postFile<{ filename: string }>('/files/', file);
+      
+      // Create file attachment object with relative URL (backend expects relative paths)
+      const fileAttachment = {
+        filename: response.filename,
+        content_type: file.type,
+        url: `/files/${response.filename}` // Use relative URL for backend compatibility
+      };
+      
+      // Send message to backend - this will replace the optimistic message with real data
+      await sendMessage(activeChat.id, `Uploaded file: ${file.name}`, 'user', fileAttachment);
+      
+      // Reload messages to get the final state with proper IDs and file data
+      await loadMessages(activeChat.id);
+    } catch (error) {
+      console.error('File upload failed:', error);
+      // Remove the optimistic message on error
+      setMessages(prev => prev.filter(m => m.id !== userMessage.id));
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!activeChat) {
