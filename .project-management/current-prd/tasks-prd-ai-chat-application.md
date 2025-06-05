@@ -74,7 +74,7 @@
 - `DEVELOPMENT.md` - Local development instructions
 - `backend/main.py` - Add status endpoint
 - `backend/models/__init__.py` - Export chat and message models
-- `run_tests.sh` - Set default OPENAI_API_KEY for tests
+ - `run_tests.sh` - Run backend and frontend tests with default OPENAI_API_KEY
 - `frontend/src/styles/globals.css` - Global styles, color variables, and custom scrollbar
 - `frontend/tailwind.config.js` - Tailwind CSS configuration
 - `backend/api/chat.py` - Add CRUD chat endpoints
@@ -192,7 +192,7 @@
 - [ ] 9.0 Testing and Quality Assurance
   - [x] 9.1 Write unit tests for all backend API endpoints
   - [x] 9.2 Create tests for OpenAI service integration with mocking
-  - [ ] 9.3 Add frontend component tests using React Testing Library
+  - [x] 9.3 Add frontend component tests using React Testing Library
   - [ ] 9.4 Test custom hooks (useChat, useMessages) with proper mocking
   - [ ] 9.5 Implement integration tests for file upload and processing
   - [ ] 9.6 Add end-to-end tests for complete chat flow
