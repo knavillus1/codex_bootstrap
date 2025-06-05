@@ -27,9 +27,10 @@ describe('ChatArea', () => {
     const chat: Chat = {
       id: '1',
       title: 'Test Chat',
-      created: '',
+      created_at: '',
       last_activity: '',
       message_count: 0,
+      messages: [],
     };
     render(<ChatArea activeChat={chat} />);
     expect(screen.getByRole('heading', { name: 'Test Chat' })).toBeInTheDocument();

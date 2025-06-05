@@ -6,9 +6,9 @@ export interface File {
 
 export interface Message {
   id: string;
-  chatId: string;
+  chat_id: string;
   role: 'user' | 'assistant';
   content: string;
   file?: File;
-  createdAt: string;
+  created_at: string;
 }

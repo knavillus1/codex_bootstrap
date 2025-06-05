@@ -65,6 +65,7 @@
 - `frontend/src/__tests__/components/ChatArea.test.tsx` - Unit tests for chat area
 - `frontend/src/__tests__/hooks/useChat.test.ts` - Unit tests for chat hook
 - `frontend/src/__tests__/hooks/useMessages.test.ts` - Unit tests for messages hook
+- `frontend/src/__tests__/utils/dateUtils.test.ts` - Unit tests for timestamp formatting utility
 
 ### Existing Files Modified
 - `frontend/package.json` - Add React, Vite, Tailwind CSS, and testing dependencies
@@ -95,6 +96,12 @@
 - `frontend/src/components/FileUpload.tsx` - File upload interface component
 - `frontend/src/components/ChatArea.tsx` - Main chat interface component
 - `frontend/src/App.tsx` - Responsive layout for mobile/desktop
+- `frontend/src/types/message.ts` - Message interface with timestamps in snake_case
+- `frontend/src/types/chat.ts` - Chat interface with timestamps in snake_case
+- `frontend/src/components/MessageBubble.tsx` - Display message timestamps correctly
+- `frontend/src/utils/dateUtils.ts` - Handle invalid timestamps gracefully
+- `frontend/src/__tests__/components/ChatArea.test.tsx` - Updated for new Chat fields
+- `frontend/src/__tests__/hooks/useChat.test.ts` - Updated for new Chat fields
 
 ### Notes
 
@@ -157,7 +164,7 @@
   - [x] 5.6 Add "AI is thinking" indicators and loading states
   - [x] 5.7 Handle OpenAI API errors and rate limiting gracefully
   - [x] 5.8 Implement message timestamp and formatting
-  - [ ] 5.9 Fix Invalid Date display by ensuring all messages and chats have valid timestamp fields and are correctly formatted in the frontend.  Protect from regression with unit tests.
+  - [x] 5.9 Fix Invalid Date display by ensuring all messages and chats have valid timestamp fields and are correctly formatted in the frontend.  Protect from regression with unit tests.
   - [ ] 5.10 Integrate OpenAI response generation in message creation endpoint - modify create_message to call OpenAI service after storing user message, generate AI response, and store assistant message with proper error handling and conversation context
   - [ ] 5.11 Fix file upload integration with messages - modify message creation to accept file attachments, store file references in message JSON, and ensure uploaded files are properly linked to messages instead of being orphaned uploads
 

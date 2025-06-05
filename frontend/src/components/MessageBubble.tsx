@@ -15,7 +15,7 @@ export default function MessageBubble({ message }: Props) {
       }`}
     >
       <div className="text-xs text-gray-500 mb-1">
-        {formatTimestamp(message.createdAt)}
+        {formatTimestamp(message.created_at)}
       </div>
       <div>{message.content}</div>
     </div>

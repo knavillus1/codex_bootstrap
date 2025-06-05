@@ -15,7 +15,7 @@ describe('useChat', () => {
   });
 
   it('loads chats on mount', async () => {
-    const chats = [{ id: '1', title: 'Chat', created: '', last_activity: '', message_count: 0 }];
+    const chats = [{ id: '1', title: 'Chat', created_at: '', last_activity: '', message_count: 0, messages: [] }];
     (api.get as unknown as any).mockResolvedValue(chats);
     const { result } = renderHook(() => useChat());
     await waitFor(() => expect(api.get).toHaveBeenCalledWith('/chats/'));
@@ -25,7 +25,7 @@ describe('useChat', () => {
 
   it('creates chat and sets active', async () => {
     (api.get as unknown as any).mockResolvedValue([]);
-    const chat = { id: '2', title: 'New', created: '', last_activity: '', message_count: 0 };
+    const chat = { id: '2', title: 'New', created_at: '', last_activity: '', message_count: 0, messages: [] };
     (api.post as unknown as any).mockResolvedValue(chat);
     const { result } = renderHook(() => useChat());
     await waitFor(() => expect(api.get).toHaveBeenCalled());
