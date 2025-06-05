@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
 
-from config import settings
-from api import api_router
+from backend.config import settings
+from backend.api import api_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

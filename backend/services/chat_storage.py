@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import List
 from uuid import uuid4
 
-from models.chat import Chat
-from models.message import Message, File
+from ..models.chat import Chat
+from ..models.message import Message, File
 
 
 class ChatStorage:

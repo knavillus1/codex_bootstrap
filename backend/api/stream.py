@@ -1,11 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import AsyncGenerator, List
 
-from config import settings
-from services.openai_service import OpenAIService
-from services.chat_storage import ChatStorage
+from backend.config import settings
+from backend.services.openai_service import OpenAIService
+from backend.services.chat_storage import ChatStorage
 
 
 router = APIRouter(prefix="/stream", tags=["stream"])
@@ -39,9 +39,6 @@ class StreamRequest(BaseModel):
 
 @router.post("/")
 async def stream(payload: StreamRequest):
-    if not settings.FEATURE_STREAMING:
-        raise HTTPException(status_code=404, detail="Streaming disabled")
-
     storage = get_storage()
     storage.add_message(
         chat_id=payload.chat_id,
@@ -67,8 +64,30 @@ async def stream(payload: StreamRequest):
         history.append({"role": m.role, "content": content})
 
     async def generator() -> AsyncGenerator[str, None]:
+        assistant_content = ""
         async for chunk in get_openai_service().chat_completion_stream(history):
-            yield format_sse(str(chunk))
+            try:
+                data = chunk
+                if isinstance(data, str):
+                    import json
+
+                    data = json.loads(data)
+                delta = (
+                    data.get("choices", [{}])[0]
+                    .get("delta", {})
+                    .get("content", "")
+                )
+                assistant_content += delta
+                if delta:
+                    yield format_sse(delta)
+            except Exception:
+                pass
+        if assistant_content.strip():
+            storage.add_message(
+                chat_id=payload.chat_id,
+                role="assistant",
+                content=assistant_content,
+            )
         yield format_sse("[DONE]", event="done")
 
     return StreamingResponse(generator(), media_type="text/event-stream")

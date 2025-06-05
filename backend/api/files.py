@@ -3,7 +3,7 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
 
-from services.file_service import FileService
+from backend.services.file_service import FileService
 
 router = APIRouter(prefix="/files", tags=["files"])
 

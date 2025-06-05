@@ -2,7 +2,7 @@ import logging
 import time
 from typing import Any, List
 
-from config import settings
+from ..config import settings
 
 try:
     import openai

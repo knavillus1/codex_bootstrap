@@ -6,13 +6,13 @@ from typing import Optional, List, Dict
 import logging
 import base64
 import mimetypes
-import api.files as files_api
+from . import files as files_api
 
-from config import settings
-from services.openai_service import OpenAIService
+from backend.config import settings
+from backend.services.openai_service import OpenAIService
 
-from services.chat_storage import ChatStorage
-from models.message import File
+from backend.services.chat_storage import ChatStorage
+from backend.models.message import File
 
 router = APIRouter(prefix="/messages", tags=["messages"])
 

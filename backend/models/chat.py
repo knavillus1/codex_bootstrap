@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 from pydantic import BaseModel, Field
-from models.message import Message
+from .message import Message
 
 
 class Chat(BaseModel):

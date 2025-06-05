@@ -31,12 +31,18 @@ export default function ChatArea({ activeChat }: Props) {
     if (!activeChat) return;
     setLoading(true);
     setPartial('');
-    await sendStream(activeChat.id, content, data => {
-      setPartial(prev => prev + data);
-    });
-    await loadMessages(activeChat.id);
-    setLoading(false);
-    setPartial('');
+    await sendStream(
+      activeChat.id,
+      content,
+      data => {
+        setPartial(prev => prev + data);
+      },
+      async () => {
+        await loadMessages(activeChat.id);
+        setLoading(false);
+        setPartial('');
+      }
+    );
   };
 
   const handleFileUpload = async (file: File) => {
