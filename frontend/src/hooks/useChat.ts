@@ -18,6 +18,21 @@ export default function useChat(initialChats: Chat[] = []) {
 
   const addChat = (chat: Chat) => setChats(prev => [...prev, chat]);
 
+  const deleteChat = async (chatId: string) => {
+    const previous = [...chats];
+    setChats(prev => prev.filter(c => c.id !== chatId));
+    try {
+      await api.deleteChat(chatId, activeChatId);
+      if (activeChatId === chatId) {
+        const remaining = previous.filter(c => c.id !== chatId);
+        setActiveChatId(remaining.length ? remaining[0].id : null);
+      }
+    } catch (err) {
+      setChats(previous);
+      throw err;
+    }
+  };
+
   const createChat = async (title: string | null = null) => {
     const chat = await api.post<Chat>('/chats/', { title });
     addChat(chat);
@@ -36,6 +51,7 @@ export default function useChat(initialChats: Chat[] = []) {
     setChats,
     addChat,
     createChat,
+    deleteChat,
     loadChats,
     activeChatId,
     activeChat,

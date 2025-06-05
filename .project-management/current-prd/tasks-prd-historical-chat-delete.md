@@ -94,19 +94,19 @@
   - [x] 3.1 Refactor `Sidebar.tsx` to use new ChatListItem components instead of direct chat rendering
   - [x] 3.2 Pass necessary props (chat data, active chat ID, delete handler) to ChatListItem components
   - [x] 3.3 Implement active chat detection logic to disable/hide delete option for currently open chat
-  - [ ] 3.4 Add empty state handling when all chats are deleted (display "No chats available" message)
+  - [x] 3.4 Add empty state handling when all chats are deleted (display "No chats available" message)
 
 - [ ] 4.0 Implement Frontend Delete Functionality and State Management
-  - [ ] 4.1 Add deleteChat function to `useChat.ts` hook that calls API and updates local state
-  - [ ] 4.2 Implement optimistic UI updates that immediately remove chat from list before API confirmation
-  - [ ] 4.3 Add error handling and rollback mechanism if delete API call fails
-  - [ ] 4.4 Create deleteChat API function in `frontend/src/services/api.ts` for DELETE requests
-  - [ ] 4.5 Ensure chat list re-renders correctly after deletion and active chat remains unchanged (if not deleted)
+  - [x] 4.1 Add deleteChat function to `useChat.ts` hook that calls API and updates local state
+  - [x] 4.2 Implement optimistic UI updates that immediately remove chat from list before API confirmation
+  - [x] 4.3 Add error handling and rollback mechanism if delete API call fails
+  - [x] 4.4 Create deleteChat API function in `frontend/src/services/api.ts` for DELETE requests
+  - [x] 4.5 Ensure chat list re-renders correctly after deletion and active chat remains unchanged (if not deleted)
 
 - [x] 5.0 Add Comprehensive Testing Coverage
-  - [ ] 5.1 Write unit tests for ChatManagementMenu component covering menu open/close, option clicks, and prop handling
-  - [ ] 5.2 Write unit tests for ChatListItem component covering hover states, menu integration, and active chat detection
-  - [ ] 5.3 Add tests to existing `useChat.test.ts` for deleteChat functionality, error handling, and state updates
+  - [x] 5.1 Write unit tests for ChatManagementMenu component covering menu open/close, option clicks, and prop handling
+  - [x] 5.2 Write unit tests for ChatListItem component covering hover states, menu integration, and active chat detection
+  - [x] 5.3 Add tests to existing `useChat.test.ts` for deleteChat functionality, error handling, and state updates
   - [x] 5.4 Write backend API tests in `test_chat_api.py` for DELETE endpoint including success, failure, and validation scenarios
   - [ ] 5.5 Add integration tests verifying end-to-end chat deletion flow from UI interaction to backend storage removal
 

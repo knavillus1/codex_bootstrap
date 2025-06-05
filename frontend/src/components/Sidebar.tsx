@@ -20,15 +20,19 @@ export default function Sidebar({ chats, activeChatId, onSelect, onNewChat, onDe
         New Chat
       </button>
       <div className="overflow-y-auto space-y-2">
-        {chats.map(chat => (
-          <ChatListItem
-            key={chat.id}
-            chat={chat}
-            active={chat.id === activeChatId}
-            onSelect={onSelect}
-            onDelete={onDeleteChat}
-          />
-        ))}
+        {chats.length === 0 ? (
+          <p className="text-sm text-center text-gray-500">No chats available</p>
+        ) : (
+          chats.map(chat => (
+            <ChatListItem
+              key={chat.id}
+              chat={chat}
+              active={chat.id === activeChatId}
+              onSelect={onSelect}
+              onDelete={onDeleteChat}
+            />
+          ))
+        )}
       </div>
     </aside>
   );

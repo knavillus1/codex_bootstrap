@@ -11,12 +11,8 @@ function Home() {
     activeChat,
     selectChat,
     createChat,
-    // deleteChat will be implemented later
+    deleteChat,
   } = useChat();
-
-  const deleteChat = (id: string) => {
-    console.log('delete chat', id);
-  };
 
   return (
     <div className="flex flex-col h-screen sm:flex-row">
