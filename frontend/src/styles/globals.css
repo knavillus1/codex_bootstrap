@@ -3,15 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #A4CCD9;
-  --color-secondary: #C4E1E6;
-  --color-accent: #EBFFD8;
-  --color-highlight: rgb(141, 188, 199);
+  --color-bg-main: #EEEDEB;
+  --color-bg-sidebar: #F5F5F5;
+  --color-accent-primary: #E6B9A6;
+  --color-accent-secondary: #939185;
+  --color-text-primary: #2F3645;
+  --color-text-secondary: #5D6471;
+  --color-text-on-accent: #2F3645;
+  --color-text-on-dark: #EEEDEB;
+
+  --color-border-subtle: #DCDAD7;
+  --color-border-strong: #939185;
+
+  --color-user-message-bg: var(--color-accent-primary);
+  --color-user-message-text: var(--color-text-on-accent);
+  --color-ai-message-bg: #FFFFFF;
+  --color-ai-message-text: var(--color-text-primary);
+
+  --color-button-primary-bg: var(--color-text-primary);
+  --color-button-primary-text: var(--color-text-on-dark);
+  --color-button-secondary-bg: var(--color-accent-secondary);
+  --color-button-secondary-text: var(--color-text-on-dark);
 }
 
 /* Custom scrollbar styling */
 * {
-  scrollbar-color: var(--color-highlight) var(--color-secondary);
+  scrollbar-color: var(--color-accent-secondary) var(--color-bg-main);
   scrollbar-width: thin;
 }
 
@@ -21,10 +38,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--color-secondary);
+  background-color: var(--color-bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-highlight);
+  background-color: var(--color-accent-secondary);
   border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-primary);
 }

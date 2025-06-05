@@ -18,11 +18,11 @@ export default function MessageBubble({ message }: Props) {
     if (isImage && url) {
       return (
         <div className="mt-2">
-          <img 
-            src={url} 
-            alt={filename} 
-            className="max-w-full max-h-48 rounded border"
-            style={{ maxWidth: '200px', maxHeight: '200px' }}
+          <img
+            src={url}
+            alt={filename}
+            className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
+            style={{ maxWidth: '200px', maxHeight: '150px' }}
           />
         </div>
       );
@@ -40,11 +40,19 @@ export default function MessageBubble({ message }: Props) {
   
   return (
     <div
-      className={`my-1 max-w-xs px-3 py-2 rounded ${
-        isUser ? 'bg-secondary self-end' : 'bg-accent self-start'
+      className={`my-1 max-w-md px-4 py-3 rounded-xl shadow-medium ${
+        isUser
+          ? 'rounded-br-lg bg-[var(--color-user-message-bg)] text-[var(--color-user-message-text)] self-end'
+          : 'rounded-bl-lg bg-[var(--color-ai-message-bg)] text-[var(--color-ai-message-text)] self-start border border-[var(--color-border-subtle)]'
       }`}
     >
-      <div className="text-xs text-gray-500 mb-1">
+      <div
+        className={`text-xs mb-1 ${
+          isUser
+            ? 'text-[var(--color-user-message-text)]/80'
+            : 'text-[var(--color-text-secondary)]'
+        }`}
+      >
         {formatTimestamp(message.created_at)}
       </div>
       <div>{message.content}</div>

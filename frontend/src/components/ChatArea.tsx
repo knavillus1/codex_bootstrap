@@ -53,9 +53,9 @@ export default function ChatArea({ activeChat }: Props) {
   }
 
   return (
-    <main className="flex-1 p-4 flex flex-col">
-      <h1 className="text-2xl font-bold mb-4">{activeChat.title}</h1>
-      <div className="flex-1 flex flex-col space-y-2 overflow-y-auto">
+    <main className="flex-1 p-4 flex flex-col bg-[var(--color-bg-main)]">
+      <h1 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">{activeChat.title}</h1>
+      <div className="flex-1 flex flex-col space-y-3 overflow-y-auto p-2">
         {messages.map(m => (
           <MessageBubble key={m.id} message={m} />
         ))}
