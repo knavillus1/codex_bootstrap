@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str
     OPENAI_MODEL: str = "gpt-4.1"
     ALLOW_ORIGINS: str = "http://localhost:5173"
+    FEATURE_STREAMING: bool = False
 
     @validator("OPENAI_API_KEY")
     def validate_key(cls, v: str) -> str:
