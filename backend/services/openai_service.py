@@ -18,8 +18,13 @@ class OpenAIService:
     def __init__(self, api_key: str, model: str | None = None) -> None:
         if openai is None:
             raise RuntimeError("openai package is required")
-        openai.api_key = api_key
-        self._client = openai.ChatCompletion
+        # openai>=1.0 uses a client instance for API access
+        # fall back to the legacy global api_key if OpenAI class is missing
+        if hasattr(openai, "OpenAI"):
+            self._client = openai.OpenAI(api_key=api_key)
+        else:  # pragma: no cover - legacy openai versions
+            openai.api_key = api_key
+            self._client = openai.ChatCompletion
         self.default_model = model or settings.OPENAI_MODEL
 
     def chat_completion(
@@ -41,6 +46,11 @@ class OpenAIService:
 
         for attempt in range(retries):
             try:
+                if hasattr(self._client, "chat"):
+                    # openai>=1.0 client
+                    return self._client.chat.completions.create(
+                        model=model, messages=messages
+                    )
                 return self._client.create(model=model, messages=messages)
             except RateLimitErr as exc:  # type: ignore[misc]
                 last_error = exc
