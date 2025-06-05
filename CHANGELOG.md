@@ -23,3 +23,4 @@
 - 2025-06-04: add frontend component tests using vitest
 - 2025-06-04: add unit tests for useChat and useMessages hooks
 - 2025-06-05: fix timestamp display and add date utility tests
+- 2025-06-05: organize uploads into dated subdirectories

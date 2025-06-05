@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Iterable
+from datetime import datetime
 from uuid import uuid4
 
 from fastapi import UploadFile
@@ -38,7 +39,10 @@ class FileService:
         if len(data) > self.max_size:
             raise ValueError("File too large")
         file_id = uuid4().hex + Path(upload.filename).suffix
-        dest = self.upload_dir / file_id
+        now = datetime.utcnow()
+        dest_dir = self.upload_dir / f"{now:%Y/%m/%d}"
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest = dest_dir / file_id
         dest.write_bytes(data)
         upload.file.seek(0)
         return dest

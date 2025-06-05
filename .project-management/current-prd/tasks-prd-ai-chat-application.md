@@ -172,7 +172,7 @@
   - [x] 6.1 Create file upload API endpoint with size and type validation
   - [ ] 6.2 Implement image file processing and preview generation
   - [ ] 6.3 Add document file text extraction (PDF, DOC, TXT, CSV)
-  - [ ] 6.4 Create file storage system with organized directory structure
+  - [x] 6.4 Create file storage system with organized directory structure
   - [ ] 6.5 Implement OpenAI vision API integration for image analysis
   - [x] 6.6 Add file attachment UI with drag-and-drop support
   - [ ] 6.7 Create file preview components for different file types
