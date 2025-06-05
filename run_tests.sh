@@ -14,7 +14,7 @@ pytest backend/tests "$@"
 echo "Running vitest..."
 cd frontend
 # Ensure dependencies are installed before checking vitest
-if ! npm list jsdom >/dev/null 2>&1; then
+if ! npm list jsdom >/dev/null 2>&1 || ! npm list eventsource-parser >/dev/null 2>&1; then
   echo "Installing missing frontend dependencies..."
   npm install
 fi

@@ -4,7 +4,7 @@ export interface ApiOptions {
   body?: any;
 }
 
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+export const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 async function request<T>(path: string, options: ApiOptions = {}): Promise<T> {
   const response = await fetch(`${baseUrl}${path}`, {
