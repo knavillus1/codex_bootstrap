@@ -38,6 +38,29 @@ export default function MessageBubble({ message }: Props) {
     }
   };
   
+  // Helper to render OpenAI-style content (string or array of parts)
+  const renderContent = (content: Message["content"]) => {
+    if (typeof content === 'string') return <span>{content}</span>;
+    // If content is an array, render each part
+    return content.map((part, idx) => {
+      if (typeof part === 'string') return <span key={idx}>{part}</span>;
+      if (part.type === 'input_image' && part.image_url) {
+        return (
+          <div className="mt-2" key={idx}>
+            <img
+              src={part.image_url}
+              alt="uploaded"
+              className="max-w-full max-h-48 rounded-lg border border-[var(--color-border-subtle)] shadow-subtle"
+              style={{ maxWidth: '200px', maxHeight: '150px' }}
+            />
+          </div>
+        );
+      }
+      // fallback for unknown part
+      return <span key={idx}>[Unsupported content]</span>;
+    });
+  };
+
   return (
     <div
       className={`my-1 max-w-md px-4 py-3 rounded-xl shadow-medium ${
@@ -55,7 +78,7 @@ export default function MessageBubble({ message }: Props) {
       >
         {formatTimestamp(message.created_at)}
       </div>
-      <div>{message.content}</div>
+      <div>{renderContent(message.content)}</div>
       {renderFileAttachment()}
     </div>
   );

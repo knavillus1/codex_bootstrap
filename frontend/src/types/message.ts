@@ -1,3 +1,5 @@
+export type MessageContentPart = string | { type: string; image_url: string };
+
 export interface File {
   filename: string;
   content_type: string;
@@ -8,7 +10,7 @@ export interface Message {
   id: string;
   chat_id: string;
   role: 'user' | 'assistant';
-  content: string;
+  content: string | MessageContentPart[];
   file?: File;
   created_at: string;
 }

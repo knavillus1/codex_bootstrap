@@ -63,7 +63,7 @@ class ChatStorage:
         return chats
 
     def add_message(
-        self, chat_id: str, role: str, content: str, file: File = None
+        self, chat_id: str, role: str, content, file: File = None
     ) -> Message:
         """Add a message to a chat and persist it."""
         chat = self.load_chat(chat_id)
@@ -79,7 +79,14 @@ class ChatStorage:
         chat.message_count = len(chat.messages)
         chat.last_activity = message.created_at
         if is_first and chat.title.startswith("Chat "):
-            chat.title = content.split("\n", 1)[0][:40]
+            # If content is a list, use the first string part for the title
+            if isinstance(content, list):
+                for part in content:
+                    if isinstance(part, str):
+                        chat.title = part.split("\n", 1)[0][:40]
+                        break
+            else:
+                chat.title = content.split("\n", 1)[0][:40]
         self.save_chat(chat)
         return message
 

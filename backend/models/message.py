@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Union, List, Dict, Any
 from pydantic import BaseModel, Field
 
 
@@ -18,6 +18,6 @@ class Message(BaseModel):
     id: str
     chat_id: str
     role: str  # 'user' or 'assistant'
-    content: str
+    content: Union[str, List[Any]]
     file: Optional[File] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)

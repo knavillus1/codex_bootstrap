@@ -73,35 +73,64 @@ async def create_message(payload: MessageCreate):
         user_msg = get_storage().add_message(
             chat_id=payload.chat_id,
             role=payload.role,
-            content=payload.content,
+            content=payload.content,  # can be str or list
             file=file,
         )
+        assistant_msg = None
         if payload.role == "user":
             # Build conversation for AI response
             history: List[Dict[str, object]] = []
             for m in get_storage().list_messages(payload.chat_id):
+                content = m.content
+                # If message has a file with data_uri, ensure content is a list and append the image object
                 if m.file and m.file.data_uri:
-                    history.append(
-                        {
-                            "role": m.role,
-                            "content": [
-                                m.content,
-                                {
-                                    "type": "input_image",
-                                    "image_url": m.file.data_uri,
-                                },
-                            ],
-                        }
-                    )
-                else:
-                    history.append({"role": m.role, "content": m.content})
+                    image_part = {"type": "input_image", "image_url": m.file.data_uri}
+                    if isinstance(content, list):
+                        # Only add image if not already present
+                        has_image = any(
+                            isinstance(part, dict) and part.get("type") == "input_image" for part in content
+                        )
+                        if not has_image:
+                            content = content + [image_part]
+                    elif isinstance(content, str):
+                        content = [content, image_part]
+                    else:
+                        content = [image_part]
+                # --- FIX: Wrap string parts in {type: "text", text: ...} if content is a list ---
+                if isinstance(content, list):
+                    new_content = []
+                    for part in content:
+                        if isinstance(part, str):
+                            new_content.append({"type": "input_text", "text": part})
+                        else:
+                            new_content.append(part)
+                    content = new_content
+                elif isinstance(content, str):
+                    # If content is a string, leave as-is (OpenAI accepts string for pure text)
+                    pass
+                history.append({"role": m.role, "content": content})
             try:
                 ai_resp = get_openai_service().chat_completion(history)
-                ai_content = (
-                    ai_resp.get("output_text")
-                    or ai_resp["choices"][0]["message"]["content"]
-                )
-                get_storage().add_message(
+                ai_content = None
+                # Try all known OpenAI response formats
+                if "output_text" in ai_resp:
+                    ai_content = ai_resp["output_text"]
+                elif "choices" in ai_resp and ai_resp["choices"]:
+                    ai_content = ai_resp["choices"][0]["message"]["content"]
+                elif (
+                    "output" in ai_resp and isinstance(ai_resp["output"], list)
+                    and ai_resp["output"]
+                    and "content" in ai_resp["output"][0]
+                    and isinstance(ai_resp["output"][0]["content"], list)
+                    and ai_resp["output"][0]["content"]
+                    and "text" in ai_resp["output"][0]["content"][0]
+                ):
+                    ai_content = ai_resp["output"][0]["content"][0]["text"]
+                if not ai_content:
+                    logger = logging.getLogger(__name__)
+                    logger.error(f"Unexpected OpenAI response format: {ai_resp}")
+                    ai_content = "[Error: AI response format not recognized]"
+                assistant_msg = get_storage().add_message(
                     chat_id=payload.chat_id,
                     role="assistant",
                     content=ai_content,
@@ -109,7 +138,9 @@ async def create_message(payload: MessageCreate):
             except Exception as exc:  # pragma: no cover - network failures
                 logger = logging.getLogger(__name__)
                 logger.error("Failed to generate AI response: %s", exc)
-        return user_msg
+        if assistant_msg:
+            return {"user": user_msg, "assistant": assistant_msg}
+        return {"user": user_msg}
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")
     except Exception as e:

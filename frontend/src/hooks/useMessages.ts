@@ -10,8 +10,6 @@ export default function useMessages(initialMessages: Message[] = []) {
     setMessages(data);
   };
 
-  const addMessage = (msg: Message) => setMessages(prev => [...prev, msg]);
-
   const sendMessage = async (
     chatId: string,
     content: string,
@@ -23,7 +21,6 @@ export default function useMessages(initialMessages: Message[] = []) {
       role,
       content,
     };
-    
     if (file) {
       payload.file = {
         filename: file.filename,
@@ -31,10 +28,14 @@ export default function useMessages(initialMessages: Message[] = []) {
         url: file.url,
       };
     }
-    
-    const msg = await api.post<Message>('/messages/', payload);
-    addMessage(msg);
-    return msg;
+    // Accept both user and assistant messages from backend
+    const result = await api.post<{ user: Message; assistant?: Message }>('/messages/', payload);
+    // Optimistically add both messages to local state for instant UI feedback
+    setMessages(prev =>
+      result.assistant
+        ? [...prev, result.user, result.assistant]
+        : [...prev, result.user]
+    );
   };
-  return { messages, setMessages, addMessage, loadMessages, sendMessage };
+  return { messages, setMessages, loadMessages, sendMessage };
 }
