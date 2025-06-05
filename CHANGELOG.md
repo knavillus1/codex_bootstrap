@@ -36,3 +36,4 @@
 - 2025-06-05: include file URL in message attachments
 - 2025-06-05: add streaming endpoint and tests
 - 2025-06-05: add useStream hook with SSE support and tests
+- 2025-06-05: integrate streaming into ChatArea with partial UI

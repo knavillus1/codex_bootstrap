@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useMessages from '../hooks/useMessages';
+import useStream from '../hooks/useStream';
 import type { Chat } from '../types/chat';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
@@ -11,7 +12,9 @@ interface Props {
 
 export default function ChatArea({ activeChat }: Props) {
   const { messages, loadMessages, sendMessage } = useMessages();
+  const { sendStream } = useStream();
   const [loading, setLoading] = useState(false);
+  const [partial, setPartial] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,14 +25,18 @@ export default function ChatArea({ activeChat }: Props) {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
+  }, [messages, loading, partial]);
 
   const handleSend = async (content: string) => {
     if (!activeChat) return;
     setLoading(true);
-    await sendMessage(activeChat.id, content);
+    setPartial('');
+    await sendStream(activeChat.id, content, data => {
+      setPartial(prev => prev + data);
+    });
     await loadMessages(activeChat.id);
     setLoading(false);
+    setPartial('');
   };
 
   const handleFileUpload = async (file: File) => {
@@ -64,7 +71,20 @@ export default function ChatArea({ activeChat }: Props) {
         {messages.map(m => (
           <MessageBubble key={m.id} message={m} />
         ))}
-        {loading && <div className="text-sm text-gray-500">AI is thinking...</div>}
+        {partial && (
+          <MessageBubble
+            message={{
+              id: 'streaming',
+              chat_id: activeChat.id,
+              role: 'assistant',
+              content: partial,
+              created_at: new Date().toISOString(),
+            }}
+          />
+        )}
+        {loading && !partial && (
+          <div className="text-sm text-gray-500">AI is typing…</div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       <ChatInput onSend={handleSend} onUpload={handleFileUpload} loading={loading} />

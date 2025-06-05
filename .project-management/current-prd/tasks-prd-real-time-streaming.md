@@ -58,8 +58,8 @@
   - [x] 4.2 Install `eventsource-parser` and update `frontend/package.json`.
   - [x] 4.3 Write unit tests in `frontend/src/hooks/useStream.test.ts` using Vitest.
 
-- [ ] 5.0 Integrate Streaming into `ChatArea` Component
-  - [ ] 5.1 Import and use `useStream` in `frontend/src/components/ChatArea.tsx`.
-  - [ ] 5.2 Replace `sendMessage` with `sendStream` invocation.
-  - [ ] 5.3 Render `partial` token stream in a new or existing `<MessageBubble>` component.
-  - [ ] 5.4 Add "AI is typing…" indicator before first token and auto-scroll behavior.
+- [x] 5.0 Integrate Streaming into `ChatArea` Component
+  - [x] 5.1 Import and use `useStream` in `frontend/src/components/ChatArea.tsx`.
+  - [x] 5.2 Replace `sendMessage` with `sendStream` invocation.
+  - [x] 5.3 Render `partial` token stream in a new or existing `<MessageBubble>` component.
+  - [x] 5.4 Add "AI is typing…" indicator before first token and auto-scroll behavior.
