@@ -32,15 +32,22 @@ class OpenAIService:
         """Request a chat completion with retries on rate limit errors."""
         last_error: Exception | None = None
         model = model or self.default_model
+        if hasattr(openai, "error"):
+            RateLimitErr = openai.error.RateLimitError  # type: ignore[attr-defined]
+            OpenAIErr = openai.error.OpenAIError  # type: ignore[attr-defined]
+        else:
+            RateLimitErr = openai.RateLimitError  # type: ignore[attr-defined]
+            OpenAIErr = openai.OpenAIError  # type: ignore[attr-defined]
+
         for attempt in range(retries):
             try:
                 return self._client.create(model=model, messages=messages)
-            except (openai.error.RateLimitError,) as exc:  # type: ignore[attr-defined]
+            except RateLimitErr as exc:  # type: ignore[misc]
                 last_error = exc
                 delay = backoff * (2 ** attempt)
                 logger.warning("Rate limited, retrying in %.1fs", delay)
                 time.sleep(delay)
-            except openai.error.OpenAIError as exc:  # type: ignore[attr-defined]
+            except OpenAIErr as exc:  # type: ignore[misc]
                 last_error = exc
                 logger.error("OpenAI error: %s", exc)
                 break
