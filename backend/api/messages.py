@@ -3,6 +3,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict
+import logging
 
 from config import settings
 from services.openai_service import OpenAIService
@@ -64,13 +65,17 @@ async def create_message(payload: MessageCreate):
                 {"role": m.role, "content": m.content}
                 for m in get_storage().list_messages(payload.chat_id)
             ]
-            ai_resp = get_openai_service().chat_completion(history)
-            ai_content = ai_resp["choices"][0]["message"]["content"]
-            get_storage().add_message(
-                chat_id=payload.chat_id,
-                role="assistant",
-                content=ai_content,
-            )
+            try:
+                ai_resp = get_openai_service().chat_completion(history)
+                ai_content = ai_resp["choices"][0]["message"]["content"]
+                get_storage().add_message(
+                    chat_id=payload.chat_id,
+                    role="assistant",
+                    content=ai_content,
+                )
+            except Exception as exc:  # pragma: no cover - network failures
+                logger = logging.getLogger(__name__)
+                logger.error("Failed to generate AI response: %s", exc)
         return msg
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Chat not found")
