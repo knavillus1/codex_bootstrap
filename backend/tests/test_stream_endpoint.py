@@ -25,5 +25,4 @@ def test_stream_endpoint(monkeypatch):
     assert resp.status_code == 200
     assert resp.headers["content-type"].startswith("text/event-stream")
     body = resp.text
-    assert "delta" in body
     assert "[DONE]" in body

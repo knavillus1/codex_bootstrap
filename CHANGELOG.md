@@ -37,3 +37,4 @@
 - 2025-06-05: add streaming endpoint and tests
 - 2025-06-05: add useStream hook with SSE support and tests
 - 2025-06-05: integrate streaming into ChatArea with partial UI
+- 2025-06-05: add active chat validation and tests for delete endpoint

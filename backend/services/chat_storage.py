@@ -48,7 +48,10 @@ class ChatStorage:
 
     def delete_chat(self, chat_id: str) -> None:
         """Remove a chat from storage."""
-        self._chat_path(chat_id).unlink()
+        path = self._chat_path(chat_id)
+        if not path.exists():
+            raise FileNotFoundError(chat_id)
+        path.unlink()
 
     def list_chats(self) -> List[Chat]:
         """Return all stored chats sorted by newest first."""
