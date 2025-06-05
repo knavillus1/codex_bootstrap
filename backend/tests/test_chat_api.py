@@ -31,6 +31,14 @@ def test_chat_crud():
     missing = client.get(f"/chats/{id1}")
     assert missing.status_code == 404
 
+    # deleting a missing chat returns 404
+    del_missing = client.delete(f"/chats/{id1}")
+    assert del_missing.status_code == 404
+
+    # active chat deletion forbidden
+    active_del = client.delete(f"/chats/{id2}", headers={"X-Active-Chat-Id": id2})
+    assert active_del.status_code == 403
+
 
 def test_create_auto_title():
     client = TestClient(app)

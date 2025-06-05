@@ -1,6 +1,6 @@
 """Chat API endpoints."""
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Header
 from pydantic import BaseModel
 
 from backend.services.chat_storage import ChatStorage
@@ -45,8 +45,12 @@ async def get_chat(chat_id: str):
 
 
 @router.delete("/{chat_id}", status_code=204)
-async def delete_chat(chat_id: str) -> None:
+async def delete_chat(
+    chat_id: str, x_active_chat_id: str | None = Header(default=None)
+) -> None:
     """Delete a chat by id."""
+    if x_active_chat_id == chat_id:
+        raise HTTPException(status_code=403, detail="Cannot delete active chat")
     try:
         get_storage().delete_chat(chat_id)
     except FileNotFoundError:

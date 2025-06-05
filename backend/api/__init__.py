@@ -6,7 +6,7 @@ from .chat import router as chat_router
 from .messages import router as message_router
 from .files import router as file_router
 from .stream import router as stream_router
-from ..config import settings  # imported to initialize config if needed
+from ..config import settings  # imported to initialize config if needed  # noqa: F401
 
 
 api_router = APIRouter()
