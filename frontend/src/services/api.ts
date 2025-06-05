@@ -29,6 +29,11 @@ export const api = {
   post: <T>(path: string, body: any) => request<T>(path, { method: 'POST', body }),
   put: <T>(path: string, body: any) => request<T>(path, { method: 'PUT', body }),
   delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
+  deleteChat: (id: string, activeId: string | null) =>
+    request<void>(`/chats/${id}`, {
+      method: 'DELETE',
+      headers: activeId ? { 'X-Active-Chat-Id': activeId } : {},
+    }),
   postFile: async <T>(path: string, file: File): Promise<T> => {
     const form = new FormData();
     form.append('file', file);
