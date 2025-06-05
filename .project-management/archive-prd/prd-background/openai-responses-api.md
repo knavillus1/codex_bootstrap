@@ -133,3 +133,93 @@ Everything—history **and** inline image—travels inside the single `input` ar
 ---
 
 Happy shipping! 🎉
+5 Real-time streaming
+
+5.1 Python streaming loop
+from openai import OpenAI
+client = OpenAI()
+
+stream = client.responses.create(
+    model="gpt-4o",
+    input=[{"role": "user", "content": "Write a haiku about winter mountains."}],
+    stream=True,
+)
+tokens = []
+for event in stream:                     # event is a dataclass
+    if event.type == "text.delta":       # text fragment
+        tokens.append(event.delta)
+        print(event.delta, end="", flush=True)
+
+full_text = "".join(tokens)
+Each event comes with a type field (text.delta, tool.call, done, …).
+The generator closes automatically when a done event is emitted.
+Python’s iterator consumes SSE frames under the hood, keeping your code synchronous and back-pressure-friendly
+community.openai.com
+.
+
+5.2 TypeScript streaming with for await
+import OpenAI from "openai";
+const client = new OpenAI();
+
+const stream = await client.responses.create({
+  model: "gpt-4o",
+  input: [{ role: "user", content: "Generate a limerick about llamas." }],
+  stream: true,
+});
+
+let final = "";
+for await (const event of stream) {
+  if (event.type === "text.delta") {
+    process.stdout.write(event.delta);
+    final += event.delta;
+  }
+}
+The Node SDK exposes the response body as an async iterator over parsed events, sparing you from manual SSE parsing
+github.com
+. For browsers, use fetch with ReadableStream and parse data: lines yourself if you cannot rely on the SDK (see cookbook pattern)
+github.com
+stackoverflow.com
+.
+
+6 Event anatomy
+
+type	What you get	Typical use
+text.delta	Single token / phrase	Real-time UI updates
+text.completed	Final assembled text	Post-process / log
+tool.call	Arguments for a tool	Trigger external function
+done	Stream ended (checksum, usage stats)	Cleanup
+Full JSON schemas are in the reference docs
+platform.openai.com
+.
+
+7 Error handling & retries
+
+Network timeouts – wrap the iterator in a try/except (AbortController in JS) and reconnect quietly; the thread history remains server-side
+platform.openai.com
+.
+Rate limits / 429 – exponential back-off plus jitter; respect Retry-After header.
+Context overflow – send shorter inputs or resume using the prior response_id instead of resending the entire chat.
+8 Best-practice checklist for smooth UX
+
+Flush early – write partial tokens to STDOUT / WebSocket so the user sees first text in < 300 ms.
+Debounce re-renders on the client by 16–32 ms to avoid layout thrash.
+Keep-alive pings every 20 s if you tunnel through Nginx or API-gateways that cut idle SSE.
+Chunk aggregation – build tokens[] and join once at done to avoid string-concat O(n²).
+Server-sent compression – enable gzip but disable chunked encoding at proxy layer.
+These patterns mirror recommendations in community deep dives and guides
+thenewstack.io
+january.sh
+.
+
+9 Appendix: TypeScript helper typings
+
+type ResponseStreamEvent =
+  | { type: "text.delta"; delta: string }
+  | { type: "text.completed"; text: string }
+  | { type: "tool.call"; name: string; arguments: unknown }
+  | { type: "done" };
+
+declare module "openai" {
+  interface Stream<T = ResponseStreamEvent> extends AsyncIterable<T> {}
+}
+Using these discriminated unions lets the compiler narrow each branch inside your for await loop for safer code.
