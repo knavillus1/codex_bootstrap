@@ -28,7 +28,7 @@ export default function ChatArea({ activeChat }: Props) {
     if (!activeChat) return;
     setLoading(true);
     await sendMessage(activeChat.id, content);
-    // placeholder for AI response
+    await loadMessages(activeChat.id);
     setLoading(false);
   };
 
@@ -46,6 +46,7 @@ export default function ChatArea({ activeChat }: Props) {
     };
     
     await sendMessage(activeChat.id, `Uploaded file: ${file.name}`, 'user', fileAttachment);
+    await loadMessages(activeChat.id);
   };
 
   if (!activeChat) {
