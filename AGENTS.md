@@ -30,6 +30,8 @@ Lint python using:
 ```bash
 flake8
 ```
+If linting errors are encountered, it is your responsability to address them and rerun linting until errors are cleared up.
+
 ## Testing Instructions
 Run tests with run_tests.sh.  Maintain this script as needed to setup specific environment variables or manage other test-specific setup.  Any tests that require network connectivity should either be ignored and not run, -or- have network test path that shunts to a success when network connectivity can't be demonstrated so failed tests in this scenario don't confuse the codex agent progress.
 
